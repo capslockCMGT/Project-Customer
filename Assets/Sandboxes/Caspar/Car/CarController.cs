@@ -15,10 +15,9 @@ public class CarController : MonoBehaviour
     [SerializeField] Wheel[] Wheels = new Wheel[4];
     [SerializeField] AnimationCurve EngineStrengthAtSpeed;
     [SerializeField] float MaximumSpeed = 30;
-    [SerializeField] float EngineStrength = 50;
-    [SerializeField] float BrakeStrength = 150;
-    [SerializeField]
-    [Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
+    [SerializeField] float EngineStrength = 500;
+    [SerializeField] float BrakeStrength = 5000;
+    [SerializeField][Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
 
     Rigidbody carRB;
     float targetSpeed = 0;
