@@ -17,6 +17,8 @@ public class CarController : MonoBehaviour
     [SerializeField] float MaximumSpeed = 30;
     [SerializeField] float EngineStrength = 50;
     [SerializeField] float BrakeStrength = 150;
+    [SerializeField]
+    [Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
 
     Rigidbody carRB;
     float targetSpeed = 0;
@@ -69,11 +71,9 @@ public class CarController : MonoBehaviour
             {
                 wheel.collider.motorTorque = 0;
                 wheel.collider.brakeTorque = BrakeStrength;
+                if (wheel.frontWheel)
+                    wheel.collider.brakeTorque *= FrontWheelBrakeStrengthMultiplier;
             }
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            int sl = 9;
         }
     }
 }
