@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class FirstPersonCamera: MonoBehaviour
 {
-    public float MouseSensitivity = 3;
-
-    [SerializeField] float _xClampMin;
-    [SerializeField] float _xClampMax;
-    [SerializeField] Transform _tiltTarget;
+    public float LookSensitivity = 3;
 
     Vector2 _mousePos;
     float _targetYRot;
     float _currTilt;
+
+    public void UpdateCameraAngle(Vector2 delta)
+    {
+        _mousePos += delta*LookSensitivity;
+    }
 
     void LateUpdate()
     {
@@ -24,9 +25,6 @@ public class FirstPersonCamera: MonoBehaviour
 
         //if the screen isnt clicked, dont rotate the camera
         if (Cursor.lockState == CursorLockMode.None) return;
-
-        _mousePos.x += Input.GetAxis("Mouse X")*MouseSensitivity;
-        _mousePos.y += Input.GetAxis("Mouse Y")*MouseSensitivity;
         
         //clamp in range 360 to prevent floating point precision
         _mousePos.x += 360;

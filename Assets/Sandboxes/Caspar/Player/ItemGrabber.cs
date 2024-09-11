@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ItemGrabber : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class ItemGrabber : MonoBehaviour
     [SerializeField] float HoldingItemDistance = 1;
     [SerializeField] float ThrowForce = 10;
     [SerializeField] float HoldingForceStrength = 5;
-    [SerializeField] bool disableGravity = false;
+    [SerializeField] float DistanceBetweenHands = .3f;
+    [SerializeField] bool DisableGravity = false;
 
     class grabbedItem
     {
@@ -20,27 +22,17 @@ public class ItemGrabber : MonoBehaviour
     grabbedItem _leftHand;
     grabbedItem _rightHand;
 
-    void temporaryControls()
-    {
-        if (Input.GetMouseButtonDown(0))
-            TryGrabReleaseItem(true);
-        if (Input.GetMouseButtonDown(1))
-            TryGrabReleaseItem(false);
-    }
     private void Start()
     {
         if(Car == null) Car = GetComponent<Rigidbody>();
         if (Car == null) Debug.Log("couldnt find car so velocity is relative to the world");
         else if (Car.interpolation == RigidbodyInterpolation.None) Debug.Log("car's interpolation is set to None, movement of grabbed objects may look janky");
     }
-    public void Update()
-    {
-        temporaryControls();
-    }
 
     public void FixedUpdate()
     {
-        TryHoldItemToPosition(_leftHand, transform.position + transform.forward*HoldingItemDistance);
+        TryHoldItemToPosition(_leftHand, transform.position + transform.forward*HoldingItemDistance - transform.right*DistanceBetweenHands*.5f);
+        TryHoldItemToPosition(_rightHand, transform.position + transform.forward*HoldingItemDistance + transform.right*DistanceBetweenHands*.5f);
     }
 
     void TryHoldItemToPosition(grabbedItem heldItem, Vector3 position)
@@ -92,7 +84,7 @@ public class ItemGrabber : MonoBehaviour
                 itemRB = hitinfo.rigidbody, 
             };
             grabbable.Grab();
-            if (disableGravity)
+            if (DisableGravity)
                 hitinfo.rigidbody.useGravity = false;
 
             if (hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) Debug.Log("grabbed rigidbody has interpolation set to None, movement may look janky");
@@ -101,7 +93,7 @@ public class ItemGrabber : MonoBehaviour
         {
             //add a force to the thrown object and release it
             workingHand.itemRB.AddForce(transform.forward*ThrowForce,ForceMode.Impulse);
-            if(disableGravity)
+            if(DisableGravity)
                 workingHand.itemRB.useGravity = true;
             workingHand.grabbable.Release();
             workingHand = null;
@@ -119,4 +111,9 @@ public class ItemGrabber : MonoBehaviour
             if (_leftHand != null) _leftHand.grabbable.PlayerInteract();
         } else if (_rightHand != null) _rightHand.grabbable.PlayerInteract();
     }
+}
+
+public enum Hand
+{
+    Right, Left
 }
