@@ -46,16 +46,15 @@ public class CarController : MonoBehaviour
             {
                 wheel.collider.steerAngle = newAngle * MaxTurnAngle;
                 //cilinder is oriented upwards by default. this is a little jank
+                //who did this
                 wheel.renderer.rotation = Quaternion.Euler(90, 0, 90- newAngle * MaxTurnAngle);
             }
     }
 
     void OnGas(float gas)
     {
-        gas *= Time.deltaTime;
-        
         //targetSpeed is between 0-1, defining the speed at which the car is trying to cruise
-        targetSpeed += gas;
+        targetSpeed += gas * Time.deltaTime;
         targetSpeed = Mathf.Clamp01(targetSpeed);
 
         //if the car is already near maximum speed, power down the engine
