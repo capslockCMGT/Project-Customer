@@ -18,6 +18,7 @@ public class CarController : MonoBehaviour
     [SerializeField] float EngineStrength = 500;
     [SerializeField] float BrakeStrength = 5000;
     [SerializeField][Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
+    [SerializeField] float MaxTurnAngle = 30;
 
     Rigidbody carRB;
     float targetSpeed = 0;
@@ -40,17 +41,20 @@ public class CarController : MonoBehaviour
     void OnSteer(float newAngle)
     {
         //set the angle of the wheel's colliders
-        foreach(Wheel wheel in Wheels)
-            if(wheel.frontWheel)
-                wheel.collider.steerAngle = newAngle*30;
+        foreach (Wheel wheel in Wheels)
+            if (wheel.frontWheel)
+            {
+                wheel.collider.steerAngle = newAngle * MaxTurnAngle;
+                //cilinder is oriented upwards by default. this is a little jank
+                //who did this
+                wheel.renderer.rotation = Quaternion.Euler(90, 0, 90- newAngle * MaxTurnAngle);
+            }
     }
 
     void OnGas(float gas)
     {
-        gas *= Time.deltaTime;
-        
         //targetSpeed is between 0-1, defining the speed at which the car is trying to cruise
-        targetSpeed += gas;
+        targetSpeed += gas * Time.deltaTime;
         targetSpeed = Mathf.Clamp01(targetSpeed);
 
         //if the car is already near maximum speed, power down the engine

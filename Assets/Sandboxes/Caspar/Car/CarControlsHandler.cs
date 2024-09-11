@@ -9,12 +9,13 @@ public class CarControlsHandler : MonoBehaviour
     public event Action<float> CarSpeedChanged;
 
     //temporary controls - both actions are expected to be between -1, 1 at all times
-    private void Update()
+    public void UpdateGas(Vector2 playerInput)
     {
-        float steeringAngle = Input.GetAxis("Horizontal");
-        SteeringAngleChanged(steeringAngle);
+        CarSpeedChanged(playerInput.x);
+    }
 
-        float gas = Input.GetAxis("Vertical");
-        CarSpeedChanged(gas);
+    public void UpdateSteeringAngle(Vector2 playerInput)
+    {
+        SteeringAngleChanged(playerInput.y);
     }
 }
