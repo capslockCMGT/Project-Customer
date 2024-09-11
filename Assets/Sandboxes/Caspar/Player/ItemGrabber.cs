@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ItemGrabber : MonoBehaviour
 {
+    [SerializeField] Rigidbody Car;
     [SerializeField] float MaxHandReach = 3;
     [SerializeField] float HoldingItemDistance = 1;
     [SerializeField] float ThrowForce = 10;
     [SerializeField] float HoldingForceStrength = 5;
+    [SerializeField] bool disableGravity = false;
 
     class grabbedItem
     {
@@ -22,6 +24,13 @@ public class ItemGrabber : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
             TryGrabReleaseItem(true);
+        if (Input.GetMouseButtonDown(1))
+            TryGrabReleaseItem(false);
+    }
+    private void Start()
+    {
+        if(Car == null) Car = GetComponent<Rigidbody>();
+        if (Car == null) Debug.Log("couldnt find car so velocity is relative to the world");
     }
     public void Update()
     {
@@ -41,17 +50,22 @@ public class ItemGrabber : MonoBehaviour
         Vector3 posDifference = rbPos - position;
         Vector3 posDifferenceNormalized = posDifference.normalized;
 
+        Vector3 carVelocity = Vector3.zero;
+        if (Car != null) carVelocity = Car.velocity;
+
         //dot between the velocity and point direction, between -1, 1 for how correct the direction is
-        float dirCorrectness = Vector3.Dot(posDifferenceNormalized, rb.velocity);
+        float dirCorrectness = Vector3.Dot(posDifferenceNormalized, rb.velocity-carVelocity);
         dirCorrectness = Mathf.Clamp(dirCorrectness, -1, 1);
 
         //arbitrary function to get the strength of the centering force
-        float centeringForce = posDifference.sqrMagnitude - dirCorrectness*posDifference.magnitude;
+        float centeringForce = posDifference.magnitude - dirCorrectness*posDifference.magnitude;
         centeringForce *= HoldingForceStrength;
 
         if (centeringForce < 0) centeringForce = 0;
 
+        rb.velocity -= carVelocity;
         rb.velocity *= .5f + .25f*dirCorrectness;
+        rb.velocity += carVelocity;
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
     }
 
@@ -77,13 +91,15 @@ public class ItemGrabber : MonoBehaviour
                 itemRB = hitinfo.rigidbody, 
             };
             grabbable.Grab();
-            hitinfo.rigidbody.useGravity = false;
+            if(disableGravity)
+                hitinfo.rigidbody.useGravity = false;
         }
         else
         {
             //add a force to the thrown object and release it
             workingHand.itemRB.AddForce(transform.forward*ThrowForce,ForceMode.Impulse);
-            workingHand.itemRB.useGravity = true;
+            if(disableGravity)
+                workingHand.itemRB.useGravity = true;
             workingHand.grabbable.Release();
             workingHand = null;
         }
