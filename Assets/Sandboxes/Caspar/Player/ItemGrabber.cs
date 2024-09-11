@@ -31,6 +31,7 @@ public class ItemGrabber : MonoBehaviour
     {
         if(Car == null) Car = GetComponent<Rigidbody>();
         if (Car == null) Debug.Log("couldnt find car so velocity is relative to the world");
+        else if (Car.interpolation == RigidbodyInterpolation.None) Debug.Log("car's interpolation is set to None, movement of grabbed objects may look janky");
     }
     public void Update()
     {
@@ -91,8 +92,10 @@ public class ItemGrabber : MonoBehaviour
                 itemRB = hitinfo.rigidbody, 
             };
             grabbable.Grab();
-            if(disableGravity)
+            if (disableGravity)
                 hitinfo.rigidbody.useGravity = false;
+
+            if (hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) Debug.Log("grabbed rigidbody has interpolation set to None, movement may look janky");
         }
         else
         {
