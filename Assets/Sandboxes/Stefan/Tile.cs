@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public enum NeighbourDir
@@ -11,6 +10,9 @@ public enum NeighbourDir
 
 public class Tile 
 {
+    //sockets are the edges of tiles divided into 3 parts. These three parts are then checked with other tiles to see if they can be connected
+    //A is empty
+    //B is road
     public string[] Sockets { get; }
     public bool SymetryHorizontal { get; }
     public bool SymetryVertical { get; }
@@ -28,7 +30,7 @@ public class Tile
 
     public Tile(GameObject prefab, float rotation, bool horizontalSymetry, bool verticalSymetry, params string[] sockets) 
     {
-        this.Rotation = rotation;
+        Rotation = rotation;
         Sockets = sockets;
         Prefab = prefab;
         SymetryHorizontal = horizontalSymetry;
