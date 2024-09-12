@@ -158,9 +158,6 @@ MonoBehaviour:
   onItemGrabbed:
     m_PersistentCalls:
       m_Calls: []
-  onPlayerInteract:
-    m_PersistentCalls:
-      m_Calls: []
   onItemReleased:
     m_PersistentCalls:
       m_Calls: []
@@ -172,7 +169,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136549192}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2.51
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -360,9 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onItemGrabbed:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
   onItemReleased:
@@ -762,36 +756,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5122302879691126969, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8202809165078254305, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.22908504
-      objectReference: {fileID: 0}
-    - target: {fileID: 8202809165078254305, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.027171215
-      objectReference: {fileID: 0}
-    - target: {fileID: 8202809165078254305, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.96455926
-      objectReference: {fileID: 0}
-    - target: {fileID: 8202809165078254305, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.12809113
-      objectReference: {fileID: 0}
-    - target: {fileID: 8202809165078254305, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -207.502
       objectReference: {fileID: 0}
     - target: {fileID: 8425666230875785182, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
         type: 3}

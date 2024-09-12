@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [SelectionBase]
+[RequireComponent(typeof(Rigidbody))]
 public class CarController : MonoBehaviour
 {
     [Serializable] 
@@ -28,7 +30,7 @@ public class CarController : MonoBehaviour
 
         carRB = GetComponent<Rigidbody>();
 
-        if(carRB == null || EngineStrengthAtSpeed == null || controlsHandler == null)
+        if(EngineStrengthAtSpeed == null || controlsHandler == null)
         {
             Debug.LogWarning("CarController was not set up properly - some essential values were null.");
             Destroy(this);
@@ -62,7 +64,7 @@ public class CarController : MonoBehaviour
         float engineStrength = EngineStrengthAtSpeed.Evaluate(currentSpeed);
 
         float torque = engineStrength*targetSpeed;
-        foreach(Wheel wheel in Wheels)
+        foreach (Wheel wheel in Wheels)
         {
             //if gas is hit or neutral, dont brake but gas
             if(gas >= 0)

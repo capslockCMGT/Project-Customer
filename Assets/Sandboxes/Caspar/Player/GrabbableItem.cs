@@ -5,18 +5,19 @@ using UnityEngine.Events;
 
 public class GrabbableItem : MonoBehaviour
 {
-    public UnityEvent onItemGrabbed;
-    public UnityEvent onPlayerInteract;
-    public UnityEvent onItemReleased;
-    private void Start()
+    public UnityEvent<PlayerController> onItemGrabbed;
+    public UnityEvent<PlayerController> onItemReleased;
+
+    List<PlayerController> _holdingPlayers = new();
+    public void Grab(PlayerController controller)
     {
-        if(GetComponent<Rigidbody>() == null)
-        {
-            Debug.LogWarning("Grabbable item does not have an attached rigidbody and will not work!");
-            Destroy(this);
-        }
+        Debug.Log($"i ({transform.name}) just got grabbed (:");
+        onItemGrabbed?.Invoke(controller);
+        _holdingPlayers.Add(controller);
     }
-    public void Grab() => onItemGrabbed?.Invoke();
-    public void PlayerInteract() => onPlayerInteract?.Invoke();
-    public void Release() => onItemReleased?.Invoke();
+    public void Release(PlayerController controller)
+    {
+        onItemReleased?.Invoke(controller);
+        _holdingPlayers.Remove(controller);
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,7 +26,7 @@ public class ItemGrabber : MonoBehaviour
     private void Start()
     {
         if(Car == null) Car = GetComponent<Rigidbody>();
-        if (Car == null) Debug.Log("couldnt find car so velocity is relative to the world");
+        if (Car == null) Debug.Log($"couldnt find car for '{gameObject.name}' so velocity is relative to the world");
         else if (Car.interpolation == RigidbodyInterpolation.None) Debug.Log("car's interpolation is set to None, movement of grabbed objects may look janky");
     }
 
@@ -39,6 +40,8 @@ public class ItemGrabber : MonoBehaviour
     {
         if (heldItem == null) return;
         var rb = heldItem.itemRB;
+        if (rb == null || rb.isKinematic) return;
+
         Vector3 rbPos = rb.position;
         Vector3 posDifference = rbPos - position;
         Vector3 posDifferenceNormalized = posDifference.normalized;
@@ -61,8 +64,7 @@ public class ItemGrabber : MonoBehaviour
         rb.velocity += carVelocity;
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
     }
-
-    public void TryGrabReleaseItem(bool leftHand)
+    public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
         //the hand were working with to make code more agnostic
         grabbedItem workingHand;
@@ -74,8 +76,11 @@ public class ItemGrabber : MonoBehaviour
         {
             //try pickikng up the item in the middle of the view
             Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, MaxHandReach);
-            if (hitinfo.rigidbody == null) return;
+
+            if (hitinfo.transform == null) return;
+
             var grabbable = hitinfo.transform.GetComponent<GrabbableItem>();
+            Debug.Log(hitinfo.transform.name);
             if (grabbable == null) return;
 
             //if theres a grabbable item, set it
@@ -83,19 +88,25 @@ public class ItemGrabber : MonoBehaviour
                 grabbable = grabbable, 
                 itemRB = hitinfo.rigidbody, 
             };
-            grabbable.Grab();
-            if (DisableGravity)
+
+            grabbable.Grab(controller);
+
+            if (DisableGravity && hitinfo.rigidbody != null)
                 hitinfo.rigidbody.useGravity = false;
 
-            if (hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) Debug.Log("grabbed rigidbody has interpolation set to None, movement may look janky");
+            if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) 
+                Debug.Log($"grabbed rigidbody '{hitinfo.rigidbody.gameObject.name}' has interpolation set to None, movement may look janky");
         }
         else
         {
             //add a force to the thrown object and release it
-            workingHand.itemRB.AddForce(transform.forward*ThrowForce,ForceMode.Impulse);
-            if(DisableGravity)
-                workingHand.itemRB.useGravity = true;
-            workingHand.grabbable.Release();
+            if (workingHand.itemRB != null)
+            {
+                workingHand.itemRB.AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
+                if (DisableGravity)
+                    workingHand.itemRB.useGravity = true;
+            }
+            workingHand.grabbable.Release(controller);
             workingHand = null;
         }
 
@@ -104,16 +115,4 @@ public class ItemGrabber : MonoBehaviour
             _leftHand = workingHand;
         else _rightHand = workingHand;
     }
-    public void TryInteractWithItem(bool leftHand)
-    {
-        //player interaction - activate the grabbable's custom functionality
-        if (leftHand) {
-            if (_leftHand != null) _leftHand.grabbable.PlayerInteract();
-        } else if (_rightHand != null) _rightHand.grabbable.PlayerInteract();
-    }
-}
-
-public enum Hand
-{
-    Right, Left
 }

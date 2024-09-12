@@ -2,20 +2,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CarControlsHandler : MonoBehaviour
 {
     public event Action<float> SteeringAngleChanged;
     public event Action<float> CarSpeedChanged;
 
-    //temporary controls - both actions are expected to be between -1, 1 at all times
+    int _steersReceived = 0;
+    float _steerInput = 0;
+
     public void UpdateGas(Vector2 playerInput)
     {
-        CarSpeedChanged(playerInput.x);
+        CarSpeedChanged?.Invoke(playerInput.y);
     }
 
     public void UpdateSteeringAngle(Vector2 playerInput)
     {
-        SteeringAngleChanged(playerInput.y);
+        //tally up the steers received every frame, so multiple players can hold it
+        _steersReceived++;
+        _steerInput += playerInput.x;
+    }
+
+    private void Update()
+    {
+        if(_steersReceived != 0)
+            SteeringAngleChanged?.Invoke(_steerInput / _steersReceived);
+        _steerInput = 0;
+        _steersReceived = 0;
     }
 }
