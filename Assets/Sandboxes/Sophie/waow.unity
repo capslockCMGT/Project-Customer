@@ -154,21 +154,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 20
   _size: 200
-  _prefab1: {fileID: 8011886544565409896, guid: a46b8bb8f7a8e5240b8b356cb9b19453,
+  _prefab1: {fileID: 8011886544565409896, guid: 637e3baf843837640a97e4924d2ffd62,
     type: 3}
-  _prefab2: {fileID: 5099231861569548205, guid: c2800382081e1e446bc3e627089790b2,
+  _prefab2: {fileID: 5099231861569548205, guid: a72c4507676de064d87741b6d897a707,
     type: 3}
-  _prefab3: {fileID: 8011886544565409896, guid: b1a234420e08c394e88c4830629bc21a,
+  _prefab3: {fileID: 8011886544565409896, guid: 1c0c0af8b62155c4a8d78499c36d5579,
     type: 3}
-  _prefab4: {fileID: 8011886544565409896, guid: c4c9ac2758906294c88ad0aa64c346d0,
+  _prefab4: {fileID: 8011886544565409896, guid: abb245a1918087149b39eb7710dd415b,
     type: 3}
-  _prefab5: {fileID: 8011886544565409896, guid: 6aaa4f6012bf06f40bafcafabd062b88,
+  _prefab5: {fileID: 8011886544565409896, guid: e004fe56743c1aa4687f4f932c253e82,
     type: 3}
-  _prefab6: {fileID: 5099231861569548205, guid: d089b4e6eee886e4fa429b0f44306bf0,
+  _prefab6: {fileID: 5099231861569548205, guid: d4ebab527aec044438fc1f8fff374f31,
     type: 3}
   _cellVisual: {fileID: 4756127973375617633, guid: 2077909cd1901e94c960bc3ad5bcc75f,
     type: 3}
-  _visualizeCell: 0
+  _visualizeCell: 1
 --- !u!4 &35787297
 Transform:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
