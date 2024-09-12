@@ -23,6 +23,7 @@ public class MyGrid : MonoBehaviour
     const int ROTATIONS = 4;
     [SerializeField] int columns = 10;
     [SerializeField] float _size = 100f;
+    [SerializeField] int _objectiveMinDistance = 10;
     [SerializeField] GameObject _prefab1;
     [SerializeField] GameObject _prefab2;
     [SerializeField] GameObject _prefab3;
@@ -31,6 +32,9 @@ public class MyGrid : MonoBehaviour
     [SerializeField] GameObject _prefab6;
     [SerializeField] GameObject _cellVisual;
 
+    [SerializeField] GameObject _start;
+    [SerializeField] GameObject _end;
+
     [SerializeField] bool _visualizeCell;
 
     public bool Done { get; private set; }
@@ -38,7 +42,8 @@ public class MyGrid : MonoBehaviour
     int collapsedTileCount;
     float _cellWidth;
     Cell[,] _cells;
-
+    Tile _startTile;
+    Tile _endTile;
     readonly Tile[] _tiles = new Tile[6];
 
     void Awake()
@@ -54,13 +59,19 @@ public class MyGrid : MonoBehaviour
         _tiles[4] = new Tile(_prefab5, true, true, "AAA", "AAA", "AAA", "AAA");
         _tiles[5] = new Tile(_prefab6, false, false, "AAA", "AAA", "AAA", "ABA");
 
+        _startTile = new Tile(_start, false, false, "AAA", "AAA", "AAA", "ABA");
+        _endTile = new Tile(_end, false, false, "AAA", "AAA", "AAA", "ABA");
+
         _cells = new Cell[columns, columns];
         List<Tile> rotatedTiles = GenerateRotateTileStates(_tiles);
         _cellWidth = _size / columns;
         var statesList = _tiles.Concat(rotatedTiles);
         GenerateGrid(columns, statesList);
-        FillGridEdgesWithEmptyTiles(columns, _tiles);
+        FillGridEdgesWithEmptyTiles(columns);
+
+        //PutRandomStartAndEnd();
     }
+
 
     void Start()
     {
@@ -76,6 +87,50 @@ public class MyGrid : MonoBehaviour
         Cell lowestCell = GetLeastEntropyCell();
         CollapseCell(lowestCell);
         Propagate(lowestCell);
+    }
+
+    void FillGridEdgesWithEmptyTiles(int columns)
+    {
+        int emptyTileIndex = _tiles.Length - 2;//hard coded to be empty tile
+
+        for (int y = 0; y < columns; y++)//I know I can make a faster loop but meh
+            for (int x = 0; x < columns; x++)
+            {
+                bool isOnEdge = x == 0 || y == 0 || x == _cells.GetLength(1) - 1 || y == _cells.GetLength(0) - 1;
+
+                if (!isOnEdge) continue;
+
+                PrePlaceTile(x, y, _tiles[emptyTileIndex]);
+            }
+    }
+
+    void PutRandomStartAndEnd()
+    {
+        Vector2Int randomStart;
+        Vector2Int randomEnd;
+        float manhatanDistance;
+
+        int maxTries = 20;
+        do
+        {
+            //exclude edges because they will already be blanck
+            randomEnd = new(Random.Range(1, columns-1), Random.Range(0, columns));
+            randomStart = new(Random.Range(1, columns-1), Random.Range(0, columns));
+            var manhatanVector = randomEnd - randomStart;
+            manhatanDistance = Mathf.Abs(manhatanVector.x) + Mathf.Abs(manhatanVector.y);
+            maxTries--;
+        } while (_objectiveMinDistance > manhatanDistance && maxTries > 0);
+        if (maxTries <= 0) Debug.Log("Did not Find close end");
+        Debug.Log(randomEnd + "   " + randomStart);
+        PrePlaceTile(randomStart.x, randomStart.y, _startTile);
+        PrePlaceTile(randomEnd.x, randomEnd.y, _endTile);
+    }
+
+    void PrePlaceTile(int gridX, int gridY, Tile tile)
+    {
+        Cell cell = _cells[gridX, gridY];
+        CollapseCellWithTile(cell, tile);
+        Propagate(cell);
     }
 
     public Cell GetLeastEntropyCell()
@@ -106,22 +161,6 @@ public class MyGrid : MonoBehaviour
                 _cells[y, x] = new Cell(x, y, new List<Tile>(statesList));
             }
         }
-    }
-
-    void FillGridEdgesWithEmptyTiles(int columns, Tile[] allTiles)
-    {
-        for (int y = 0; y < columns; y++)
-            for (int x = 0; x < columns; x++)
-            {
-                bool isOnEdge = x == 0 || y == 0 || x == _cells.GetLength(1) - 1 || y == _cells.GetLength(0) - 1;
-                
-                if (!isOnEdge) continue;
-
-                Cell cell = _cells[y, x];
-                int emptyTileIndex = allTiles.Length - 2;//hard coded to be empty tile
-                CollapseCellWithTile(cell, allTiles[emptyTileIndex]);
-                Propagate(cell);
-            }
     }
 
     List<Tile> GenerateRotateTileStates(Tile[] unrotatedTiles)
