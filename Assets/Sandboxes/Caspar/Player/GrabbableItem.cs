@@ -5,9 +5,10 @@ using UnityEngine.Events;
 
 public class GrabbableItem : MonoBehaviour
 {
-    public UnityEvent onItemGrabbed;
-    public UnityEvent onPlayerInteract;
-    public UnityEvent onItemReleased;
+    public UnityEvent<PlayerController> onItemGrabbed;
+    public UnityEvent<PlayerController> onItemReleased;
+
+    List<PlayerController> _holdingPlayers = new();
     private void Start()
     {
         if(GetComponent<Rigidbody>() == null)
@@ -16,7 +17,14 @@ public class GrabbableItem : MonoBehaviour
             Destroy(this);
         }
     }
-    public void Grab() => onItemGrabbed?.Invoke();
-    public void PlayerInteract() => onPlayerInteract?.Invoke();
-    public void Release() => onItemReleased?.Invoke();
+    public void Grab(PlayerController controller)
+    {
+        onItemGrabbed?.Invoke(controller);
+        _holdingPlayers.Add(controller);
+    }
+    public void Release(PlayerController controller)
+    {
+        onItemReleased?.Invoke(controller);
+        _holdingPlayers.Remove(controller);
+    }
 }

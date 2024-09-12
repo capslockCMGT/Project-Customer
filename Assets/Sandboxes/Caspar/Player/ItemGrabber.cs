@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,6 +40,8 @@ public class ItemGrabber : MonoBehaviour
     {
         if (heldItem == null) return;
         var rb = heldItem.itemRB;
+        if (rb.isKinematic) return;
+
         Vector3 rbPos = rb.position;
         Vector3 posDifference = rbPos - position;
         Vector3 posDifferenceNormalized = posDifference.normalized;
@@ -61,8 +64,7 @@ public class ItemGrabber : MonoBehaviour
         rb.velocity += carVelocity;
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
     }
-
-    public void TryGrabReleaseItem(bool leftHand)
+    public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
         //the hand were working with to make code more agnostic
         grabbedItem workingHand;
@@ -83,11 +85,12 @@ public class ItemGrabber : MonoBehaviour
                 grabbable = grabbable, 
                 itemRB = hitinfo.rigidbody, 
             };
-            grabbable.Grab();
+            grabbable.Grab(controller);
             if (DisableGravity)
                 hitinfo.rigidbody.useGravity = false;
 
-            if (hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) Debug.Log("grabbed rigidbody has interpolation set to None, movement may look janky");
+            if (hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) 
+                Debug.Log($"grabbed rigidbody '{hitinfo.rigidbody.gameObject.name}' has interpolation set to None, movement may look janky");
         }
         else
         {
@@ -95,7 +98,7 @@ public class ItemGrabber : MonoBehaviour
             workingHand.itemRB.AddForce(transform.forward*ThrowForce,ForceMode.Impulse);
             if(DisableGravity)
                 workingHand.itemRB.useGravity = true;
-            workingHand.grabbable.Release();
+            workingHand.grabbable.Release(controller);
             workingHand = null;
         }
 
@@ -104,16 +107,4 @@ public class ItemGrabber : MonoBehaviour
             _leftHand = workingHand;
         else _rightHand = workingHand;
     }
-    public void TryInteractWithItem(bool leftHand)
-    {
-        //player interaction - activate the grabbable's custom functionality
-        if (leftHand) {
-            if (_leftHand != null) _leftHand.grabbable.PlayerInteract();
-        } else if (_rightHand != null) _rightHand.grabbable.PlayerInteract();
-    }
-}
-
-public enum Hand
-{
-    Right, Left
 }

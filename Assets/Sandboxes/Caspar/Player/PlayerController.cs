@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public int Player = 0;
+    [field:SerializeField] public bool PlayerCanSteer { get; private set; } = true;
+    [SerializeField] CarControlsHandler CarIfDriver;
     
     public UnityEvent<Vector2> UpdateLeftJoystick;
     public UnityEvent<Vector2> UpdateRightJoystick;
@@ -20,7 +22,21 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         if (Player >= Gamepad.all.Count || Gamepad.all[Player] == null)
-            Debug.LogWarning($"not epicore! Player {Player} totes doesnt exist yo!");
+            Debug.LogWarning($"not epicore! player {Player} totes doesnt exist yo!");
+
+        var grabber = GetComponent<ItemGrabber>();
+        if (grabber == null) Debug.LogWarning("controller couldnt find an itemgrabber. thats fair. i am hardcoding this though, so it wont work. FUCK you.");
+        else
+        {
+            //automatically add the playercontroller to grab on input.
+            LeftTriggerPressed.AddListener( () => { grabber.TryGrabReleaseItem(true, this); });
+            RightTriggerPressed.AddListener( () => { grabber.TryGrabReleaseItem(false, this); });
+        }
+
+        if(CarIfDriver != null)
+        {
+            UpdateLeftJoystick.AddListener(CarIfDriver.UpdateGas);
+        }
     }
     private void Update()
     {
