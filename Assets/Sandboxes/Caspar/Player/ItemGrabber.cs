@@ -26,7 +26,7 @@ public class ItemGrabber : MonoBehaviour
     private void Start()
     {
         if(Car == null) Car = GetComponent<Rigidbody>();
-        if (Car == null) Debug.Log("couldnt find car so velocity is relative to the world");
+        if (Car == null) Debug.Log($"couldnt find car for '{gameObject.name}' so velocity is relative to the world");
         else if (Car.interpolation == RigidbodyInterpolation.None) Debug.Log("car's interpolation is set to None, movement of grabbed objects may look janky");
     }
 
@@ -40,7 +40,7 @@ public class ItemGrabber : MonoBehaviour
     {
         if (heldItem == null) return;
         var rb = heldItem.itemRB;
-        if (rb.isKinematic) return;
+        if (rb == null || rb.isKinematic) return;
 
         Vector3 rbPos = rb.position;
         Vector3 posDifference = rbPos - position;
@@ -76,8 +76,11 @@ public class ItemGrabber : MonoBehaviour
         {
             //try pickikng up the item in the middle of the view
             Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, MaxHandReach);
-            if (hitinfo.rigidbody == null) return;
+
+            if (hitinfo.transform == null) return;
+
             var grabbable = hitinfo.transform.GetComponent<GrabbableItem>();
+            Debug.Log(hitinfo.transform.name);
             if (grabbable == null) return;
 
             //if theres a grabbable item, set it
@@ -85,19 +88,24 @@ public class ItemGrabber : MonoBehaviour
                 grabbable = grabbable, 
                 itemRB = hitinfo.rigidbody, 
             };
+
             grabbable.Grab(controller);
-            if (DisableGravity)
+
+            if (DisableGravity && hitinfo.rigidbody != null)
                 hitinfo.rigidbody.useGravity = false;
 
-            if (hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) 
+            if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) 
                 Debug.Log($"grabbed rigidbody '{hitinfo.rigidbody.gameObject.name}' has interpolation set to None, movement may look janky");
         }
         else
         {
             //add a force to the thrown object and release it
-            workingHand.itemRB.AddForce(transform.forward*ThrowForce,ForceMode.Impulse);
-            if(DisableGravity)
-                workingHand.itemRB.useGravity = true;
+            if (workingHand.itemRB != null)
+            {
+                workingHand.itemRB.AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
+                if (DisableGravity)
+                    workingHand.itemRB.useGravity = true;
+            }
             workingHand.grabbable.Release(controller);
             workingHand = null;
         }

@@ -9,16 +9,9 @@ public class GrabbableItem : MonoBehaviour
     public UnityEvent<PlayerController> onItemReleased;
 
     List<PlayerController> _holdingPlayers = new();
-    private void Start()
-    {
-        if(GetComponent<Rigidbody>() == null)
-        {
-            Debug.LogWarning("Grabbable item does not have an attached rigidbody and will not work!");
-            Destroy(this);
-        }
-    }
     public void Grab(PlayerController controller)
     {
+        Debug.Log($"i ({transform.name}) just got grabbed (:");
         onItemGrabbed?.Invoke(controller);
         _holdingPlayers.Add(controller);
     }

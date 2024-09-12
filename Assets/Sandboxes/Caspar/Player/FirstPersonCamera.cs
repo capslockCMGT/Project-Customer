@@ -34,6 +34,6 @@ public class FirstPersonCamera: MonoBehaviour
         Quaternion rot = Quaternion.AngleAxis(_mousePos.x, Vector3.up);
         Quaternion up = Quaternion.AngleAxis(_mousePos.y, Vector3.left);
 
-        transform.rotation = rot*up;
+        transform.localRotation = rot*up;
     }
 }
