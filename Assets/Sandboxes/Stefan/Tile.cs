@@ -24,16 +24,17 @@ public class Tile
 
     public List<Tile> Neighbours { get; } = new List<Tile>();
 
-    public Tile(GameObject prefab, bool horizontalSymetry, bool verticalSymetry, params string[] sockets)
+    public Tile(GameObject prefab, bool horizontalSymetry, bool verticalSymetry, string up, string right, string down, string left)
     {
         Rotation = 0;
         Prefab = prefab;
-        Sockets = sockets;
+        Sockets = new string[4] {up,right,down,left };
+
         SymetryHorizontal = horizontalSymetry;
         SymetryVertical = verticalSymetry;
     }
 
-    public Tile(GameObject prefab, float rotation, bool horizontalSymetry, bool verticalSymetry, params string[] sockets) 
+    private Tile(GameObject prefab, float rotation, bool horizontalSymetry, bool verticalSymetry, string[] sockets) 
     {
         Rotation = rotation;
         Sockets = sockets;

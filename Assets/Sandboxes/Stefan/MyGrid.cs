@@ -42,14 +42,14 @@ public class MyGrid : MonoBehaviour
 
     public Vector2Int StartPos { get; private set; }
     public Vector2Int EndPos { get; private set; }
-    AStar _aStar = new();
+    readonly AStar _aStar = new();
 
     void Awake()
     {
         //hardcoded the simetries.
         //The simetries are needed to save memory on repeating the tiles that after rotation
         //look the same
-
+        //up right down left
         _tiles[0] = new Tile(_prefab1, true, true, "ABA", "ABA", "ABA", "ABA");
         _tiles[1] = new Tile(_prefab2, true, false, "AAA", "ABA", "AAA", "ABA");
         _tiles[2] = new Tile(_prefab3, false, true, "AAA", "ABA", "ABA", "ABA");
@@ -60,11 +60,35 @@ public class MyGrid : MonoBehaviour
         _startTile = new Tile(_start, false, false, "AAA", "AAA", "AAA", "ABA");
         _endTile = new Tile(_end, false, false, "AAA", "AAA", "AAA", "ABA");
 
-        Cells = new Cell[columns, columns];
+        for (int i = 0; i < Random.Range(1,5); i++)
+            _startTile.Rotate();
+        for (int i = 0; i < Random.Range(1, 5); i++)
+            _endTile.Rotate();
+
         List<Tile> rotatedTiles = GenerateRotateTileStates(_tiles);
-        _cellWidth = _size / columns;
         var statesList = _tiles.Concat(rotatedTiles);
-        GenerateGrid(columns, statesList);
+
+        int safety = 10;
+        List<Cell> path;
+        do
+        {
+            Debug.Log("recreate map");
+            GenerateMap(statesList);
+            path = DoAstar(StartPos, EndPos);
+        } while (--safety > 0 && (path == null || path.Count == 0));
+        VisualizeAStar(path);
+
+
+        GetComponent<NavMeshSurface>().BuildNavMesh();
+
+        //if there is no solution, redo the algo
+    }
+
+    void GenerateMap(IEnumerable<Tile> rotatedTiles)
+    {
+        Cells = new Cell[columns, columns];
+        _cellWidth = _size / columns;
+        GenerateGrid(columns, rotatedTiles);
         FillGridEdgesWithEmptyTiles(columns);
         //need to first check what rotations of end and start are allowed
         (StartPos, EndPos) = PutRandomStartAndEnd();
@@ -75,10 +99,6 @@ public class MyGrid : MonoBehaviour
         }
 
         ConnectTilesB();
-        
-        GetComponent<NavMeshSurface>().BuildNavMesh();
-
-        VisualizeAStar(DoAstar(StartPos, EndPos));
     }
 
     //void VisualizeConnectionNumbers()
@@ -97,6 +117,7 @@ public class MyGrid : MonoBehaviour
 
     public void VisualizeAStar(List<Cell> path)
     {
+        if(path == null) return;
         List<GameObject> roads = new();
 
         //visualising path
@@ -143,13 +164,18 @@ public class MyGrid : MonoBehaviour
         do
         {
             //exclude edges because they will already be blanck
-            randomEnd = new(Random.Range(2, columns - 2), Random.Range(2, columns-2));
-            randomStart = new(Random.Range(2, columns - 2), Random.Range(2, columns-2));
+            randomEnd = new(Random.Range(2, columns - 3), Random.Range(2, columns-3));
+            randomStart = new(Random.Range(2, columns - 3), Random.Range(2, columns-3));
             manhatanDistance = randomStart.GetManhattanDistance(randomEnd);
             maxTries--;
         } while (_objectiveMinDistance > manhatanDistance && maxTries > 0);
         if (maxTries <= 0) Debug.Log("Did not Find close end");
-        //Debug.Log(randomEnd + "   " + randomStart);
+
+        //get neighbour tiles
+        //get random rotation of cap tile
+        //if it faces a wall, then continue
+        //if not then collapse and return
+        //naaah, not gonna do that, too much work
 
         PrePlaceTile(randomStart.x, randomStart.y, _startTile);
         PrePlaceTile(randomEnd.x, randomEnd.y, _endTile);
@@ -296,6 +322,7 @@ public class MyGrid : MonoBehaviour
         return neighbours;
     }
 
+
     void ConnectTilesB()
     {
         foreach (Cell cell in Cells)
@@ -320,8 +347,6 @@ public class MyGrid : MonoBehaviour
         {
             string mySockets = currentTile.Sockets[dir];
             Tile neighbourTile = neighbour.CollapsedTile;
-
-            Debug.Log($"neighbourTile: {neighbourTile}, neighbourTile.Sockets: {neighbourTile.Sockets}.");
 
             string otherSockets = neighbourTile.Sockets[(dir + 2) % 4];
             if (otherSockets == "AAA") return;
