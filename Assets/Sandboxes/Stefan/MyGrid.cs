@@ -12,7 +12,7 @@ public class MyGrid : MonoBehaviour
 {
     const int ROTATIONS = 4;
     [SerializeField] int columns = 10;
-    [SerializeField] float _size = 100f;
+    public float _size = 100f;
     [SerializeField] int _objectiveMinDistance = 10;
 
     [SerializeField] GameObject _prefab1;
@@ -25,7 +25,7 @@ public class MyGrid : MonoBehaviour
     [SerializeField] GameObject _cellVisual;
 
     [SerializeField] GameObject _start;
-    [SerializeField] GameObject _end;
+    public GameObject _end;
 
     [SerializeField] bool _visualizeCell;
 
