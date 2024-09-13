@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 
 public class PlayerController : MonoBehaviour
@@ -45,23 +46,40 @@ public class PlayerController : MonoBehaviour
             UpdateLeftJoystick.AddListener(CarIfDriver.UpdateGas);
         }
     }
-    private void Update()
+
+    public void OnMove(CallbackContext context)
     {
-        //return if the player is invalid
-        if (Player >= Gamepad.all.Count || Gamepad.all[Player] == null) return;
+        //Vector2 val = context.ReadValue<Vector2>();
 
-        var pad = Gamepad.all[Player];
-        UpdateLeftJoystick?.Invoke(pad.leftStick.ReadValue());
-        UpdateRightJoystick?.Invoke(pad.rightStick.ReadValue());
+    }
 
-        if (pad.leftTrigger.wasPressedThisFrame) LeftTriggerPressed?.Invoke();
-        if (pad.rightTrigger.wasPressedThisFrame) RightTriggerPressed?.Invoke();
-        if (pad.leftTrigger.wasReleasedThisFrame) LeftTriggerReleased?.Invoke();
-        if (pad.rightTrigger.wasReleasedThisFrame) RightTriggerReleased?.Invoke();
+    public void OnInteractLeft(CallbackContext context)
+    {
+        //bool interacted = context.action.triggered;
 
-        if (pad.leftShoulder.wasPressedThisFrame) LeftBumperPressed?.Invoke();
-        if (pad.rightShoulder.wasPressedThisFrame) RightBumperPressed?.Invoke();
-        if (pad.leftShoulder.wasReleasedThisFrame) LeftBumperReleased?.Invoke();
-        if (pad.rightShoulder.wasReleasedThisFrame) RightBumperReleased?.Invoke();
+    }
+
+    public void OnInteractRight(CallbackContext context)
+    {
+        //bool interacted = context.action.triggered;
+
+    }
+
+    public void OnGrabRight(CallbackContext context)
+    {
+        //bool interacted = context.action.triggered;
+
+    }
+
+    public void OnGrabLeft(CallbackContext context)
+    {
+        //bool interacted = context.action.triggered;
+
+    }
+
+    public void OnCameraMove(CallbackContext context)
+    {
+        //Vector2 val = context.ReadValue<Vector2>();
+
     }
 }

@@ -49,7 +49,7 @@ public class MyGrid : MonoBehaviour
         //hardcoded the simetries.
         //The simetries are needed to save memory on repeating the tiles that after rotation
         //look the same
-
+        //up right down left
         _tiles[0] = new Tile(_prefab1, true, true, "ABA", "ABA", "ABA", "ABA");
         _tiles[1] = new Tile(_prefab2, true, false, "AAA", "ABA", "AAA", "ABA");
         _tiles[2] = new Tile(_prefab3, false, true, "AAA", "ABA", "ABA", "ABA");
@@ -97,6 +97,7 @@ public class MyGrid : MonoBehaviour
 
     public void VisualizeAStar(List<Cell> path)
     {
+        if(path == null) return;
         List<GameObject> roads = new();
 
         //visualising path
@@ -296,6 +297,7 @@ public class MyGrid : MonoBehaviour
         return neighbours;
     }
 
+
     void ConnectTilesB()
     {
         foreach (Cell cell in Cells)
@@ -320,8 +322,6 @@ public class MyGrid : MonoBehaviour
         {
             string mySockets = currentTile.Sockets[dir];
             Tile neighbourTile = neighbour.CollapsedTile;
-
-            Debug.Log($"neighbourTile: {neighbourTile}, neighbourTile.Sockets: {neighbourTile.Sockets}.");
 
             string otherSockets = neighbourTile.Sockets[(dir + 2) % 4];
             if (otherSockets == "AAA") return;
