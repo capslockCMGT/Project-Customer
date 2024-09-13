@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f27690b3ab29ca4ebaa193ca7e41cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 15
+  columns: 20
   _size: 500
-  _objectiveMinDistance: 10
+  _objectiveMinDistance: 5
   _prefab1: {fileID: 8011886544565409896, guid: 637e3baf843837640a97e4924d2ffd62,
     type: 3}
   _prefab2: {fileID: 5099231861569548205, guid: a72c4507676de064d87741b6d897a707,
