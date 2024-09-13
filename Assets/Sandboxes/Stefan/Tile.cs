@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum NeighbourDir
@@ -13,11 +14,15 @@ public class Tile
     //sockets are the edges of tiles divided into 3 parts. These three parts are then checked with other tiles to see if they can be connected
     //A is empty
     //B is road
+    public Cell ParentCell; //maybeChangeLater?
+
     public string[] Sockets { get; }
     public bool SymetryHorizontal { get; }
     public bool SymetryVertical { get; }
     public float Rotation { get; private set; }
     public GameObject Prefab { get; }
+
+    public List<Tile> Neighbours { get; } = new List<Tile>();
 
     public Tile(GameObject prefab, bool horizontalSymetry, bool verticalSymetry, params string[] sockets)
     {

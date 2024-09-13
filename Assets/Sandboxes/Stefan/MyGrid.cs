@@ -1,22 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using TMPro;
 using Unity.AI.Navigation;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
-
-public class Cell
-{
-    public List<Tile> Possibilities { get; }
-    public int X { get; }
-    public int Y { get; }
-    public Tile CollapsedTile { get; set; }
-    public Cell(int x, int y, List<Tile> possibilities)
-    {
-        Possibilities = possibilities;
-        X = x;
-        Y = y;
-    }
-
-}
 
 public class MyGrid : MonoBehaviour
 {
@@ -24,12 +14,14 @@ public class MyGrid : MonoBehaviour
     [SerializeField] int columns = 10;
     [SerializeField] float _size = 100f;
     [SerializeField] int _objectiveMinDistance = 10;
+
     [SerializeField] GameObject _prefab1;
     [SerializeField] GameObject _prefab2;
     [SerializeField] GameObject _prefab3;
     [SerializeField] GameObject _prefab4;
     [SerializeField] GameObject _prefab5;
     [SerializeField] GameObject _prefab6;
+    
     [SerializeField] GameObject _cellVisual;
 
     [SerializeField] GameObject _start;
@@ -37,14 +29,20 @@ public class MyGrid : MonoBehaviour
 
     [SerializeField] bool _visualizeCell;
 
+    [SerializeField] Material _pathMat;
+
     public bool Done { get; private set; }
-    
+    public Cell[,] Cells { get; private set; }
+
     int collapsedTileCount;
     float _cellWidth;
-    Cell[,] _cells;
     Tile _startTile;
     Tile _endTile;
     readonly Tile[] _tiles = new Tile[6];
+
+    public Vector2Int StartPos { get; private set; }
+    public Vector2Int EndPos { get; private set; }
+    AStar _aStar = new();
 
     void Awake()
     {
@@ -62,24 +60,55 @@ public class MyGrid : MonoBehaviour
         _startTile = new Tile(_start, false, false, "AAA", "AAA", "AAA", "ABA");
         _endTile = new Tile(_end, false, false, "AAA", "AAA", "AAA", "ABA");
 
-        _cells = new Cell[columns, columns];
+        Cells = new Cell[columns, columns];
         List<Tile> rotatedTiles = GenerateRotateTileStates(_tiles);
         _cellWidth = _size / columns;
         var statesList = _tiles.Concat(rotatedTiles);
         GenerateGrid(columns, statesList);
         FillGridEdgesWithEmptyTiles(columns);
+        //need to first check what rotations of end and start are allowed
+        (StartPos, EndPos) = PutRandomStartAndEnd();
 
-        //PutRandomStartAndEnd();
-    }
-
-
-    void Start()
-    {
         while (!Done)
         {
             Iterate();
         }
+
+        ConnectTilesB();
+        
         GetComponent<NavMeshSurface>().BuildNavMesh();
+
+        VisualizeAStar(DoAstar(StartPos, EndPos));
+    }
+
+    //void VisualizeConnectionNumbers()
+    //{
+    //    foreach (Cell cell in Cells)
+    //    {
+    //        TextMeshPro txt = Instantiate(_countMeshrePrefab, cell.WorldObj.transform.position + Vector3.up * 12, Quaternion.AngleAxis(90, Vector3.right));
+    //        txt.text = cell.CollapsedTile.Neighbours.Count.ToString();
+    //    }
+    //}
+
+    public List<Cell> DoAstar(Vector2Int startPos, Vector2Int endPos)
+    {
+        return _aStar.Find(Cells[startPos.y, startPos.x], Cells[endPos.y, endPos.x]);
+    }
+
+    public void VisualizeAStar(List<Cell> path)
+    {
+        List<GameObject> roads = new();
+
+        //visualising path
+        foreach (Cell pathPoint in path)
+        {
+            pathPoint.WorldObj.FindGameObjectInChildWithTag("road", roads);
+
+            foreach (GameObject road in roads)
+            {
+                road.GetComponent<MeshRenderer>().material = _pathMat;
+            }
+        }
     }
 
     void Iterate()
@@ -96,7 +125,7 @@ public class MyGrid : MonoBehaviour
         for (int y = 0; y < columns; y++)//I know I can make a faster loop but meh
             for (int x = 0; x < columns; x++)
             {
-                bool isOnEdge = x == 0 || y == 0 || x == _cells.GetLength(1) - 1 || y == _cells.GetLength(0) - 1;
+                bool isOnEdge = x == 0 || y == 0 || x == Cells.GetLength(1) - 1 || y == Cells.GetLength(0) - 1;
 
                 if (!isOnEdge) continue;
 
@@ -104,7 +133,7 @@ public class MyGrid : MonoBehaviour
             }
     }
 
-    void PutRandomStartAndEnd()
+    (Vector2Int, Vector2Int) PutRandomStartAndEnd()
     {
         Vector2Int randomStart;
         Vector2Int randomEnd;
@@ -114,21 +143,22 @@ public class MyGrid : MonoBehaviour
         do
         {
             //exclude edges because they will already be blanck
-            randomEnd = new(Random.Range(1, columns-1), Random.Range(0, columns));
-            randomStart = new(Random.Range(1, columns-1), Random.Range(0, columns));
-            var manhatanVector = randomEnd - randomStart;
-            manhatanDistance = Mathf.Abs(manhatanVector.x) + Mathf.Abs(manhatanVector.y);
+            randomEnd = new(Random.Range(2, columns - 2), Random.Range(2, columns-2));
+            randomStart = new(Random.Range(2, columns - 2), Random.Range(2, columns-2));
+            manhatanDistance = randomStart.GetManhattanDistance(randomEnd);
             maxTries--;
         } while (_objectiveMinDistance > manhatanDistance && maxTries > 0);
         if (maxTries <= 0) Debug.Log("Did not Find close end");
-        Debug.Log(randomEnd + "   " + randomStart);
+        //Debug.Log(randomEnd + "   " + randomStart);
+
         PrePlaceTile(randomStart.x, randomStart.y, _startTile);
         PrePlaceTile(randomEnd.x, randomEnd.y, _endTile);
+        return (randomStart, randomEnd);
     }
 
     void PrePlaceTile(int gridX, int gridY, Tile tile)
     {
-        Cell cell = _cells[gridX, gridY];
+        Cell cell = Cells[gridY, gridX];
         CollapseCellWithTile(cell, tile);
         Propagate(cell);
     }
@@ -136,7 +166,7 @@ public class MyGrid : MonoBehaviour
     public Cell GetLeastEntropyCell()
     {
         Cell min = null;
-        foreach (Cell cell in _cells)
+        foreach (Cell cell in Cells)
         {
             if (cell.CollapsedTile != null) continue;//is a collapsed cell
             min ??= cell;
@@ -150,17 +180,15 @@ public class MyGrid : MonoBehaviour
     void GenerateGrid(int columns, IEnumerable<Tile> statesList)
     {
         for (int y = 0; y < columns; y++)
-        {
             for (int x = 0; x < columns; x++)
             {
-                if(_visualizeCell)
+                if (_visualizeCell)
                 {
                     var inst = Instantiate(_cellVisual, transform.position + new Vector3(x * _cellWidth + .5f * _cellWidth, 0, -y * _cellWidth - .5f * _cellWidth), Quaternion.identity);
                     inst.transform.localScale = new Vector3(_cellWidth - .2f, .2f, _cellWidth - .2f);
                 }
-                _cells[y, x] = new Cell(x, y, new List<Tile>(statesList));
+                Cells[y, x] = new Cell(x, y, new List<Tile>(statesList));
             }
-        }
     }
 
     List<Tile> GenerateRotateTileStates(Tile[] unrotatedTiles)
@@ -192,7 +220,7 @@ public class MyGrid : MonoBehaviour
             Done = true;
             return;
         }
-        
+
         int randomIndex = GetRandomPossibility(cell);
         Tile prototype = cell.Possibilities[randomIndex];
         CollapseCellWithTile(cell, prototype);
@@ -207,7 +235,6 @@ public class MyGrid : MonoBehaviour
         if (cell.Possibilities.Count > 1)
         {
             while (IsCapTile(randomIndex)) randomIndex = Random.Range(0, cell.Possibilities.Count);
-
         }
         return randomIndex;
 
@@ -222,12 +249,14 @@ public class MyGrid : MonoBehaviour
         cell.Possibilities.Clear();
         cell.CollapsedTile = prototype.Clone();
         Tile tile = cell.CollapsedTile;
+        tile.ParentCell = cell;
         //The Y direction is negative because I initialy programed the algorithm in GXPengine and I can't bother
         //to figure out how to write the algorithm with positive y
-        var inst = Instantiate(tile.Prefab, transform.position + new Vector3(cell.X * _cellWidth +.5f* _cellWidth, 0, -cell.Y * _cellWidth - .5f * _cellWidth), Quaternion.AngleAxis(tile.Rotation ,transform.up), transform);
+        var inst = Instantiate(tile.Prefab, transform.position + new Vector3(cell.X * _cellWidth + .5f * _cellWidth, 0, -cell.Y * _cellWidth - .5f * _cellWidth), Quaternion.AngleAxis(tile.Rotation, transform.up), transform);
         inst.transform.localScale = Vector3.one * _cellWidth;
+        cell.WorldObj = inst;
 
-        if (++collapsedTileCount >= _cells.Length) Done = true;
+        if (++collapsedTileCount >= Cells.Length) Done = true;
     }
 
     void Propagate(Cell cell)
@@ -257,15 +286,113 @@ public class MyGrid : MonoBehaviour
         List<CellAndDir> neighbours = new();
         //I'm checking the bounds of the array
         if (x - 1 >= 0)
-            neighbours.Add(new CellAndDir(_cells[y, x - 1], NeighbourDir.Left));
-        if (x + 1 < _cells.GetLength(1))
-            neighbours.Add(new CellAndDir(_cells[y, x + 1], NeighbourDir.Right));
+            neighbours.Add(new CellAndDir(Cells[y, x - 1], NeighbourDir.Left));
+        if (x + 1 < Cells.GetLength(1))
+            neighbours.Add(new CellAndDir(Cells[y, x + 1], NeighbourDir.Right));
         if (y - 1 >= 0)
-            neighbours.Add(new CellAndDir(_cells[y - 1, x], NeighbourDir.Up));
-        if (y + 1 < _cells.GetLength(0))
-            neighbours.Add(new CellAndDir(_cells[y + 1, x], NeighbourDir.Down));
+            neighbours.Add(new CellAndDir(Cells[y - 1, x], NeighbourDir.Up));
+        if (y + 1 < Cells.GetLength(0))
+            neighbours.Add(new CellAndDir(Cells[y + 1, x], NeighbourDir.Down));
         return neighbours;
     }
+
+    void ConnectTilesB()
+    {
+        foreach (Cell cell in Cells)
+        {
+            int x = cell.X;
+            int y = cell.Y;
+            Tile currentTile = cell.CollapsedTile;
+
+            if (x - 1 >= 0)
+                ConnectTiles(Cells[y, x - 1], currentTile, (int)NeighbourDir.Left);
+            if (x + 1 < Cells.GetLength(1))
+                ConnectTiles(Cells[y, x + 1], currentTile, (int)NeighbourDir.Right);
+            if (y - 1 >= 0)
+                ConnectTiles(Cells[y - 1, x], currentTile, (int)NeighbourDir.Up);
+            if (y + 1 < Cells.GetLength(0))
+                ConnectTiles(Cells[y + 1, x], currentTile, (int)NeighbourDir.Down);
+
+            
+        }
+
+        static void ConnectTiles(Cell neighbour, Tile currentTile, int dir)
+        {
+            string mySockets = currentTile.Sockets[dir];
+            Tile neighbourTile = neighbour.CollapsedTile;
+
+            Debug.Log($"neighbourTile: {neighbourTile}, neighbourTile.Sockets: {neighbourTile.Sockets}.");
+
+            string otherSockets = neighbourTile.Sockets[(dir + 2) % 4];
+            if (otherSockets == "AAA") return;
+
+            if (otherSockets == mySockets)//canConnect
+            {
+                if (!neighbourTile.Neighbours.Contains(currentTile))
+                    neighbourTile.Neighbours.Add(currentTile);
+                if (!currentTile.Neighbours.Contains(neighbourTile))
+                    currentTile.Neighbours.Add(neighbourTile);
+            }
+        }
+    }
+
+    #region BFS version
+
+    //void ConnectAllTiles(int startX, int startY)
+    //{
+    //    HashSet<Cell> _visitedNodes = new HashSet<Cell>();
+    //    Queue<Cell> _queue = new Queue<Cell>();
+
+    //    Cell startCell = Cells[startY, startX];
+
+    //    if (startCell.CollapsedTile == null) return;
+
+    //    _queue.Enqueue(startCell);
+    //    _visitedNodes.Add(startCell);
+
+    //    while (_queue.Count > 0)
+    //    {
+    //        Cell currentCell = _queue.Dequeue();
+    //        Tile currentTile = currentCell.CollapsedTile;
+    //        int x = currentCell.X;
+    //        int y = currentCell.Y;
+    //        if (x - 1 >= 0)
+    //            ConnectTiles(Cells[y, x - 1], currentTile, (int)NeighbourDir.Left);
+    //        if (x + 1 < Cells.GetLength(1))
+    //            ConnectTiles(Cells[y, x + 1], currentTile, (int)NeighbourDir.Right);
+    //        if (y - 1 >= 0)
+    //            ConnectTiles(Cells[y - 1, x], currentTile, (int)NeighbourDir.Up);
+    //        if (y + 1 < Cells.GetLength(0))
+    //            ConnectTiles(Cells[y + 1, x], currentTile, (int)NeighbourDir.Down);
+
+    //    }
+
+
+    //    void ConnectTiles(Cell neighbourCell, Tile currentTile, int dir)
+    //    {
+
+    //        Tile neighbourTile = neighbourCell.CollapsedTile;
+    //        string currentSockets = currentTile.Sockets[dir];
+
+    //        if (currentSockets != "AAA")//I know that it can connect, I should change it so I take advantage of the fact
+    //        {
+    //            if (!neighbourTile.Neighbours.Contains(currentTile))
+    //                neighbourTile.Neighbours.Add(currentTile);
+    //            if (!currentTile.Neighbours.Contains(neighbourTile))
+    //                currentTile.Neighbours.Add(neighbourTile);
+    //        }
+    //        if (_visitedNodes.Contains(neighbourCell)) return;
+
+    //        _queue.Enqueue(neighbourCell);
+    //        _visitedNodes.Add(neighbourCell);
+    //    }
+    //}
+
+    //bool CanConnect(string[] socketsA, string socketsB, int dir)
+    //{
+    //    return socketsA[(dir + 2) % 4] == socketsB;
+    //}
+    #endregion
 
     readonly struct CellAndDir
     {
