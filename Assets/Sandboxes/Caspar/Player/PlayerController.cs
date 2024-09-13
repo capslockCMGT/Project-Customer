@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
     public void OnMove(CallbackContext context)
     {
         //Vector2 val = context.ReadValue<Vector2>();
-
     }
 
     public void OnInteractLeft(CallbackContext context)
