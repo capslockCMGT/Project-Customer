@@ -8,9 +8,15 @@ public class CarControlsHandler : MonoBehaviour
 {
     public event Action<float> SteeringAngleChanged;
     public event Action<float> CarSpeedChanged;
+    public event Action GearshiftReversed;
 
     int _steersReceived = 0;
     float _steerInput = 0;
+
+    public void ToggleCarReverse()
+    {
+        GearshiftReversed.Invoke();
+    }
 
     public void UpdateGas(Vector2 playerInput)
     {

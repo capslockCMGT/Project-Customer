@@ -193,9 +193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a703eb87325777248acf3c7018ba65a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Renderer: {fileID: 1026875114861203561}
   onItemGrabbed:
     m_PersistentCalls:
       m_Calls: []
   onItemReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
