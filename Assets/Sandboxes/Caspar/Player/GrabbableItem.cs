@@ -5,9 +5,16 @@ using UnityEngine.Events;
 
 public class GrabbableItem : MonoBehaviour
 {
+    public Transform Renderer;
     public UnityEvent<PlayerController> onItemGrabbed;
     public UnityEvent<PlayerController> onItemReleased;
     public UnityEvent onPlayerInteract;
+
+    private void Start()
+    {
+        if (Renderer == null)
+            Renderer = this.transform;
+    }
 
     List<PlayerController> _holdingPlayers = new();
     public void Grab(PlayerController controller)

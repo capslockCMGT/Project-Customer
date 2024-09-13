@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 public class ItemGrabber : MonoBehaviour
 {
     [SerializeField] Rigidbody Car;
+    [SerializeField] Transform LeftHandRenderer;
+    [SerializeField] Transform RightHandRenderer;
+
     [SerializeField] float MaxHandReach = 3;
     [SerializeField] float HoldingItemDistance = 1;
     [SerializeField] float ThrowForce = 10;
@@ -63,6 +66,7 @@ public class ItemGrabber : MonoBehaviour
         rb.velocity *= .5f + .25f*dirCorrectness;
         rb.velocity += carVelocity;
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
+        rb.angularVelocity *= .9f;
     }
     public void TryInteractWithItem(bool leftHand)
     {
@@ -74,9 +78,17 @@ public class ItemGrabber : MonoBehaviour
     {
         //the hand were working with to make code more agnostic
         grabbedItem workingHand;
+        Transform workingHandRenderer;
         if (leftHand)
+        {
             workingHand = _leftHand;
-        else workingHand = _rightHand;
+            workingHandRenderer = LeftHandRenderer;
+        }
+        else
+        {
+            workingHand = _rightHand;
+            workingHandRenderer = RightHandRenderer;
+        }
 
         if(workingHand == null)
         {
@@ -96,6 +108,8 @@ public class ItemGrabber : MonoBehaviour
             };
 
             grabbable.Grab(controller);
+            workingHandRenderer.position = hitinfo.point;
+            workingHandRenderer.parent = grabbable.Renderer;
 
             if (DisableGravity && hitinfo.rigidbody != null)
                 hitinfo.rigidbody.useGravity = false;
@@ -114,6 +128,9 @@ public class ItemGrabber : MonoBehaviour
             }
             workingHand.grabbable.Release(controller);
             workingHand = null;
+
+            workingHandRenderer.position = transform.position;
+            workingHandRenderer.parent = transform;
         }
 
         //set the hand back to the altered working hand - set to a new object if grabbed, or set to null if released

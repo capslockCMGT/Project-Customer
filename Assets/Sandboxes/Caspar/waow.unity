@@ -901,6 +901,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 635684090484345418, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
+        type: 3}
+      propertyPath: BrakeStrength
+      value: 40347
+      objectReference: {fileID: 0}
+    - target: {fileID: 635684090484345418, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
+        type: 3}
+      propertyPath: MaxSpeedBackwards
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3190442711018410752, guid: 70cd34e39483e9e4abcc4c1bc8a1179e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
+[RequireComponent(typeof(GrabbableItem))]
 public class GearShift : MonoBehaviour
 {
     [SerializeField] Transform Renderer;
@@ -10,12 +11,6 @@ public class GearShift : MonoBehaviour
     private void Start()
     {
         var grab = GetComponent<GrabbableItem>();
-        if (grab == null)
-        {
-            Debug.LogWarning($"gearshift {transform.name} does not have a grabbable and will not function.");
-            Destroy(this);
-            return;
-        }
 
         if (carHandler == null)
         {
