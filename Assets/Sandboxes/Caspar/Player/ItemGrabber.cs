@@ -64,6 +64,12 @@ public class ItemGrabber : MonoBehaviour
         rb.velocity += carVelocity;
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
     }
+    public void TryInteractWithItem(bool leftHand)
+    {
+        grabbedItem hand = leftHand ? _leftHand : _rightHand;
+        if (hand == null) return;
+        hand.grabbable.onPlayerInteract?.Invoke();
+    }
     public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
         //the hand were working with to make code more agnostic

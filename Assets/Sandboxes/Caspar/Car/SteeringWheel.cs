@@ -25,15 +25,15 @@ public class SteeringWheel : MonoBehaviour
         }
 
         if(Renderer == null)
-        {
-            Debug.LogWarning("steering wheel doesnt have a renderer set. can you add it pls 🥺");
-        }
+            Debug.LogWarning("steering wheel doesnt have a renderer set. can you add it pls");
 
-        grab.onItemGrabbed.AddListener((PlayerController addedController) => {
+        grab.onItemGrabbed.AddListener((PlayerController addedController) => 
+        {
             if(addedController.PlayerCanSteer)
                 addedController.UpdateLeftJoystick.AddListener(carHandler.UpdateSteeringAngle);
         });
-        grab.onItemReleased.AddListener((PlayerController addedController) => {
+        grab.onItemReleased.AddListener((PlayerController addedController) => 
+        {
             if(addedController.PlayerCanSteer)
                 addedController.UpdateLeftJoystick.RemoveListener(carHandler.UpdateSteeringAngle);
         });

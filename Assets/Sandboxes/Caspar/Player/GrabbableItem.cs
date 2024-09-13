@@ -7,6 +7,7 @@ public class GrabbableItem : MonoBehaviour
 {
     public UnityEvent<PlayerController> onItemGrabbed;
     public UnityEvent<PlayerController> onItemReleased;
+    public UnityEvent onPlayerInteract;
 
     List<PlayerController> _holdingPlayers = new();
     public void Grab(PlayerController controller)

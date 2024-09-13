@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
     public UnityEvent LeftTriggerReleased;
     public UnityEvent RightTriggerReleased;
 
+    public UnityEvent LeftBumperPressed;
+    public UnityEvent RightBumperPressed;
+    public UnityEvent LeftBumperReleased;
+    public UnityEvent RightBumperReleased;
+
     private void Start()
     {
         if (Player >= Gamepad.all.Count || Gamepad.all[Player] == null)
@@ -31,6 +36,8 @@ public class PlayerController : MonoBehaviour
             //automatically add the playercontroller to grab on input.
             LeftTriggerPressed.AddListener( () => { grabber.TryGrabReleaseItem(true, this); });
             RightTriggerPressed.AddListener( () => { grabber.TryGrabReleaseItem(false, this); });
+            LeftBumperPressed.AddListener( () => { grabber.TryInteractWithItem(true); });
+            RightBumperPressed.AddListener( () => { grabber.TryInteractWithItem(false); });
         }
 
         if(CarIfDriver != null)
@@ -51,5 +58,10 @@ public class PlayerController : MonoBehaviour
         if (pad.rightTrigger.wasPressedThisFrame) RightTriggerPressed?.Invoke();
         if (pad.leftTrigger.wasReleasedThisFrame) LeftTriggerReleased?.Invoke();
         if (pad.rightTrigger.wasReleasedThisFrame) RightTriggerReleased?.Invoke();
+
+        if (pad.leftShoulder.wasPressedThisFrame) LeftBumperPressed?.Invoke();
+        if (pad.rightShoulder.wasPressedThisFrame) RightBumperPressed?.Invoke();
+        if (pad.leftShoulder.wasReleasedThisFrame) LeftBumperReleased?.Invoke();
+        if (pad.rightShoulder.wasReleasedThisFrame) RightBumperReleased?.Invoke();
     }
 }
