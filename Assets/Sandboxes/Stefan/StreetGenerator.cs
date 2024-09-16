@@ -9,19 +9,24 @@ public class StreetGenerator : MonoBehaviour
     {
         _cityGenerator = GetComponent<MyGrid>();
     }
-    void OnEnable()
-    {
-        _cityGenerator.TileCollapsed += OnTileCollapse;
-    }
-    void OnDisable()
-    {
-        _cityGenerator.TileCollapsed -= OnTileCollapse;
-    }
 
-    void OnTileCollapse(Tile tile, GameObject gameObject)
+    void Start()
     {
-
+        MakeRandomCrosswalks();   
     }
+    //void OnEnable()
+    //{
+    //    _cityGenerator.TileCollapsed += OnTileCollapse;
+    //}
+    //void OnDisable()
+    //{
+    //    _cityGenerator.TileCollapsed -= OnTileCollapse;
+    //}
+
+    //void OnTileCollapse(Tile tile, GameObject gameObject)
+    //{
+
+    //}
 
     void MakeRandomCrosswalks()
     {
@@ -29,14 +34,22 @@ public class StreetGenerator : MonoBehaviour
         //connect sidewalks
         foreach (Cell cell in _cityGenerator.Cells)
         {
+            if (!cell.WorldObj.TryGetComponent<TileConnections>(out var mySideWalkManager)) continue;
+            
             neighbours.Clear();
             _cityGenerator.GetNeighbouringCellsAndDirections(cell.X, cell.Y, neighbours);
 
+            mySideWalkManager.UpdateDirections();
             foreach (CellAndDir neighbourData in neighbours)
             {
-                TileConnections sidewalkManager = neighbourData.cell.WorldObj.GetComponent<TileConnections>();
+                //check if tiles are connected
+                if (!neighbourData.cell.CollapsedTile.Neighbours.Contains(cell.CollapsedTile)) continue;
+                if (!neighbourData.cell.WorldObj.TryGetComponent<TileConnections>(out var neighbourSidewalkManager)) continue;
+                
+                //connect
+                neighbourSidewalkManager.UpdateDirections();
+                neighbourSidewalkManager.Connect(mySideWalkManager, neighbourData.dir);
 
-                //sidewalkManager.get MyGrid.GetOppositeDir((int)neighbourData.dir);
             }
             
         }

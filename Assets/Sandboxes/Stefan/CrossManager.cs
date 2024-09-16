@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,40 +11,42 @@ struct Range
 
 public class CrossManager : MonoBehaviour
 {
-    [SerializeField] Transform _mainObjective;
-    [SerializeField] Transform[] _randomObjectives;
-    [SerializeField] CrossManager IgnoreFrom;
+    [SerializeField] List<Transform> _randomObjectives;
+    [SerializeField] Transform _ignoreFrom;
+
+    public void TransferObjectivesFrom(CrossManager fromCrossPoint)
+    {
+        _randomObjectives = fromCrossPoint._randomObjectives.Concat(_randomObjectives).ToList();
+    }
+
+    public void SetIgnoreTransform(Transform ignore)
+    {
+        _ignoreFrom = ignore;
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent<NPC>(out var npc)) return;
 
-        if(IgnoreFrom == null)
-        {
-            SetDestinationToCrossPoint(_mainObjective.transform, npc);
-            return;
-        }
-
         bool senderShouldBeIgnored = ShouldIgnore(npc);
 
-        if (!senderShouldBeIgnored || IgnoreFrom.transform != _mainObjective)
+        if(_ignoreFrom == null || !senderShouldBeIgnored)
         {
-            SetDestinationToCrossPoint(_mainObjective.transform, npc);
+            SetDestinationToCrossPoint(_randomObjectives[Random.Range(0,_randomObjectives.Count)], npc);
             return;
         }
 
-        Transform[] shufledObjectives = _randomObjectives.Clone() as Transform[];
+        List<Transform> shufledObjectives = new(_randomObjectives);
         shufledObjectives.Shuffle();
 
         foreach (Transform randomObjective in shufledObjectives)
         {
-            if (senderShouldBeIgnored && randomObjective == IgnoreFrom.transform) continue;
+            if (randomObjective == _ignoreFrom.transform) continue;
             SetDestinationToCrossPoint(randomObjective, npc);
             break;
         }
-
-
     }
+
 
     void SetDestinationToCrossPoint(Transform crossPoint, NPC npc)
     {
@@ -60,7 +64,7 @@ public class CrossManager : MonoBehaviour
 
     bool ShouldIgnore(NPC npc)
     {
-        return npc.Sender == IgnoreFrom.gameObject.name;
+        return npc.Sender == _ignoreFrom.gameObject.name;
     }
 
     //bool ShouldIgnore(Transform objective)

@@ -72,7 +72,6 @@ public class MyGrid : MonoBehaviour
 
 
         GetComponent<NavMeshSurface>().BuildNavMesh();
-
     }
 
     private void Update()
@@ -340,7 +339,6 @@ public class MyGrid : MonoBehaviour
         if (y + 1 < Cells.GetLength(0))
             neighbours.Add(new CellAndDir(Cells[y + 1, x], NeighbourDir.Down));
     }
-
 
     void ConnectTiles()
     {

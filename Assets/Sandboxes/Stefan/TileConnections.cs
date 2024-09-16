@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+[Serializable]
+public struct ConnectionPair
+{
+    public CrossManager A;
+    public CrossManager B;
+}
 
 public class TileConnections : MonoBehaviour
 {
-    public struct ConnectionPair
-    {
-        public CrossManager A;
-        public CrossManager B;
-    }
-
     [SerializeField] ConnectionPair _pairUp;
     [SerializeField] ConnectionPair _pairRight;
     [SerializeField] ConnectionPair _pairDown;
@@ -22,22 +21,47 @@ public class TileConnections : MonoBehaviour
         _pairs = new ConnectionPair[4] { _pairUp, _pairRight, _pairDown, _pairLeft };
     }
 
-    public ConnectionPair GetConnection(NeighbourDir direction)
+    public void Connect(TileConnections otherConnection, NeighbourDir direction)
     {
-        UpdateDirections();
-
-
-        return direction switch
+        switch (direction)
         {
-            NeighbourDir.Up => _pairUp,
-            NeighbourDir.Right => _pairRight,
-            NeighbourDir.Down => _pairDown,
-            NeighbourDir.Left => _pairLeft,
-            _ => new(),
-        };
+            case NeighbourDir.Up:
+                MergePairs(_pairUp, otherConnection._pairDown);
+                otherConnection._pairDown = _pairUp;
+                otherConnection._pairs[2] = _pairUp;
+                break;
+            case NeighbourDir.Right:
+                MergePairs(_pairRight, otherConnection._pairLeft);
+                otherConnection._pairLeft = _pairRight;
+                otherConnection._pairs[3] = _pairRight;
+
+                break;
+            case NeighbourDir.Down:
+                MergePairs(_pairDown, otherConnection._pairUp);
+                otherConnection._pairUp = _pairDown;
+                otherConnection._pairs[0] = _pairDown;
+
+                break;
+            case NeighbourDir.Left:
+                MergePairs(_pairLeft, otherConnection._pairRight);
+                otherConnection._pairRight = _pairLeft;
+                otherConnection._pairs[1] = _pairLeft;
+
+                break;
+        }
+
     }
 
-    void UpdateDirections()
+    void MergePairs(ConnectionPair myPair, ConnectionPair otherPair)
+    {
+        myPair.A.TransferObjectivesFrom(otherPair.A);
+        myPair.B.TransferObjectivesFrom(otherPair.B);
+
+        Destroy(otherPair.A.gameObject);
+        Destroy(otherPair.B.gameObject);
+    }
+
+    public void UpdateDirections()
     {
         int upIndex = GetWorldUpIndex();
 
@@ -51,18 +75,6 @@ public class TileConnections : MonoBehaviour
         
     }
 
-    //returns in what array position is the world up pair
-    int GetWorldUpIndex()
-    {
-        for (int i = 0; i < _pairs.Length; i++)
-        {
-            //getting the difference from center to check if point is in up direction relative to world coordinates
-            //i'm checking if value is negative because the up direction is flipped in the grid system
-            bool isAbove = _pairs[i].A.transform.position.z - transform.position.z < 0;
-            if (isAbove) 
-                return i;
-        }
-        return -1;
-    }
+    
 
 }
