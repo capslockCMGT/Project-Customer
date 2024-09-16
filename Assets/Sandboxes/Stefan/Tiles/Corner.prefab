@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 5977533995707457528}
   - component: {fileID: 5914881937765989686}
   - component: {fileID: 4995806295555945750}
+  - component: {fileID: 4956656690113471885}
   m_Layer: 0
   m_Name: CrossPairUpA
   m_TagString: Untagged
@@ -132,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 1710633772365645731}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.083, y: -0.014, z: 0.479}
+  m_LocalPosition: {x: -0.083, y: -0.014, z: 0.511}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -171,9 +172,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 6940837782910887823}
-  _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
+  _randomObjectives:
+  - {fileID: 6940837782910887823}
+  _ignoreFrom: {fileID: 0}
+  connected: 0
+--- !u!54 &4956656690113471885
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710633772365645731}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1818882730839148400
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +529,7 @@ GameObject:
   - component: {fileID: 8165195595097189913}
   - component: {fileID: 4431327833797123191}
   - component: {fileID: 4409963965623274885}
+  - component: {fileID: 978859046843830209}
   m_Layer: 0
   m_Name: CrossPairRightB
   m_TagString: Untagged
@@ -516,7 +546,7 @@ Transform:
   m_GameObject: {fileID: 2214252315342789452}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.474, y: -0.014, z: -0.095}
+  m_LocalPosition: {x: 0.504, y: -0.014, z: -0.095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -555,9 +585,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 6940837782910887823}
-  _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
+  _randomObjectives:
+  - {fileID: 6940837782910887823}
+  _ignoreFrom: {fileID: 0}
+  connected: 0
+--- !u!54 &978859046843830209
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2214252315342789452}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2315699958214807080
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +627,7 @@ GameObject:
   - component: {fileID: 2821975724635997966}
   - component: {fileID: 8037223924746338756}
   - component: {fileID: 8996730319363336749}
+  - component: {fileID: 7042449021358402706}
   m_Layer: 0
   m_Name: CrossPairUpB
   m_TagString: Untagged
@@ -585,7 +644,7 @@ Transform:
   m_GameObject: {fileID: 2315699958214807080}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.065, y: -0.014, z: 0.474}
+  m_LocalPosition: {x: 0.065, y: -0.014, z: 0.514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -624,9 +683,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 5690178337050347110}
-  _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
+  _randomObjectives:
+  - {fileID: 5690178337050347110}
+  _ignoreFrom: {fileID: 0}
+  connected: 0
+--- !u!54 &7042449021358402706
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2315699958214807080}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2615734335736333619
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,9 +990,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 8289767067732224638}
-  _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
+  _randomObjectives:
+  - {fileID: 8289767067732224638}
+  - {fileID: 2821975724635997966}
+  _ignoreFrom: {fileID: 0}
+  connected: 0
 --- !u!1 &5597539636871029228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1216,7 @@ GameObject:
   - component: {fileID: 8289767067732224638}
   - component: {fileID: 7847388872558041742}
   - component: {fileID: 1861241372719777460}
+  - component: {fileID: 160862239218276381}
   m_Layer: 0
   m_Name: CrossPairRightA
   m_TagString: Untagged
@@ -1143,7 +1233,7 @@ Transform:
   m_GameObject: {fileID: 7954346410780831053}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.459, y: -0.014, z: 0.092}
+  m_LocalPosition: {x: 0.494, y: -0.014, z: 0.092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1182,9 +1272,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 5690178337050347110}
-  _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
+  _randomObjectives:
+  - {fileID: 5690178337050347110}
+  _ignoreFrom: {fileID: 0}
+  connected: 0
+--- !u!54 &160862239218276381
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954346410780831053}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8011886544565409896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1312,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8647630973829367811}
-  - component: {fileID: 969113646558052190}
   m_Layer: 0
   m_Name: Corner
   m_TagString: Untagged
@@ -1238,30 +1355,6 @@ Transform:
   - {fileID: 2957687105631230391}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &969113646558052190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011886544565409896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59a05ae12f63a02478ca800350e101d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pairUp:
-    A: {fileID: 4995806295555945750}
-    B: {fileID: 8996730319363336749}
-  _pairRight:
-    A: {fileID: 1861241372719777460}
-    B: {fileID: 4409963965623274885}
-  _pairDown:
-    A: {fileID: 0}
-    B: {fileID: 0}
-  _pairLeft:
-    A: {fileID: 0}
-    B: {fileID: 0}
 --- !u!1 &9149089521091493249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,9 +1421,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 8165195595097189913}
-  _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
+  _randomObjectives:
+  - {fileID: 5977533995707457528}
+  - {fileID: 8165195595097189913}
+  _ignoreFrom: {fileID: 0}
+  connected: 0
 --- !u!1001 &179460490131350616
 PrefabInstance:
   m_ObjectHideFlags: 0

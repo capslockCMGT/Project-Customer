@@ -12,27 +12,33 @@ struct Range
 public class CrossManager : MonoBehaviour
 {
     [SerializeField] List<Transform> _randomObjectives;
-    [SerializeField] Transform _ignoreFrom;
+    bool _connected;
 
     public void TransferObjectivesFrom(CrossManager fromCrossPoint)
     {
         _randomObjectives = fromCrossPoint._randomObjectives.Concat(_randomObjectives).ToList();
     }
 
-    public void SetIgnoreTransform(Transform ignore)
-    {
-        _ignoreFrom = ignore;
-    }
-
     void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<NPC>(out var npc)) return;
-
-        bool senderShouldBeIgnored = ShouldIgnore(npc);
-
-        if(_ignoreFrom == null || !senderShouldBeIgnored)
+        if (other.TryGetComponent<NPC>(out var npc))
         {
-            SetDestinationToCrossPoint(_randomObjectives[Random.Range(0,_randomObjectives.Count)], npc);
+            SendNPC(npc);
+        }else if(other.TryGetComponent<CrossManager>(out var otherConenction))
+        {
+            Connect(otherConenction);
+        }
+
+        
+    }
+
+    void SendNPC(NPC npc)
+    {
+        UpdateObjectives();
+
+        if (npc.Sender == null)
+        {
+            SetDestinationToCrossPoint(_randomObjectives[Random.Range(0, _randomObjectives.Count)], npc);
             return;
         }
 
@@ -41,34 +47,37 @@ public class CrossManager : MonoBehaviour
 
         foreach (Transform randomObjective in shufledObjectives)
         {
-            if (randomObjective == _ignoreFrom.transform) continue;
+            if (randomObjective == npc.Sender) continue;
             SetDestinationToCrossPoint(randomObjective, npc);
             break;
         }
     }
 
 
+    void Connect(CrossManager otherConnection)
+    {
+        if(_connected) return;
+
+        TransferObjectivesFrom(otherConnection);
+        otherConnection._connected = true;
+        Destroy(otherConnection.gameObject);
+    }
+
+    void UpdateObjectives()
+    {
+        _randomObjectives.RemoveAll(o => o == null);
+    }
+
     void SetDestinationToCrossPoint(Transform crossPoint, NPC npc)
     {
-        Debug.Log("Setting destonation to " + crossPoint.gameObject.name);
 
-        npc.Sender = gameObject.name;
+        npc.Sender = transform;
 
-        Physics.Raycast(crossPoint.position, -crossPoint.up, out RaycastHit hit, 10, 1 << LayerMask.NameToLayer("Walkable"));
+        Physics.Raycast(crossPoint.position + Vector3.up * 11, -Vector3.up, out RaycastHit hit, 20, 1 << LayerMask.NameToLayer("Walkable"));
         npc.gixmo = hit.point;
+        Debug.Log("Setting destonation to " + crossPoint.gameObject.name + "pos: " + hit.point);
 
         npc.Agent.SetDestination(hit.point);
     }
 
-    
-
-    bool ShouldIgnore(NPC npc)
-    {
-        return npc.Sender == _ignoreFrom.gameObject.name;
-    }
-
-    //bool ShouldIgnore(Transform objective)
-    //{
-    //    return objective.gameObject.name == IgnoreFrom.gameObject.name;
-    //}
 }

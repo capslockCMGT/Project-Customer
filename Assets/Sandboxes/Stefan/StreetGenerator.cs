@@ -30,29 +30,7 @@ public class StreetGenerator : MonoBehaviour
 
     void MakeRandomCrosswalks()
     {
-        List<CellAndDir> neighbours = new();
-        //connect sidewalks
-        foreach (Cell cell in _cityGenerator.Cells)
-        {
-            if (!cell.WorldObj.TryGetComponent<TileConnections>(out var mySideWalkManager)) continue;
-            
-            neighbours.Clear();
-            _cityGenerator.GetNeighbouringCellsAndDirections(cell.X, cell.Y, neighbours);
-
-            mySideWalkManager.UpdateDirections();
-            foreach (CellAndDir neighbourData in neighbours)
-            {
-                //check if tiles are connected
-                if (!neighbourData.cell.CollapsedTile.Neighbours.Contains(cell.CollapsedTile)) continue;
-                if (!neighbourData.cell.WorldObj.TryGetComponent<TileConnections>(out var neighbourSidewalkManager)) continue;
-                
-                //connect
-                neighbourSidewalkManager.UpdateDirections();
-                neighbourSidewalkManager.Connect(mySideWalkManager, neighbourData.dir);
-
-            }
-            
-        }
+        
 
         //instantiate random crosswalks
     }
