@@ -279,8 +279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 2170823044091910453}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &3703061601558685240
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1054,8 +1052,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 2170823044091910453}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!1 &8411804875729730167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,8 +1225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 2302713471080370099}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!1 &8789961597613713260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,8 +1294,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 1065241622673815131}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &4719164832424921245
 Rigidbody:
   m_ObjectHideFlags: 0

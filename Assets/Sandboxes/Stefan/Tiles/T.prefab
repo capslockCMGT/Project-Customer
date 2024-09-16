@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 812233050012011633}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.076, y: -0.014, z: -0.095}
+  m_LocalPosition: {x: -0.076, y: 0.01, z: -0.095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -69,8 +69,6 @@ MonoBehaviour:
   _randomObjectives:
   - {fileID: 5096969319624957133}
   - {fileID: 3775274434081021125}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!1 &906813956220966146
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 906813956220966146}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.514, y: -0.014, z: -0.07}
+  m_LocalPosition: {x: -0.514, y: 0.01, z: -0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -140,8 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 4317378124644074180}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &1009147918697392416
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -197,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 1070541526567796148}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.065, y: -0.014, z: -0.514}
+  m_LocalPosition: {x: 0.065, y: 0.01, z: -0.514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -238,8 +234,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 8802987038326056314}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &2258572266334958225
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -400,7 +394,7 @@ Transform:
   m_GameObject: {fileID: 1303511720293131569}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.52, y: -0.014, z: 0.092}
+  m_LocalPosition: {x: 0.52, y: 0.01, z: 0.092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -441,8 +435,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 3175427722122756989}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &2747116990173031932
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -498,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 2527120751277555913}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.505, y: -0.014, z: -0.095}
+  m_LocalPosition: {x: 0.505, y: 0.01, z: -0.095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -539,8 +531,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 8802987038326056314}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &6651559466240430645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -700,7 +690,7 @@ Transform:
   m_GameObject: {fileID: 3075079734629671099}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.088, y: -0.014, z: -0.095}
+  m_LocalPosition: {x: 0.088, y: 0.01, z: -0.095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -742,8 +732,6 @@ MonoBehaviour:
   _randomObjectives:
   - {fileID: 6642954169055579801}
   - {fileID: 364759069522857840}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!1 &4508428193237343004
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +865,7 @@ Transform:
   m_GameObject: {fileID: 7338914577945408951}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.515, y: -0.014, z: 0.092}
+  m_LocalPosition: {x: -0.515, y: 0.01, z: 0.092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -918,8 +906,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 7527290119572092798}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &586423874549867101
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1131,7 +1117,7 @@ Transform:
   m_GameObject: {fileID: 8587577467505024015}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.083, y: -0.014, z: -0.498}
+  m_LocalPosition: {x: -0.083, y: 0.01, z: -0.498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1172,8 +1158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 4317378124644074180}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &4849498109223487465
 Rigidbody:
   m_ObjectHideFlags: 0

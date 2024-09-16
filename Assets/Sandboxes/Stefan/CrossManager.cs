@@ -34,7 +34,7 @@ public class CrossManager : MonoBehaviour
 
     void SendNPC(NPC npc)
     {
-        UpdateObjectives();
+        //UpdateObjectives();
 
         if (npc.Sender == null)
         {
@@ -59,13 +59,19 @@ public class CrossManager : MonoBehaviour
         if(_connected) return;
 
         TransferObjectivesFrom(otherConnection);
+        //to prevent the other script from removing this script
         otherConnection._connected = true;
-        Destroy(otherConnection.gameObject);
-    }
+        //search the connection that we will be deleting
+        foreach (CrossManager connection in otherConnection.transform.parent.GetComponentsInChildren<CrossManager>())
+        {
+            int connectionIndex = connection._randomObjectives.IndexOf(otherConnection.transform);
+            if (connectionIndex == -1) continue;
 
-    void UpdateObjectives()
-    {
-        _randomObjectives.RemoveAll(o => o == null);
+            connection._randomObjectives[connectionIndex] = transform;
+            break;
+        }
+
+        Destroy(otherConnection.gameObject);
     }
 
     void SetDestinationToCrossPoint(Transform crossPoint, NPC npc)
