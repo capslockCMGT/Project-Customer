@@ -34,8 +34,6 @@ public class CrossManager : MonoBehaviour
 
     void SendNPC(NPC npc)
     {
-        //UpdateObjectives();
-
         if (npc.Sender == null)
         {
             SetDestinationToCrossPoint(_randomObjectives[Random.Range(0, _randomObjectives.Count)], npc);
@@ -53,7 +51,16 @@ public class CrossManager : MonoBehaviour
         }
     }
 
-
+    //in this function I am merging two connection points into one to have less colliders
+    //because the deleted objects are referenced in the "_randomObjectives" list, I need to replace the future deleted objects with the one that will remain
+    //example:
+    //===sidewalk======connectionA connectionA=========sidewalk========
+    //===sidewalk======connectionB connectionB=========sidewalk========
+    //one pair of connections will be romoved:
+    //===sidewalk======connectionA =========sidewalk========
+    //===sidewalk======connectionB =========sidewalk========
+    //in this case, the right sidewalks need to have the references of the connections from the
+    //333left sidewalks
     void Connect(CrossManager otherConnection)
     {
         if(_connected) return;
@@ -61,14 +68,13 @@ public class CrossManager : MonoBehaviour
         TransferObjectivesFrom(otherConnection);
         //to prevent the other script from removing this script
         otherConnection._connected = true;
-        //search the connection that we will be deleting
-        foreach (CrossManager connection in otherConnection.transform.parent.GetComponentsInChildren<CrossManager>())
+        //search the connection that we will be deleting, so I can replace it with the one with this script
+        foreach (CrossManager connection in otherConnection.transform.parent.GetComponentsInChildren<CrossManager>(true))
         {
-            int connectionIndex = connection._randomObjectives.IndexOf(otherConnection.transform);
-            if (connectionIndex == -1) continue;
+            int toBeDeletedConnectionIndex = connection._randomObjectives.IndexOf(otherConnection.transform);
+            if (toBeDeletedConnectionIndex == -1) continue;
 
-            connection._randomObjectives[connectionIndex] = transform;
-            break;
+            connection._randomObjectives[toBeDeletedConnectionIndex] = transform;
         }
 
         Destroy(otherConnection.gameObject);
@@ -76,12 +82,13 @@ public class CrossManager : MonoBehaviour
 
     void SetDestinationToCrossPoint(Transform crossPoint, NPC npc)
     {
-
+        if(crossPoint == null) return;
         npc.Sender = transform;
-
-        Physics.Raycast(crossPoint.position + Vector3.up * 11, -Vector3.up, out RaycastHit hit, 20, 1 << LayerMask.NameToLayer("Walkable"));
+        //doing a spherecast because some connections are not alligned properly so a simple ray just misses the sidewalk
+        Physics.SphereCast(crossPoint.position + Vector3.up * 11,5, -Vector3.up, out RaycastHit hit, 20, 1 << LayerMask.NameToLayer("Walkable"));
+        //Physics.Raycast(crossPoint.position + Vector3.up * 11, -Vector3.up, out RaycastHit hit, 20, 1 << LayerMask.NameToLayer("Walkable"));
         npc.gixmo = hit.point;
-        Debug.Log("Setting destonation to " + crossPoint.gameObject.name + "pos: " + hit.point);
+        //Debug.Log("Setting destonation to " + crossPoint.gameObject.name + "pos: " + hit.point);
 
         npc.Agent.SetDestination(hit.point);
     }

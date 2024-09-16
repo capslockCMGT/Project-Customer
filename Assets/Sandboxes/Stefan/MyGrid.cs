@@ -74,6 +74,7 @@ public class MyGrid : MonoBehaviour
         GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
+
     private void Update()
     {
         if(_generateNewMap)
@@ -286,6 +287,7 @@ public class MyGrid : MonoBehaviour
         var inst = Instantiate(tile.Prefab, transform.position + new Vector3(cell.X * _cellWidth + .5f * _cellWidth, 0, -cell.Y * _cellWidth - .5f * _cellWidth), Quaternion.AngleAxis(tile.Rotation, transform.up), _tileHolder);
         inst.transform.localScale = Vector3.one * _cellWidth;
         cell.WorldObj = inst;
+        TileCollapsed?.Invoke(tile, inst);
 
         if (++collapsedTileCount >= Cells.Length) Done = true;
     }

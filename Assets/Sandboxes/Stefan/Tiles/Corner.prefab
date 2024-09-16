@@ -174,8 +174,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 6940837782910887823}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &4956656690113471885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -587,8 +585,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 6940837782910887823}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &978859046843830209
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -685,8 +681,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 5690178337050347110}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &7042449021358402706
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -993,8 +987,6 @@ MonoBehaviour:
   _randomObjectives:
   - {fileID: 8289767067732224638}
   - {fileID: 2821975724635997966}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!1 &5597539636871029228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,8 +1266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomObjectives:
   - {fileID: 5690178337050347110}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!54 &160862239218276381
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1424,8 +1414,6 @@ MonoBehaviour:
   _randomObjectives:
   - {fileID: 5977533995707457528}
   - {fileID: 8165195595097189913}
-  _ignoreFrom: {fileID: 0}
-  connected: 0
 --- !u!1001 &179460490131350616
 PrefabInstance:
   m_ObjectHideFlags: 0
