@@ -17,14 +17,14 @@ public class StreetGenerator : MonoBehaviour
     {
         MakeRandomCrosswalks();
     }
-    //void OnEnable()
-    //{
-    //    _cityGenerator.TileCollapsed += OnTileCollapse;
-    //}
-    //void OnDisable()
-    //{
-    //    _cityGenerator.TileCollapsed -= OnTileCollapse;
-    //}
+    void OnEnable()
+    {
+        _cityGenerator.MapGenerated += MakeRandomCrosswalks;
+    }
+    void OnDisable()
+    {
+        _cityGenerator.MapGenerated -= MakeRandomCrosswalks;
+    }
 
     //void OnTileCollapse(Tile tile, GameObject gameObject)
     //{
@@ -36,11 +36,17 @@ public class StreetGenerator : MonoBehaviour
 
     void MakeRandomCrosswalks()
     {
+        GameObject newTileHolder = new("NpcHolder");
+        Destroy(_npcHolder.gameObject);
+        _npcHolder = newTileHolder.transform;
+        _npcHolder.parent = transform;
+
         foreach (Cell cell in _cityGenerator.Cells)
         {
             CrossManager crossPoint = cell.WorldObj.GetComponentInChildren<CrossManager>();
             if (crossPoint == null) continue ;
 
+            Instantiate(_npcPrefab, crossPoint.transform.position, Quaternion.identity, _npcHolder);
             Instantiate(_npcPrefab, crossPoint.transform.position, Quaternion.identity, _npcHolder);
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class MyGrid : MonoBehaviour
@@ -29,6 +30,7 @@ public class MyGrid : MonoBehaviour
     [SerializeField] bool _generateNewMap;
 
     public event Action<Tile, GameObject> TileCollapsed;
+    public event Action MapGenerated;
     public bool Done { get; private set; }
     public Cell[,] Cells { get; private set; }
     public Vector2Int StartPos { get; private set; }
@@ -69,9 +71,9 @@ public class MyGrid : MonoBehaviour
             path = DoAstar(StartPos, EndPos);
         } while (--safety > 0 && (path == null || path.Count == 0));
         VisualizeAStar(path);
-
-
+        NavMesh.RemoveAllNavMeshData();
         GetComponent<NavMeshSurface>().BuildNavMesh();
+        MapGenerated?.Invoke();
     }
 
 
@@ -84,9 +86,12 @@ public class MyGrid : MonoBehaviour
             GenerateMap(_rotatedTiles);
             var path = DoAstar(StartPos, EndPos);
             VisualizeAStar(path);
-            
+            NavMesh.RemoveAllNavMeshData();
+
             var nav = GetComponent<NavMeshSurface>();
             nav.BuildNavMesh();
+            MapGenerated?.Invoke();
+
         }
     }
 
@@ -101,7 +106,6 @@ public class MyGrid : MonoBehaviour
             _startTile.Rotate();
         for (int i = 0; i < Random.Range(1, 5); i++)
             _endTile.Rotate();
-
 
         GameObject newTileHolder = new("Tiles");
         Destroy(_tileHolder.gameObject);
