@@ -7,11 +7,15 @@ public class NavigationDisplayRenderer : MonoBehaviour
     [SerializeField] MyGrid Map;
     [SerializeField] Material DisplayTexMat;
     [SerializeField] Texture2D RoadTexture;
+    [SerializeField] Transform Car;
+
+    [SerializeField][Range(0, 1)] float carOnMapDistance;
+    [SerializeField] float mapScale = 1;
     //[SerializeField] GameObject friend;
 
-    public Texture2D _mapAsTexture;
-    public Texture2D _routeAsTexture;
-    public Texture2D _magicRoadTexture;
+    Texture2D _mapAsTexture;
+    Texture2D _routeAsTexture;
+    Texture2D _magicRoadTexture;
 
     readonly Color zero = new Color(0,0,0,0);
 
@@ -48,6 +52,17 @@ public class NavigationDisplayRenderer : MonoBehaviour
     void FixedUpdate()
     {
         UpdateRoute();
+    }
+    private void Update()
+    {
+        Vector3 relPos = transform.position - Map.transform.position;
+        relPos /= Map._size;
+        var forward = Car.forward;
+        Vector2 dir = new(forward.x, forward.z);
+        dir.Normalize();
+        dir *= mapScale;
+        DisplayTexMat.SetVector("_PositionDirection", new Vector4(-relPos.z, relPos.x, -dir.x, -dir.y));
+        DisplayTexMat.SetFloat("_CarOffset", -carOnMapDistance);
     }
 
     bool HasConnection(Tile tile, Tile otherTile)
@@ -113,12 +128,12 @@ public class NavigationDisplayRenderer : MonoBehaviour
             bool bottom = cell.Y - prevCell.Y == 1 || cell.Y - nextCell.Y == 1;
             bool left = cell.X - prevCell.X == 1 || cell.X - nextCell.X == 1;
 
-            _routeAsTexture.SetPixel(cell.X, cell.Y, new Color(
-                top ? 1 : 0,
-                left ? 1 : 0,
-                bottom ? 1 : 0,
-                right ? 1 : 0
-            ));
+            _routeAsTexture.SetPixel(cell.Y, cell.X, new Color(
+            (vile)right,
+            (vile)bottom,
+            (vile)left,
+            (vile)top
+                ));
         }
         _routeAsTexture.Apply();
         DisplayTexMat.SetTexture("_RouteTex", _routeAsTexture);
@@ -164,5 +179,13 @@ public class NavigationDisplayRenderer : MonoBehaviour
 
             return RoadTexture.GetPixel(point.x, point.y);
         }
+    }
+
+    private struct vile
+    {
+        public float dat;
+
+        public static implicit operator vile(bool dat) => dat? new vile() { dat = 1} : new vile() { dat = 0};
+        public static implicit operator float(vile gruh) => gruh.dat;
     }
 }
