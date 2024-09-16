@@ -13,6 +13,8 @@ public class NavigationDisplayRenderer : MonoBehaviour
     public Texture2D _routeAsTexture;
     public Texture2D _magicRoadTexture;
 
+    readonly Color zero = new Color(0,0,0,0);
+
     void Start()
     {
         if (Map == null || !Map.Done)
@@ -27,7 +29,7 @@ public class NavigationDisplayRenderer : MonoBehaviour
         _mapAsTexture.filterMode = FilterMode.Point;
         for (int x = 0; x < _mapAsTexture.width; x++)
             for (int y = 0; y < _mapAsTexture.height; y++)
-                _mapAsTexture.SetPixel(x, y, GetConnections(Map.Cells[x,y].CollapsedTile));
+                _mapAsTexture.SetPixel(x, y, GetConnections(x,y));
         _mapAsTexture.Apply();
 
         _routeAsTexture = new(Map.Cells.GetLength(0), Map.Cells.GetLength(1), TextureFormat.ARGB32, false, false);
@@ -48,19 +50,25 @@ public class NavigationDisplayRenderer : MonoBehaviour
         UpdateRoute();
     }
 
-    bool HasConnection(Tile tile, int direction)
+    bool HasConnection(Tile tile, Tile otherTile)
     {
-        if (tile.Sockets[direction] == "ABA") return true;
-        return false;
+        //horrible. unoptimised. at least it works
+        return tile.Neighbours.Contains(otherTile);
     }
-    Color GetConnections(Tile tile)
+    Color GetConnections(int x, int y)
     {
-        return new Color(
-            HasConnection(tile, 0) ? 1 : 0,
-            HasConnection(tile, 1) ? 1 : 0,
-            HasConnection(tile, 2) ? 1 : 0,
-            HasConnection(tile, 3) ? 1 : 0
-            );
+        Color res = zero;
+
+        if (x + 1 < Map.Cells.GetLength(0))
+            res.a = HasConnection(Map.Cells[x, y].CollapsedTile, Map.Cells[x + 1, y].CollapsedTile) ? 1 : 0;
+        if (y + 1 < Map.Cells.GetLength(1))
+            res.r = HasConnection(Map.Cells[x, y].CollapsedTile, Map.Cells[x, y + 1].CollapsedTile) ? 1 : 0;
+        if (x - 1 >= 0)
+            res.g = HasConnection(Map.Cells[x, y].CollapsedTile, Map.Cells[x - 1, y].CollapsedTile) ? 1 : 0;
+        if (y - 1 >= 0) 
+            res.b = HasConnection(Map.Cells[x, y].CollapsedTile, Map.Cells[x, y - 1].CollapsedTile) ? 1 : 0;
+
+        return res;
     }
     void UpdateRoute()
     {
@@ -74,13 +82,18 @@ public class NavigationDisplayRenderer : MonoBehaviour
             var jpos = Map.Cells[pos.y, pos.x].WorldObj.transform.position;
             friend.transform.position = jpos;
         }
-        catch { }*/
+        catch { }
+
+        string res = "";
+        foreach (var j in Map.Cells[pos.y, pos.x].CollapsedTile.Sockets)
+            res += j+", ";
+        Debug.Log(res);*/
 
         var route = Map.DoAstar(pos, Map.EndPos);
 
         for (int x = 0; x < _mapAsTexture.width; x++)
             for (int y = 0; y < _mapAsTexture.height; y++)
-                _routeAsTexture.SetPixel(x, y, Color.black);
+                _routeAsTexture.SetPixel(x, y, zero);
 
         if (route == null)
             return;
@@ -102,13 +115,13 @@ public class NavigationDisplayRenderer : MonoBehaviour
 
             _routeAsTexture.SetPixel(cell.X, cell.Y, new Color(
                 top ? 1 : 0,
-                right ? 1 : 0,
+                left ? 1 : 0,
                 bottom ? 1 : 0,
-                left ? 1 : 0
+                right ? 1 : 0
             ));
         }
         _routeAsTexture.Apply();
-        DisplayTexMat.SetTexture("_RouteTex", _mapAsTexture);
+        DisplayTexMat.SetTexture("_RouteTex", _routeAsTexture);
     }
 
     void MakeHorribleMagicRoadTexture()
