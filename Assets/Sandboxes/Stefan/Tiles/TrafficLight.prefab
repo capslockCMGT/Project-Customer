@@ -135,6 +135,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   _creditViolation: 5
+  _deductionCooldown: 5
 --- !u!65 &6470762915976329364
 BoxCollider:
   m_ObjectHideFlags: 0
