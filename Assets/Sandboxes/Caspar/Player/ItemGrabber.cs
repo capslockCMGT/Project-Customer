@@ -68,11 +68,11 @@ public class ItemGrabber : MonoBehaviour
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
         rb.angularVelocity *= .9f;
     }
-    public void TryInteractWithItem(bool leftHand)
+    public void TryInteractWithItem(bool leftHand, PlayerController controller)
     {
         grabbedItem hand = leftHand ? _leftHand : _rightHand;
         if (hand == null) return;
-        hand.grabbable.onPlayerInteract?.Invoke();
+        hand.grabbable.onPlayerInteract?.Invoke(controller);
     }
     public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
@@ -137,5 +137,20 @@ public class ItemGrabber : MonoBehaviour
         if (leftHand)
             _leftHand = workingHand;
         else _rightHand = workingHand;
+    }
+
+    public GameObject GetLeftHandItem()
+    {
+        if (_leftHand == null) return null;
+
+        return _leftHand.grabbable.gameObject;
+
+    }
+
+    public GameObject GetRightHandItem()
+    {
+        if (_rightHand == null) return null;
+        return _rightHand.grabbable.gameObject;
+
     }
 }

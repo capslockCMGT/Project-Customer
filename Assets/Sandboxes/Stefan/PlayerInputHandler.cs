@@ -13,11 +13,15 @@ public class PlayerInputHandler : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+
+    }
+    private void Start()
+    {
         var index = playerInput.playerIndex;
+
         controller = FindObjectsOfType<PlayerController>().FirstOrDefault(p => p.Player == index);
 
     }
-
     public void OnMove(CallbackContext context)
     {
         if (controller != null) 

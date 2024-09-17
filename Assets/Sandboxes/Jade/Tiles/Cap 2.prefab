@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2235785946200585375}
   m_Layer: 0
-  m_Name: Cap
+  m_Name: Cap 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,8 +794,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -7791486788655378091, guid: 3add1b35cc4157a45adedd1fa49eca6f,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: ec4186ccea8482c4981b684bf1be8289, type: 2}
     - target: {fileID: 2477682853630190807, guid: b0c07a5bb1814384fbc9e0e13043479b,
         type: 3}
       propertyPath: m_Name

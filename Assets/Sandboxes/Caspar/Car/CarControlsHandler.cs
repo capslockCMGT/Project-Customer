@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CarControlsHandler : MonoBehaviour
 {
@@ -13,7 +10,7 @@ public class CarControlsHandler : MonoBehaviour
     int _steersReceived = 0;
     float _steerInput = 0;
 
-    public void ToggleCarReverse()
+    public void ToggleCarReverse(PlayerController controller)
     {
         GearshiftReversed.Invoke();
     }
