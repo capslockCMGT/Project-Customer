@@ -7,6 +7,8 @@ public class SteeringWheel : MonoBehaviour
 {
     [SerializeField] Transform Renderer;
     [SerializeField] CarControlsHandler carHandler;
+    [SerializeField] float _steeringSens = 25f;
+
     private void Start()
     {
         var grab = GetComponent<GrabbableItem>();
@@ -39,6 +41,6 @@ public class SteeringWheel : MonoBehaviour
         });
 
         if(Renderer != null) 
-            carHandler.SteeringAngleChanged += (float fuckshit) => { Renderer.localRotation = Quaternion.AngleAxis(fuckshit * 30, Vector3.up); };
+            carHandler.SteeringAngleChanged += (float fuckshit) => { Renderer.localRotation = Quaternion.AngleAxis(fuckshit * _steeringSens, Vector3.up); };
     }
 }

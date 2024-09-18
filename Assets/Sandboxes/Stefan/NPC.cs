@@ -6,9 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NPC : MonoBehaviour
 {
-    public string Sender { get; set; }
+    public Transform Sender { get; set; }
     public NavMeshAgent Agent { get; private set; }
-    public Vector3 gixmo;
+    public Vector3 gixmo { get; set; }
 
     void Awake()
     {
