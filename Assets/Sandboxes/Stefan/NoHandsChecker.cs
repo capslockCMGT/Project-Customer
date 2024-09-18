@@ -5,6 +5,7 @@ using UnityEngine;
 public class NoHandsChecker : RuleChecker
 {
     ItemGrabber _hands;
+    //CarController _carController;
 
     protected override void OnAwake()
     {
@@ -13,7 +14,7 @@ public class NoHandsChecker : RuleChecker
 
     protected override bool Condition()
     {
-        return _hands.GetRightHandItem() != null || _hands.GetLeftHandItem() != null;
+        return /*_carController.CarVelocity.magnitude > .1f */ _hands.GetRightHandItem() != null || _hands.GetLeftHandItem() != null;
     }
 
     protected override string DeductionName()

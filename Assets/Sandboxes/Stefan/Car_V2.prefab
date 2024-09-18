@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 1259054001903249294}
   - component: {fileID: 4321014292650692184}
   - component: {fileID: 2847147933222837468}
+  - component: {fileID: 6588284555081939846}
   m_Layer: 8
   m_Name: Car_V2
   m_TagString: Car
@@ -595,8 +596,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 0.86, z: 3}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Size: {x: 1.8, y: 0.68, z: 2.79}
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!114 &4321014292650692184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,6 +663,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d66824c984a93654096193faa2a019f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6588284555081939846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582638049416433318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338ec21754299074b96de290695f0b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1977329224227739788
@@ -752,6 +765,9 @@ GameObject:
   - component: {fileID: 6283307610981432822}
   - component: {fileID: 7342318993578624906}
   - component: {fileID: 7962352702799397996}
+  - component: {fileID: 8404092223514185774}
+  - component: {fileID: 1155334407336410315}
+  - component: {fileID: 267872072770291766}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: MainCamera
@@ -984,6 +1000,51 @@ MonoBehaviour:
   _penaltyThreshhold: 3
   _penaltyCooldown: 3
   _deductionAmount: 5
+--- !u!114 &8404092223514185774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270127816248381527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a5bd07dc917e04784304f2b6fefa2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _penaltyThreshhold: 3
+  _penaltyCooldown: 3
+  _deductionAmount: 5
+--- !u!114 &1155334407336410315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270127816248381527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419d24a69188fdb41860e44560d4d6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _masterVolume: 1
+  _soundClips:
+    _serializedList:
+    - Key:
+        Name: Honk
+        PopUpIndexOfChosenName: 4
+      Value:
+        Volume: 1
+        Clip: {fileID: 8300000, guid: e5e5382ed7ada1b4fb09915e2f1a2d90, type: 3}
+        Loop: 0
+--- !u!81 &267872072770291766
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270127816248381527}
+  m_Enabled: 1
 --- !u!1 &2548629221514744898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1761,11 @@ MonoBehaviour:
   Renderer: {fileID: 6904660203198777245}
   carHandler: {fileID: 2847147933222837468}
   _steeringSens: 25
+  _honksBeforeCooldownStart: 1
+  _honkCooldown: 1
+  _soundName:
+    Name: Honk
+    PopUpIndexOfChosenName: 4
 --- !u!114 &3259280824667309276
 MonoBehaviour:
   m_ObjectHideFlags: 0

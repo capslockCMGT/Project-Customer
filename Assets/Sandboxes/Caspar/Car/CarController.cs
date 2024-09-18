@@ -23,6 +23,8 @@ public class CarController : MonoBehaviour
     [SerializeField][Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
     [SerializeField] float MaxTurnAngle = 30;
 
+    public Vector3 CarVelocity => _carRB.velocity;
+
     Rigidbody _carRB;
     float _targetSpeed = 0;
     bool _inReverse = false;

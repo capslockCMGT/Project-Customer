@@ -8,8 +8,13 @@ public class SteeringWheel : MonoBehaviour
     [SerializeField] Transform Renderer;
     [SerializeField] CarControlsHandler carHandler;
     [SerializeField] float _steeringSens = 25f;
+    [SerializeField] int _honksBeforeCooldownStart;
+    [SerializeField] float _honkCooldown;
+    [SerializeField] SoundName _soundName;
+    bool _canHonk = true;
+    int _honks;
 
-    private void Start()
+    void Start()
     {
         var grab = GetComponent<GrabbableItem>();
         if(grab == null )
@@ -40,7 +45,24 @@ public class SteeringWheel : MonoBehaviour
                 addedController.UpdateLeftJoystick.RemoveListener(carHandler.UpdateSteeringAngle);
         });
 
+        grab.onPlayerInteract.AddListener((PlayerController addedController) =>
+        {
+            if (!_canHonk) return;
+            Debug.Log("HONLK!!1!");
+            SoundManager.Instance.PlaySound(_soundName);
+            if (++_honks > _honksBeforeCooldownStart)
+                StartCoroutine(HonkTimer());
+        });
+
         if(Renderer != null) 
             carHandler.SteeringAngleChanged += (float fuckshit) => { Renderer.localRotation = Quaternion.AngleAxis(fuckshit * _steeringSens, Vector3.up); };
+    }
+
+    IEnumerator HonkTimer()
+    {
+        _honks = 0;
+        _canHonk = false;
+        yield return new WaitForSeconds(_honkCooldown);
+        _canHonk = true;
     }
 }

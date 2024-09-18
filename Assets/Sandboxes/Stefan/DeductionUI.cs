@@ -33,6 +33,7 @@ public class DeductionUI : MonoBehaviour
         _bg.gameObject.SetActive(true);
         _textMesh.text = $"Lost {deductedAmount} safety points because: {message}!";
         yield return new WaitForSeconds(_displayTime);
+        //fade
         _bg.gameObject.SetActive(false);
     }
 

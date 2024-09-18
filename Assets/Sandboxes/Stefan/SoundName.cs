@@ -4,5 +4,5 @@
 public struct SoundName
 {
     public string Name;
-    public int index;
+    public int PopUpIndexOfChosenName;
 }

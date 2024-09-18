@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -5,18 +6,17 @@ using UnityEngine;
 public class SoundNamePropertyDrawer : PropertyDrawer
 {
     SoundNamesContainer _soundNamesContainer;
-
+    
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         if(_soundNamesContainer == null)
             _soundNamesContainer = Resources.Load("SoundNames") as SoundNamesContainer;
 
         SerializedProperty nameProperty = property.FindPropertyRelative("Name");
-        SerializedProperty indexProperty = property.FindPropertyRelative("index");
+        SerializedProperty indexProperty = property.FindPropertyRelative("PopUpIndexOfChosenName");
 
         EditorGUI.BeginProperty(position, label, property);
-        if (position.Contains(Input.mousePosition))
-            Debug.Log("in");
+
         indexProperty.intValue = EditorGUI.Popup(position, indexProperty.intValue, _soundNamesContainer.Names);
         nameProperty.stringValue = _soundNamesContainer.Names[indexProperty.intValue];
         

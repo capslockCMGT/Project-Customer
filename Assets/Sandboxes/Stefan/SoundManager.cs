@@ -38,6 +38,7 @@ public class SoundManager : MonoBehaviour
         {
             Debug.Log("destroying song manager");
             Destroy(this);
+            return;
         }
         else
         {
@@ -48,6 +49,8 @@ public class SoundManager : MonoBehaviour
 
             DontDestroyOnLoad(this);
         }
+
+        SoundClips = _soundClips.ToDictionary(t => t.Key.Name, t => t.Value);
     }
     #endregion
 
@@ -56,7 +59,9 @@ public class SoundManager : MonoBehaviour
     Stack<AudioSource> _inactiveSources;
     int _currentID;
     [SerializeField, Range(0, 1)] float _masterVolume; 
-    [SerializedDictionary("Clip Name", "Clip")] public SerializedDictionary<SoundName, SoundData> SoundClips;
+    //make this for inspector interface, but habe actual dictionary be a copy of it with strings as key
+    [SerializeField, SerializedDictionary("Clip Name", "Clip")] SerializedDictionary<SoundName, SoundData> _soundClips;
+    Dictionary<string, SoundData> SoundClips;
 
     //SoundData from here is general, so you don't have to put the same volume of a sound in 100 different scripts.
     //However, you CAN have custom volume/soundData in each object in case you want to make one more quiet than the others
@@ -67,7 +72,7 @@ public class SoundManager : MonoBehaviour
         return _activeSources.Any(s => s.ID == id);
     }
 
-    public int PlaySound(SoundName soundName, float volumeMult = 1)
+    int PlaySound(string soundName, float volumeMult = 1)
     {
         if (!SoundClips.ContainsKey(soundName))
         {
@@ -84,6 +89,12 @@ public class SoundManager : MonoBehaviour
 
         return soundID;
     }
+
+    public int PlaySound(SoundName soundName, float volumeMult = 1)
+    {
+        return PlaySound(soundName.Name, volumeMult);
+    }
+
 
     public void StopSound(int id)
     {
