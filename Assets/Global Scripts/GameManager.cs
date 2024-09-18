@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
     public static GameManager Instance { get; private set; } 
+    public GameObject PlayerCar { get; private set; }
 
     void Awake()
     {
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
         Physics.Raycast(startCenter + Vector3.up * 20,Vector3.down, out RaycastHit hit, 25);
 
         GameObject carInst = Instantiate(_carPrefab, hit.point + Vector3.up * 5, Quaternion.AngleAxis(startCell.WorldObj.transform.rotation.eulerAngles.y - 90, Vector3.up));
-
+        PlayerCar = carInst;
         carInst.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
     }
 

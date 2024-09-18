@@ -15,4 +15,9 @@ public class NoHandsChecker : RuleChecker
     {
         return _hands.GetRightHandItem() != null || _hands.GetLeftHandItem() != null;
     }
+
+    protected override string DeductionName()
+    {
+        return "No hands on wheel";
+    }
 }

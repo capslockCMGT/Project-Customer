@@ -44,11 +44,11 @@ public abstract class RuleChecker : MonoBehaviour
         {
             _cooldownTimer = 0;
             _penaltyAccumulation = 0;
-            _creditsManager.DeductCredits(_deductionAmount);
+            _creditsManager.DeductCredits(_deductionAmount, DeductionName());
             RuleBroken?.Invoke();
         }
     }
 
     protected abstract bool Condition();
-
+    protected abstract string DeductionName();
 }

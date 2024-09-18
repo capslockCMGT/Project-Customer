@@ -48,7 +48,7 @@ public class TrafficLight : MonoBehaviour
 
         SafetyCreditsManager creditManager = parent.GetComponentInChildren<SafetyCreditsManager>();
         Debug.Log("passed a red light");
-        creditManager.DeductCredits(_creditViolation);
+        creditManager.DeductCredits(_creditViolation, "Red light cross");
         StartCoroutine(Cooldown());
     }
 

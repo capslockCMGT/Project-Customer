@@ -11,4 +11,8 @@ public class EyesOnRoadChekcer : RuleChecker
         return Physics.Raycast(transform.position, transform.forward, 5, _frontScreenMask);
     }
 
+    protected override string DeductionName()
+    {
+        return "Eyes not on road";
+    }
 }
