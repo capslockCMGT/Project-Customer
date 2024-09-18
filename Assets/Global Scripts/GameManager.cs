@@ -38,12 +38,11 @@ public class GameManager : MonoBehaviour
     public void SpawnCar()
     {
         Cell startCell = _grid.Cells[_grid.StartPos.y, _grid.StartPos.x];
-        GameObject carInst = Instantiate(_carPrefab, startCell.WorldObj.transform.position, Quaternion.AngleAxis(startCell.WorldObj.transform.rotation.eulerAngles.y - 90, Vector3.up));
         //shoot a ray from above to spawn the car exactly on road
-        //Vector3 startCenter = ;
-        //Physics.Raycast(startCenter + Vector3.up * 50,Vector3.down, out RaycastHit hit, 55);
+        Vector3 startCenter = startCell.WorldObj.transform.position;
+        Physics.Raycast(startCenter + Vector3.up * 20,Vector3.down, out RaycastHit hit, 25);
 
-        //carInst.transform.position = startCenter;
+        GameObject carInst = Instantiate(_carPrefab, hit.point + Vector3.up * 5, Quaternion.AngleAxis(startCell.WorldObj.transform.rotation.eulerAngles.y - 90, Vector3.up));
 
         carInst.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
     }

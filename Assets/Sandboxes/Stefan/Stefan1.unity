@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 35787296}
-  _carPrefab: {fileID: 7631525597726792747, guid: 182339cae697999428c7d71314d26c2d,
+  _carPrefab: {fileID: 1582638049416433318, guid: 941602fb74d05da47a19f968fcabc71f,
     type: 3}
 --- !u!4 &356019372
 Transform:
