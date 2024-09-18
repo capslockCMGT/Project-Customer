@@ -8,7 +8,7 @@ public class EyesOnRoadChekcer : RuleChecker
     protected override bool Condition()
     {
 
-        return Physics.Raycast(transform.position, transform.forward, 5, _frontScreenMask);
+        return Physics.Raycast(transform.position, transform.forward, 10, _frontScreenMask);
     }
 
     protected override string DeductionName()

@@ -459,7 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2513319242025723913}
   - component: {fileID: 6009148755917383274}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: FrontScreenCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a5bd07dc917e04784304f2b6fefa2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _penaltyThreshhold: 3
+  _penaltyThreshhold: -5
   _penaltyCooldown: 3
   _deductionAmount: 5
 --- !u!114 &1155334407336410315

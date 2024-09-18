@@ -5,7 +5,7 @@ using UnityEngine;
 public class PedestrianHitRule : RuleChecker
 {
     TriggerDelegator _triggerDelegator;
-    bool _pedestrianHit;
+    HashSet<Collider> _pedestrianHitList = new();
 
     protected override void OnAwake()
     {
@@ -25,7 +25,7 @@ public class PedestrianHitRule : RuleChecker
     {
         if(other.CompareTag("NPC"))
         {
-            _pedestrianHit = true;
+            _pedestrianHitList.Add(other);
         }
 
     }
@@ -33,12 +33,14 @@ public class PedestrianHitRule : RuleChecker
     void TriggerExited(Collider other)
     {
         if(other.CompareTag("NPC"))
-            _pedestrianHit = false;
+        {
+            _pedestrianHitList.Remove(other);
+        }
     }
 
     protected override bool Condition()
     {
-        return !_pedestrianHit;
+        return _pedestrianHitList.Count == 0;
     }
 
     protected override string DeductionName()
