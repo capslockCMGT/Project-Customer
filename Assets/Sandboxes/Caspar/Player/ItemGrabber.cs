@@ -93,8 +93,10 @@ public class ItemGrabber : MonoBehaviour
         if(workingHand == null)
         {
             //try pickikng up the item in the middle of the view
-            Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, MaxHandReach);
-
+            //ignore car collider
+            Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, MaxHandReach, ~1<<LayerMask.NameToLayer("Car"));
+            Debug.Log(hitinfo.transform);
+            Debug.DrawRay(transform.position, transform.forward * MaxHandReach);
             if (hitinfo.transform == null) return;
 
             var grabbable = hitinfo.transform.GetComponent<GrabbableItem>();
