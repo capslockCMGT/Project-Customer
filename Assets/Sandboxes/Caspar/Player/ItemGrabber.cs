@@ -68,11 +68,11 @@ public class ItemGrabber : MonoBehaviour
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
         rb.angularVelocity *= .9f;
     }
-    public void TryInteractWithItem(bool leftHand)
+    public void TryInteractWithItem(bool leftHand, PlayerController controller)
     {
         grabbedItem hand = leftHand ? _leftHand : _rightHand;
         if (hand == null) return;
-        hand.grabbable.onPlayerInteract?.Invoke();
+        hand.grabbable.onPlayerInteract?.Invoke(controller);
     }
     public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
@@ -93,8 +93,10 @@ public class ItemGrabber : MonoBehaviour
         if(workingHand == null)
         {
             //try pickikng up the item in the middle of the view
-            Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, MaxHandReach);
-
+            //ignore car collider
+            Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, MaxHandReach, ~1<<LayerMask.NameToLayer("Car"));
+            Debug.Log(hitinfo.transform);
+            Debug.DrawRay(transform.position, transform.forward * MaxHandReach);
             if (hitinfo.transform == null) return;
 
             var grabbable = hitinfo.transform.GetComponent<GrabbableItem>();
@@ -137,5 +139,20 @@ public class ItemGrabber : MonoBehaviour
         if (leftHand)
             _leftHand = workingHand;
         else _rightHand = workingHand;
+    }
+
+    public GameObject GetLeftHandItem()
+    {
+        if (_leftHand == null) return null;
+
+        return _leftHand.grabbable.gameObject;
+
+    }
+
+    public GameObject GetRightHandItem()
+    {
+        if (_rightHand == null) return null;
+        return _rightHand.grabbable.gameObject;
+
     }
 }

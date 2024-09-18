@@ -74,10 +74,10 @@ public class MyGrid : MonoBehaviour
         NavMesh.RemoveAllNavMeshData();
         GetComponent<NavMeshSurface>().BuildNavMesh();
         MapGenerated?.Invoke();
+
     }
 
-
-    private void Update()
+    void Update()
     {
         if(_generateNewMap)
         {

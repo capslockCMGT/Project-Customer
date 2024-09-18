@@ -134,8 +134,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _TileHeight: 0.05
-    - _TileWidth: 0.05
+    - _TileHeight: 0.1
+    - _TileWidth: 0.1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

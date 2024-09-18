@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class NavigationDisplayRenderer : MonoBehaviour
 {
-    [SerializeField] MyGrid Map;
+    MyGrid Map;
     [SerializeField] Material DisplayTexMat;
     [SerializeField] Texture2D RoadTexture;
     [SerializeField] Transform Car;
 
     [SerializeField][Range(0, 1)] float carOnMapDistance;
     [SerializeField] float mapScale = 1;
-    //[SerializeField] GameObject friend;
 
     Texture2D _mapAsTexture;
     Texture2D _routeAsTexture;
@@ -47,6 +46,11 @@ public class NavigationDisplayRenderer : MonoBehaviour
         DisplayTexMat.SetFloat("_TileHeight", 1f/Map.Cells.GetLength(1));
         DisplayTexMat.SetTexture("_MapTex", _mapAsTexture);
         DisplayTexMat.SetTexture("_RoadTex", _magicRoadTexture);
+    }
+
+    public void Init(MyGrid grid)
+    {
+        Map = grid;
     }
 
     void FixedUpdate()
