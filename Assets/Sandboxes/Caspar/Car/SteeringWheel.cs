@@ -1,15 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 [SelectionBase]
 public class SteeringWheel : MonoBehaviour
 {
     [SerializeField] Transform Renderer;
     [SerializeField] CarControlsHandler carHandler;
+    [SerializeField] CarController _carController;
     [SerializeField] float _steeringSens = 25f;
+    [SerializeField] float _steeringAngle = 25f;
+    [SerializeField] int _honksBeforeCooldownStart;
+    [SerializeField] float _honkCooldown;
+    [SerializeField] SoundName _soundName;
 
-    private void Start()
+    [SerializeField] bool _canReposition;
+
+    bool _canHonk = true;
+    int _honks;
+    float _currAngle;
+
+    void Start()
     {
         var grab = GetComponent<GrabbableItem>();
         if(grab == null )
@@ -40,7 +52,44 @@ public class SteeringWheel : MonoBehaviour
                 addedController.UpdateLeftJoystick.RemoveListener(carHandler.UpdateSteeringAngle);
         });
 
-        if(Renderer != null) 
-            carHandler.SteeringAngleChanged += (float fuckshit) => { Renderer.localRotation = Quaternion.AngleAxis(fuckshit * _steeringSens, Vector3.up); };
+        grab.onPlayerInteract.AddListener((PlayerController addedController) =>
+        {
+            if (!_canHonk) return;
+            Debug.Log("HONLK!!1!");
+            SoundManager.Instance.PlaySound(_soundName);
+            if (++_honks > _honksBeforeCooldownStart)
+                StartCoroutine(HonkTimer());
+        });
+
+        if (Renderer != null) 
+            carHandler.SteeringAngleChanged += (float input) => 
+            {
+                _currAngle += input * _steeringSens;
+                _currAngle = Mathf.Clamp(_currAngle, -_steeringAngle, _steeringAngle);
+                //goes back to 0 in increments
+                if (_canReposition && input == 0 && _currAngle != 0)
+                {
+                    CenterWheel();
+                }
+                Renderer.localRotation = Quaternion.AngleAxis(_currAngle, Vector3.up);
+
+                _carController.SetWheelAngle(_currAngle / _steeringAngle);
+            };
+    }
+
+    void CenterWheel()
+    {
+        var prevAngle = _currAngle;
+        _currAngle -= _steeringSens * Mathf.Sign(_currAngle);
+        if (prevAngle * _currAngle < 0)
+            _currAngle = 0;
+    }
+
+    IEnumerator HonkTimer()
+    {
+        _honks = 0;
+        _canHonk = false;
+        yield return new WaitForSeconds(_honkCooldown);
+        _canHonk = true;
     }
 }

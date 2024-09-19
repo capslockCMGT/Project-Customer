@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CarControlsHandler : MonoBehaviour
 {
@@ -7,8 +8,9 @@ public class CarControlsHandler : MonoBehaviour
     public event Action<float> CarSpeedChanged;
     public event Action GearshiftReversed;
 
-    int _steersReceived = 0;
+    //int _steersReceived = 0;
     float _steerInput = 0;
+    float _gasInput;
 
     public void ToggleCarReverse(PlayerController controller)
     {
@@ -17,21 +19,23 @@ public class CarControlsHandler : MonoBehaviour
 
     public void UpdateGas(Vector2 playerInput)
     {
-        CarSpeedChanged?.Invoke(playerInput.y);
+        _gasInput = playerInput.y;
+
     }
 
     public void UpdateSteeringAngle(Vector2 playerInput)
     {
         //tally up the steers received every frame, so multiple players can hold it
-        _steersReceived++;
-        _steerInput += playerInput.x;
+        //_steersReceived++;
+        _steerInput = playerInput.x;
     }
 
     private void Update()
     {
-        if(_steersReceived != 0)
-            SteeringAngleChanged?.Invoke(_steerInput / _steersReceived);
-        _steerInput = 0;
-        _steersReceived = 0;
+        //if(_steersReceived != 0)
+        SteeringAngleChanged?.Invoke(_steerInput );
+        CarSpeedChanged?.Invoke(_gasInput);
+
+        //_steersReceived = 0;
     }
 }

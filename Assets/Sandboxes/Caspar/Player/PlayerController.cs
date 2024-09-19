@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
     public int Player = 0;
     [field:SerializeField] public bool PlayerCanSteer { get; private set; } = true;
     [SerializeField] CarControlsHandler CarIfDriver;
-    
+
+    public UnityEvent<float> ItemControl;
     public UnityEvent<Vector2> UpdateLeftJoystick;
     public UnityEvent<Vector2> UpdateRightJoystick;
 
-
+    Vector2 _rightJoystickValue;
     ItemGrabber _grabber;
 
     void Awake()
@@ -26,9 +27,22 @@ public class PlayerController : MonoBehaviour
         //Debug.Log($"Tryina move, value: {val} carIfDriver: " + CarIfDriver);
         if (CarIfDriver == null) return;
         Vector2 val = context.ReadValue<Vector2>();
-
-        CarIfDriver.UpdateGas(val);
         UpdateLeftJoystick?.Invoke(val);
+
+    }
+
+    public void OnGasPress(CallbackContext context)
+    {
+        bool clickEntered = context.action.triggered;
+        CarIfDriver.UpdateGas(clickEntered ? Vector2.up : Vector2.zero);
+
+    }
+
+    public void OnBrakePress(CallbackContext context)
+    {
+        bool clickEntered = context.action.triggered;
+        CarIfDriver.UpdateGas(clickEntered ? Vector2.down : Vector2.zero);
+
     }
 
     public void OnInteractLeft(CallbackContext context)
@@ -63,7 +77,19 @@ public class PlayerController : MonoBehaviour
 
     public void OnCameraMove(CallbackContext context)
     {
+        _rightJoystickValue = context.ReadValue<Vector2>();
+    }
+    //for keyboards to have continuous input
+    void FixedUpdate()
+    {
+        UpdateRightJoystick?.Invoke(_rightJoystickValue);
+
+    }
+
+    public void OnItemControl(CallbackContext context)
+    {
         Vector2 val = context.ReadValue<Vector2>();
-        UpdateRightJoystick?.Invoke(val);
+        Debug.Log(val);
+        ItemControl?.Invoke(val.y);
     }
 }

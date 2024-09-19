@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ItemGrabber : MonoBehaviour
 {
@@ -10,36 +6,50 @@ public class ItemGrabber : MonoBehaviour
     [SerializeField] Transform LeftHandRenderer;
     [SerializeField] Transform RightHandRenderer;
 
-    [SerializeField] float MaxHandReach = 3;
-    [SerializeField] float HoldingItemDistance = 1;
+
     [SerializeField] float ThrowForce = 10;
     [SerializeField] float HoldingForceStrength = 5;
     [SerializeField] float DistanceBetweenHands = .3f;
     [SerializeField] bool DisableGravity = false;
 
-    class grabbedItem
+    [SerializeField, Range(.1f, 7)] float _minHandReach = .1f;
+    [SerializeField, Range(.1f, 7)] float _maxHandReach = 3;
+    [SerializeField] float _itemReachChangeSpeed = 1f;
+
+    public float HoldingItemDistance { get; private set; } = 1;
+
+    class GrabbedItem
     {
         public GrabbableItem grabbable;
         public Rigidbody itemRB;
     }
 
-    grabbedItem _leftHand;
-    grabbedItem _rightHand;
+    GrabbedItem _leftHand;
+    GrabbedItem _rightHand;
+    PlayerController _playerController;
+    float _currentItemDistanceInput;
 
     private void Start()
     {
-        if(Car == null) Car = GetComponent<Rigidbody>();
-        if (Car == null) Debug.Log($"couldnt find car for '{gameObject.name}' so velocity is relative to the world");
+        _playerController = GetComponent<PlayerController>();
+        _playerController.ItemControl.AddListener((input)=> _currentItemDistanceInput = input);
+        if (Car == null && !TryGetComponent(out Car)) Debug.Log($"couldnt find car for '{gameObject.name}' so velocity is relative to the world");
         else if (Car.interpolation == RigidbodyInterpolation.None) Debug.Log("car's interpolation is set to None, movement of grabbed objects may look janky");
     }
 
     public void FixedUpdate()
     {
-        TryHoldItemToPosition(_leftHand, transform.position + transform.forward*HoldingItemDistance - transform.right*DistanceBetweenHands*.5f);
-        TryHoldItemToPosition(_rightHand, transform.position + transform.forward*HoldingItemDistance + transform.right*DistanceBetweenHands*.5f);
+        ChangeItemDistance(_currentItemDistanceInput);
+        TryHoldItemToPosition(_leftHand, transform.position + transform.forward*HoldingItemDistance - .5f * DistanceBetweenHands * transform.right);
+        TryHoldItemToPosition(_rightHand, transform.position + transform.forward * HoldingItemDistance + .5f * DistanceBetweenHands * transform.right);
     }
 
-    void TryHoldItemToPosition(grabbedItem heldItem, Vector3 position)
+    void ChangeItemDistance(float amount)
+    {
+        HoldingItemDistance = Mathf.Clamp(HoldingItemDistance + amount * Time.deltaTime * _itemReachChangeSpeed, _minHandReach, _maxHandReach);
+    }
+
+    void TryHoldItemToPosition(GrabbedItem heldItem, Vector3 position)
     {
         if (heldItem == null) return;
         var rb = heldItem.itemRB;
@@ -70,14 +80,14 @@ public class ItemGrabber : MonoBehaviour
     }
     public void TryInteractWithItem(bool leftHand, PlayerController controller)
     {
-        grabbedItem hand = leftHand ? _leftHand : _rightHand;
+        GrabbedItem hand = leftHand ? _leftHand : _rightHand;
         if (hand == null) return;
         hand.grabbable.onPlayerInteract?.Invoke(controller);
     }
     public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
         //the hand were working with to make code more agnostic
-        grabbedItem workingHand;
+        GrabbedItem workingHand;
         Transform workingHandRenderer;
         if (leftHand)
         {
@@ -94,17 +104,14 @@ public class ItemGrabber : MonoBehaviour
         {
             //try pickikng up the item in the middle of the view
             //ignore car collider
-            Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, MaxHandReach, ~1<<LayerMask.NameToLayer("Car"));
-            Debug.Log(hitinfo.transform);
-            Debug.DrawRay(transform.position, transform.forward * MaxHandReach);
-            if (hitinfo.transform == null) return;
+            if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach, ~1 << LayerMask.NameToLayer("Car"))) 
+                return;
 
-            var grabbable = hitinfo.transform.GetComponent<GrabbableItem>();
-            Debug.Log(hitinfo.transform.name);
-            if (grabbable == null) return;
+            
+            if (!hitinfo.transform.TryGetComponent<GrabbableItem>(out var grabbable)) return;
 
             //if theres a grabbable item, set it
-            workingHand = new grabbedItem() { 
+            workingHand = new GrabbedItem() { 
                 grabbable = grabbable, 
                 itemRB = hitinfo.rigidbody, 
             };
