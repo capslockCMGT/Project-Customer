@@ -440,6 +440,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8647630973829367811}
     m_Modifications:
+    - target: {fileID: 2953765862097154527, guid: d3216a652e6767c45ada223833636a8a,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571598491014966168, guid: d3216a652e6767c45ada223833636a8a,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3702926854747831323, guid: d3216a652e6767c45ada223833636a8a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -494,6 +504,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ct_lightsrope (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4398781208720539718, guid: d3216a652e6767c45ada223833636a8a,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822591788921267499, guid: d3216a652e6767c45ada223833636a8a,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444377845935945575, guid: d3216a652e6767c45ada223833636a8a,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
