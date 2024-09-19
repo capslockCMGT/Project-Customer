@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public UnityEvent<Vector2> UpdateLeftJoystick;
     public UnityEvent<Vector2> UpdateRightJoystick;
 
-
+    Vector2 _rightJoystickValue;
     ItemGrabber _grabber;
 
     void Awake()
@@ -77,8 +77,13 @@ public class PlayerController : MonoBehaviour
 
     public void OnCameraMove(CallbackContext context)
     {
-        Vector2 val = context.ReadValue<Vector2>();
-        UpdateRightJoystick?.Invoke(val);
+        _rightJoystickValue = context.ReadValue<Vector2>();
+    }
+    //for keyboards to have continuous input
+    void FixedUpdate()
+    {
+        UpdateRightJoystick?.Invoke(_rightJoystickValue);
+
     }
 
     public void OnItemControl(CallbackContext context)
