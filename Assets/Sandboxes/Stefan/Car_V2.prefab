@@ -860,6 +860,9 @@ MonoBehaviour:
   Player: 0
   <PlayerCanSteer>k__BackingField: 1
   CarIfDriver: {fileID: 2847147933222837468}
+  ItemControl:
+    m_PersistentCalls:
+      m_Calls: []
   UpdateLeftJoystick:
     m_PersistentCalls:
       m_Calls: []
@@ -950,12 +953,13 @@ MonoBehaviour:
   Car: {fileID: 2117219472132942864}
   LeftHandRenderer: {fileID: 1056704375292174184}
   RightHandRenderer: {fileID: 7243003644210143272}
-  MaxHandReach: 3
-  HoldingItemDistance: 1
   ThrowForce: 4
   HoldingForceStrength: 300
   DistanceBetweenHands: 0.3
   DisableGravity: 0
+  _minHandReach: 0.5
+  _maxHandReach: 1
+  _itemReachChangeSpeed: 1
 --- !u!114 &6283307610981432822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,6 +1234,7 @@ GameObject:
   - component: {fileID: 7010429448541761232}
   - component: {fileID: 7078075737471144160}
   - component: {fileID: 894875885084038488}
+  - component: {fileID: 7651148675786905600}
   m_Layer: 9
   m_Name: Drawer
   m_TagString: Untagged
@@ -1335,8 +1340,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7670869, y: 0.0070835175, z: 0.14207768}
-  m_Center: {x: -0.0014236927, y: -0.046458248, z: 0.07723391}
+  m_Size: {x: 0.7670869, y: 0.0107498765, z: 0.14207768}
+  m_Center: {x: -0.0014236867, y: -0.05649981, z: 0.07723391}
 --- !u!65 &5026775374526730083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1356,8 +1361,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7671173, y: 0.0070835114, z: 0.12987672}
-  m_Center: {x: -0.00011444092, y: 0.08, z: 0.08333435}
+  m_Size: {x: 0.7671173, y: 0.008332193, z: 0.12987672}
+  m_Center: {x: -0.00011444092, y: 0.089747995, z: 0.08333435}
 --- !u!65 &7010429448541761232
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1427,6 +1432,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7651148675786905600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618516900514530474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2658346844238348422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,6 +1497,7 @@ GameObject:
   - component: {fileID: 3446371494738458843}
   - component: {fileID: 1730475119872457245}
   - component: {fileID: 7310553796953353912}
+  - component: {fileID: 8220738790842765388}
   m_Layer: 9
   m_Name: Phone
   m_TagString: Untagged
@@ -1586,6 +1610,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8220738790842765388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2709273331682579773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2796863763978422301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,6 +1915,7 @@ GameObject:
   - component: {fileID: 3147525349037852106}
   - component: {fileID: 807127210598184653}
   - component: {fileID: 3259280824667309276}
+  - component: {fileID: 1947778872602692283}
   m_Layer: 9
   m_Name: Steering wheel
   m_TagString: Untagged
@@ -1989,6 +2032,24 @@ MonoBehaviour:
   onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1947778872602692283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3725799098224874391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4297406350127180235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,6 +2542,7 @@ GameObject:
   - component: {fileID: 1133269429651397710}
   - component: {fileID: 6777278211594019475}
   - component: {fileID: 7163401259453029466}
+  - component: {fileID: 6767806953795030331}
   m_Layer: 9
   m_Name: Gearshift
   m_TagString: Untagged
@@ -2637,6 +2699,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6767806953795030331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5977103833412157793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5998884553983694569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,6 +3037,9 @@ MonoBehaviour:
   Player: 1
   <PlayerCanSteer>k__BackingField: 1
   CarIfDriver: {fileID: 0}
+  ItemControl:
+    m_PersistentCalls:
+      m_Calls: []
   UpdateLeftJoystick:
     m_PersistentCalls:
       m_Calls: []
@@ -3047,12 +3130,13 @@ MonoBehaviour:
   Car: {fileID: 2117219472132942864}
   LeftHandRenderer: {fileID: 4274357398750607093}
   RightHandRenderer: {fileID: 9087811191233194606}
-  MaxHandReach: 3
-  HoldingItemDistance: 1
   ThrowForce: 4
   HoldingForceStrength: 300
   DistanceBetweenHands: 0.3
   DisableGravity: 0
+  _minHandReach: 0.5
+  _maxHandReach: 1
+  _itemReachChangeSpeed: 1
 --- !u!1 &7060603675418040767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3597,6 +3681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2cb34564f2d5fe34f967954d14313721,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

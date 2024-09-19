@@ -187,6 +187,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f1cb49cd-52db-4227-b2de-6cd4b4ca60c3
     m_ActionName: PlayerMovement/Brake[/DualShock4GamepadHID/buttonEast,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3677139174491872196}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnItemControl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4e00d377-2cba-4927-8cb8-49919c668a4e
+    m_ActionName: PlayerMovement/ItemControl[/DualShock4GamepadHID/dpad,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement

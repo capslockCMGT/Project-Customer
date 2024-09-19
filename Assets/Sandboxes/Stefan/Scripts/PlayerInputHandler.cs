@@ -70,4 +70,10 @@ public class PlayerInputHandler : MonoBehaviour
         if (controller != null) 
             controller.OnCameraMove(context);
     }
+
+    public void OnItemControl(CallbackContext context)
+    {
+        if (controller != null)
+            controller.OnItemControl(context);
+    }
 }

@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public int Player = 0;
     [field:SerializeField] public bool PlayerCanSteer { get; private set; } = true;
     [SerializeField] CarControlsHandler CarIfDriver;
-    
+
+    public UnityEvent<float> ItemControl;
     public UnityEvent<Vector2> UpdateLeftJoystick;
     public UnityEvent<Vector2> UpdateRightJoystick;
 
@@ -78,5 +79,12 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 val = context.ReadValue<Vector2>();
         UpdateRightJoystick?.Invoke(val);
+    }
+
+    public void OnItemControl(CallbackContext context)
+    {
+        Vector2 val = context.ReadValue<Vector2>();
+        Debug.Log(val);
+        ItemControl?.Invoke(val.y);
     }
 }

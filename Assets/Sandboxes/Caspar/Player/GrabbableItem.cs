@@ -23,6 +23,10 @@ public class GrabbableItem : MonoBehaviour
     {
         if (Renderer == null)
             Renderer = this.transform;
+
+        _outline.OutlineWidth = OutlineSettings.Instance.OutlineWidth;
+        _outline.OutlineColor = OutlineSettings.Instance.OutlineColor;
+        _outline.OutlineMode = OutlineSettings.Instance.OutlineMode;
     }
 
     public void Grab(PlayerController controller)
