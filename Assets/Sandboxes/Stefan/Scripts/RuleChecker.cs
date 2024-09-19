@@ -9,6 +9,7 @@ public abstract class RuleChecker : MonoBehaviour
     [SerializeField] float _penaltyThreshhold = 3f;
     [SerializeField] float _penaltyCooldown = 3f;
     [SerializeField] int _deductionAmount = 5;
+    
     public event Action RuleBroken;
 
     SafetyCreditsManager _creditsManager;
@@ -36,11 +37,6 @@ public abstract class RuleChecker : MonoBehaviour
             return;
         }
         if (_cooldownTimer <= _penaltyCooldown) return;
-
-        if(GetType() == typeof(PedestrianHitRule)) 
-        {
-        
-        }
 
         _penaltyAccumulation += Time.deltaTime;
 
