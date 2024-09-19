@@ -26,9 +26,22 @@ public class PlayerController : MonoBehaviour
         //Debug.Log($"Tryina move, value: {val} carIfDriver: " + CarIfDriver);
         if (CarIfDriver == null) return;
         Vector2 val = context.ReadValue<Vector2>();
-
-        CarIfDriver.UpdateGas(val);
         UpdateLeftJoystick?.Invoke(val);
+
+    }
+
+    public void OnGasPress(CallbackContext context)
+    {
+        bool clickEntered = context.action.triggered;
+        CarIfDriver.UpdateGas(clickEntered ? Vector2.up : Vector2.zero);
+
+    }
+
+    public void OnBrakePress(CallbackContext context)
+    {
+        bool clickEntered = context.action.triggered;
+        CarIfDriver.UpdateGas(clickEntered ? Vector2.down : Vector2.zero);
+
     }
 
     public void OnInteractLeft(CallbackContext context)

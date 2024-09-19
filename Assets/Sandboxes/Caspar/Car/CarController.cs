@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 [SelectionBase]
 [RequireComponent(typeof(Rigidbody))]
@@ -22,6 +23,7 @@ public class CarController : MonoBehaviour
     [SerializeField] float BrakeStrength = 5000;
     [SerializeField][Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
     [SerializeField] float MaxTurnAngle = 30;
+    [SerializeField] float _engineToMaxPowerTime = .8f;
 
     public Vector3 CarVelocity => _carRB.velocity;
 
@@ -40,27 +42,27 @@ public class CarController : MonoBehaviour
             Destroy(this);
         }
 
-        controlsHandler.SteeringAngleChanged += OnSteer;
         controlsHandler.CarSpeedChanged += OnGas;
         controlsHandler.GearshiftReversed += () => { _inReverse = !_inReverse; };
     }
 
-    void OnSteer(float newAngle)
+
+    public void SetWheelAngle(float angle01)
     {
         //set the angle of the wheel's colliders
         foreach (Wheel wheel in Wheels)
             if (wheel.frontWheel)
             {
-                wheel.collider.steerAngle = newAngle * MaxTurnAngle;
+                wheel.collider.steerAngle = angle01 * MaxTurnAngle;
                 //cilinder is oriented upwards by default. this is a little jank
                 //who did this
-                wheel.renderer.rotation = Quaternion.Euler(90, 0, 90 - newAngle * MaxTurnAngle);
+                wheel.renderer.rotation = Quaternion.Euler(90, 0, 90 - angle01 * MaxTurnAngle);
             }
     }
 
     //expects an update every frame. more updates will make changing speed more erratic
     //dont care to make this update speed agnostic
-    void OnGas(float gas)
+    void OnGas(float input)
     {
         //a little messed up. a little evil
         //invert driving direction and inputs if were going in reverse
@@ -68,13 +70,13 @@ public class CarController : MonoBehaviour
         float maxVel = MaximumSpeed;
         if(_inReverse)
         {
-            gas = -gas;
+            input = -input;
             reversing = -1;
             maxVel = MaxSpeedBackwards;
         }
 
         //targetSpeed is between 0-1, defining the speed at which the car is trying to cruise
-        _targetSpeed += gas * Time.deltaTime;
+        _targetSpeed += input * Time.deltaTime * _engineToMaxPowerTime;
         _targetSpeed = Mathf.Clamp01(_targetSpeed);
 
         //if the car is already near maximum speed, power down the engine
@@ -85,7 +87,7 @@ public class CarController : MonoBehaviour
         foreach (Wheel wheel in Wheels)
         {
             //if gas is hit or neutral, dont brake but gas
-            if(gas >= 0)
+            if(input >= 0)
             {
                 wheel.collider.motorTorque = torque*EngineStrength*reversing;
                 wheel.collider.brakeTorque = 0;

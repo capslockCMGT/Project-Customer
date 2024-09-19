@@ -100,7 +100,7 @@ public class ItemGrabber : MonoBehaviour
             if (hitinfo.transform == null) return;
 
             var grabbable = hitinfo.transform.GetComponent<GrabbableItem>();
-            Debug.Log(hitinfo.transform.name);
+            
             if (grabbable == null) return;
 
             //if theres a grabbable item, set it

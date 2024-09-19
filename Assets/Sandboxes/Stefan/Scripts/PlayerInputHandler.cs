@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -22,28 +21,42 @@ public class PlayerInputHandler : MonoBehaviour
         controller = FindObjectsOfType<PlayerController>().FirstOrDefault(p => p.Player == index);
 
     }
+
+    public void OnGasPress(CallbackContext context)
+    {
+        if (controller != null)
+            controller.OnGasPress(context);
+
+    }
+
+    public void OnBrakePress(CallbackContext context)
+    {
+        if (controller != null)
+            controller.OnBrakePress(context);
+    }
+
     public void OnMove(CallbackContext context)
     {
         if (controller != null) 
-        controller.OnMove(context);
+            controller.OnMove(context);
     }
     
     public void OnInteractLeft(CallbackContext context)
     {
         if (controller != null) 
-        controller.OnInteractLeft(context);
+            controller.OnInteractLeft(context);
     }
 
     public void OnInteractRight(CallbackContext context)
     {
         if (controller != null) 
-        controller.OnInteractRight(context);
+            controller.OnInteractRight(context);
     }
 
     public void OnGrabRight(CallbackContext context)
     {
         if (controller != null) 
-        controller.OnGrabRight(context);
+            controller.OnGrabRight(context);
     }
 
     public void OnGrabLeft(CallbackContext context)
@@ -55,6 +68,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnCameraMove(CallbackContext context)
     {
         if (controller != null) 
-        controller.OnCameraMove(context);
+            controller.OnCameraMove(context);
     }
 }

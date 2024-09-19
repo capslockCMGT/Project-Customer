@@ -18,12 +18,12 @@ public class Phone : MonoBehaviour
 
     void OnEnable()
     {
-        _grababble.onPlayerInteract.AddListener(OnGrab);
+        _grababble.onPlayerInteract.AddListener(OnInteract);
     }
 
     void OnDisable()
     {
-        _grababble.onPlayerInteract.RemoveListener(OnGrab);
+        _grababble.onPlayerInteract.RemoveListener(OnInteract);
     }
 
     void FixedUpdate()
@@ -41,8 +41,10 @@ public class Phone : MonoBehaviour
         _callState.SetActive(true);
     }
 
-    void OnGrab(PlayerController controller)
+    void OnInteract(PlayerController controller)
     {
+        if (!_callState.activeInHierarchy) return;
+        
         bool isDriver = controller.Player == 0;
 
         _callState.SetActive(false);

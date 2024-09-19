@@ -13,17 +13,17 @@ public class MyGrid : MonoBehaviour
     public float _size = 100f;
     [SerializeField] int _objectiveMinDistance = 10;
 
-    [SerializeField] GameObject _prefab1;
-    [SerializeField] GameObject _prefab2;
-    [SerializeField] GameObject _prefab3;
-    [SerializeField] GameObject _prefab4;
-    [SerializeField] GameObject _prefab5;
-    [SerializeField] GameObject _prefab6;
+    [SerializeField] GameObject _crossPrefab;
+    [SerializeField] GameObject _linePrefab;
+    [SerializeField] GameObject _tPrefab;
+    [SerializeField] GameObject _cornerPrefab;
+    [SerializeField] GameObject _blankPrefab;
+    [SerializeField] GameObject _capPrefab;
     
     [SerializeField] Transform _tileHolder;
 
     [SerializeField] GameObject _start;
-    public GameObject _end;
+    [SerializeField] GameObject _end;
 
 
     [SerializeField] Material _pathMat;
@@ -31,6 +31,7 @@ public class MyGrid : MonoBehaviour
 
     public event Action<Tile, GameObject> TileCollapsed;
     public event Action MapGenerated;
+
     public bool Done { get; private set; }
     public Cell[,] Cells { get; private set; }
     public Vector2Int StartPos { get; private set; }
@@ -44,20 +45,19 @@ public class MyGrid : MonoBehaviour
     readonly AStar _aStar = new();
 
     IEnumerable<Tile> _rotatedTiles;
+
     void Awake()
     {
         //hardcoded the simetries.
         //The simetries are needed to save memory on repeating the tiles that after rotation
         //look the same
         //up right down left
-        _tiles[0] = new Tile(_prefab1, true, true, "ABA", "ABA", "ABA", "ABA");
-        _tiles[1] = new Tile(_prefab2, true, false, "AAA", "ABA", "AAA", "ABA");
-        _tiles[2] = new Tile(_prefab3, false, true, "AAA", "ABA", "ABA", "ABA");
-        _tiles[3] = new Tile(_prefab4, false, false, "ABA", "ABA", "AAA", "AAA");
-        _tiles[4] = new Tile(_prefab5, true, true, "AAA", "AAA", "AAA", "AAA");
-        _tiles[5] = new Tile(_prefab6, false, false, "AAA", "AAA", "AAA", "ABA");
-
-        
+        _tiles[0] = new Tile(_crossPrefab, true, true, "ABA", "ABA", "ABA", "ABA");
+        _tiles[1] = new Tile(_linePrefab, true, false, "AAA", "ABA", "AAA", "ABA");
+        _tiles[2] = new Tile(_tPrefab, false, true, "AAA", "ABA", "ABA", "ABA");
+        _tiles[3] = new Tile(_cornerPrefab, false, false, "ABA", "ABA", "AAA", "AAA");
+        _tiles[4] = new Tile(_blankPrefab, true, true, "AAA", "AAA", "AAA", "AAA");
+        _tiles[5] = new Tile(_capPrefab, false, false, "AAA", "AAA", "AAA", "ABA");
 
         var rotatedTiles = GenerateRotatedTileStates(_tiles);
         _rotatedTiles = _tiles.Concat(rotatedTiles);
