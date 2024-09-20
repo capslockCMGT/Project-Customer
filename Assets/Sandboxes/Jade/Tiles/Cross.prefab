@@ -1286,6 +1286,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8647630973829367811}
     m_Modifications:
+    - target: {fileID: -8730051827315326399, guid: afd4263cdc9f0d6418c50fede917cd07,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8730051827315326399, guid: afd4263cdc9f0d6418c50fede917cd07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: afd4263cdc9f0d6418c50fede917cd07,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1356,10 +1366,30 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5720876971503774468, guid: afd4263cdc9f0d6418c50fede917cd07,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: afd4263cdc9f0d6418c50fede917cd07,
         type: 3}
       propertyPath: m_Name
       value: road_cross
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378922297957006227, guid: afd4263cdc9f0d6418c50fede917cd07,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1805317115561307705, guid: afd4263cdc9f0d6418c50fede917cd07,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200344217081120180, guid: afd4263cdc9f0d6418c50fede917cd07,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
