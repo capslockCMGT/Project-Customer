@@ -154,23 +154,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   columns: 10
-  _size: 1000
+  _size: 500
   _objectiveMinDistance: 5
-  _crossPrefab: {fileID: 8011886544565409896, guid: e3a023898e505e848916b4339a753944,
+  _crossPrefab: {fileID: 8011886544565409896, guid: 65aa28c96a1cbd940b20039330e8f676,
     type: 3}
-  _linePrefab: {fileID: 5099231861569548205, guid: 3e3b6b6c79167da488e26538888cd60c,
+  _linePrefab: {fileID: 5099231861569548205, guid: e20ff748fa4d6d947b8ad81ad008f0da,
     type: 3}
-  _tPrefab: {fileID: 8011886544565409896, guid: 936e378b15881134d859f11c66de4400,
+  _tPrefab: {fileID: 8011886544565409896, guid: da2d33e4f3c130a4b9773d8034695f80,
     type: 3}
-  _cornerPrefab: {fileID: 8011886544565409896, guid: 55ce9145ca04b424a8786199d97ca707,
+  _cornerPrefab: {fileID: 8011886544565409896, guid: 3165b8cfa58e62a4788069e152d6304b,
     type: 3}
   _blankPrefab: {fileID: 8011886544565409896, guid: f3430f51346bd2b42a7a386da206eab1,
     type: 3}
-  _capPrefab: {fileID: 5099231861569548205, guid: 0cae74857a531e84ab4a083eab476033,
+  _capPrefab: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544,
     type: 3}
   _tileHolder: {fileID: 52199711}
-  _start: {fileID: 5099231861569548205, guid: ab68186adb6dc4643909cbc7e4ae1253, type: 3}
-  _end: {fileID: 5099231861569548205, guid: 6a1ce9fa03ed6d54d9930ae4eb174c9b, type: 3}
+  _start: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544, type: 3}
+  _end: {fileID: 5099231861569548205, guid: f08ee2ba3b4b3e44e81e07966ac087d9, type: 3}
   _pathMat: {fileID: 2100000, guid: 27341f7f9d79fc045be2682c96244763, type: 2}
   _generateNewMap: 0
 --- !u!4 &35787297
@@ -808,7 +808,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.75
+    m_Strength: 0.4
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2

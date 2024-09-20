@@ -546,7 +546,6 @@ Transform:
   - {fileID: 6998671196594559420}
   - {fileID: 226081647290155100}
   - {fileID: 5323901930325652135}
-  - {fileID: 2909140715280083567}
   - {fileID: 1524043308190810919}
   - {fileID: 7581998058037802172}
   - {fileID: 6359355391788950037}
@@ -827,7 +826,7 @@ Camera:
     y: 0
     width: 0.5
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -1670,10 +1669,11 @@ Transform:
   m_GameObject: {fileID: 2796863763978422301}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6668651, y: -0, z: -0, w: 0.74517846}
-  m_LocalPosition: {x: 0, y: -1, z: -45}
+  m_LocalPosition: {x: -51.8, y: -1, z: -45}
   m_LocalScale: {x: 7.1790385, y: 98.9533, z: 10.3148155}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 2909140715280083567}
   m_Father: {fileID: 1524043308190810919}
   m_LocalEulerAnglesHint: {x: -68.651, y: 0, z: 0}
 --- !u!33 &4819655951606873004
@@ -1692,7 +1692,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2796863763978422301}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -2409,13 +2409,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4394833276316963241}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6255882, y: 0.35800302, z: -0.16207485, w: 0.67394733}
-  m_LocalPosition: {x: 0, y: 0.70268035, z: 0.12768555}
-  m_LocalScale: {x: 0.0015, y: 0.0013893727, z: 0.0015115319}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
+  m_LocalPosition: {x: 0, y: 0.18, z: -0.17}
+  m_LocalScale: {x: 0.08500001, y: 0.10396939, z: 0.07750093}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 426732384452381009}
-  m_LocalEulerAnglesHint: {x: -46.651, y: 93.261, z: -76.114}
+  m_Father: {fileID: 5846111371090060777}
+  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
 --- !u!33 &7486187862805848190
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2444,7 +2444,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 80274e291e017064891166b0b74ff95a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3252,7 +3252,7 @@ Camera:
     y: 0
     width: 0.5
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
