@@ -1,4 +1,6 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class ItemGrabber : MonoBehaviour
@@ -38,7 +40,7 @@ public class ItemGrabber : MonoBehaviour
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
-        _playerController.ItemControl.AddListener((input)=> _currentItemDistanceInput = input);
+        _playerController.ItemControl.AddListener((input) => _currentItemDistanceInput = input);
         if (Car == null && !TryGetComponent(out Car)) Debug.Log($"couldnt find car for '{gameObject.name}' so velocity is relative to the world");
         else if (Car.interpolation == RigidbodyInterpolation.None) Debug.Log("car's interpolation is set to None, movement of grabbed objects may look janky");
     }
@@ -46,16 +48,16 @@ public class ItemGrabber : MonoBehaviour
     public void FixedUpdate()
     {
         ChangeItemDistance(_currentItemDistanceInput);
-        TryHoldItemToPosition(_leftHand, transform.position + transform.forward*HoldingItemDistance - .5f * DistanceBetweenHands * transform.right);
+        TryHoldItemToPosition(_leftHand, transform.position + transform.forward * HoldingItemDistance - .5f * DistanceBetweenHands * transform.right);
         TryHoldItemToPosition(_rightHand, transform.position + transform.forward * HoldingItemDistance + .5f * DistanceBetweenHands * transform.right);
 
-        OutlineLookedAtItem(_leftHand, ref _lastLeftHandOutline);   
+        OutlineLookedAtItem(_leftHand, ref _lastLeftHandOutline);
         OutlineLookedAtItem(_rightHand, ref _lastRightHandOutline);
     }
 
     void OutlineLookedAtItem(GrabbedItem heldItem, ref Outline previousFrameOutline)
     {
-        if(previousFrameOutline != null)
+        if (previousFrameOutline != null)
         {   //remove outline if not looking (called for every frame when you're not looking)
             previousFrameOutline.enabled = false;
             previousFrameOutline = null;
@@ -83,12 +85,17 @@ public class ItemGrabber : MonoBehaviour
     void SetGrabOutline(Outline outline)
     {
         outline.OutlineColor = OutlineSettings.Instance.OutlineGrabColor;
+        outline.OutlineWidth = OutlineSettings.Instance.OutlineWidth;
+        outline.OutlineMode = OutlineSettings.Instance.OutlineMode;
         outline.enabled = true;
+
     }
 
     void SetLookOutline(Outline outline)
     {
-        outline.OutlineColor = OutlineSettings.Instance.OutlineGrabColor;
+        outline.OutlineColor = OutlineSettings.Instance.OutlineLookColor;
+        outline.OutlineWidth = OutlineSettings.Instance.OutlineWidth;
+        outline.OutlineMode = OutlineSettings.Instance.OutlineMode;
         outline.enabled = true;
     }
 
@@ -111,27 +118,29 @@ public class ItemGrabber : MonoBehaviour
         if (Car != null) carVelocity = Car.velocity;
 
         //dot between the velocity and point direction, between -1, 1 for how correct the direction is
-        float dirCorrectness = Vector3.Dot(posDifferenceNormalized, rb.velocity-carVelocity);
+        float dirCorrectness = Vector3.Dot(posDifferenceNormalized, rb.velocity - carVelocity);
         dirCorrectness = Mathf.Clamp(dirCorrectness, -1, 1);
 
         //arbitrary function to get the strength of the centering force
-        float centeringForce = posDifference.magnitude - dirCorrectness*posDifference.magnitude;
+        float centeringForce = posDifference.magnitude - dirCorrectness * posDifference.magnitude;
         centeringForce *= HoldingForceStrength;
 
         if (centeringForce < 0) centeringForce = 0;
 
         rb.velocity -= carVelocity;
-        rb.velocity *= .5f + .25f*dirCorrectness;
+        rb.velocity *= .5f + .25f * dirCorrectness;
         rb.velocity += carVelocity;
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
         rb.angularVelocity *= .9f;
     }
+    
     public void TryInteractWithItem(bool leftHand, PlayerController controller)
     {
         GrabbedItem hand = leftHand ? _leftHand : _rightHand;
         if (hand == null) return;
         hand.grabbable.onPlayerInteract?.Invoke(controller);
     }
+
     public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
         //the hand were working with to make code more agnostic
@@ -148,11 +157,11 @@ public class ItemGrabber : MonoBehaviour
             workingHandRenderer = RightHandRenderer;
         }
 
-        if(workingHand == null)
+        if (workingHand == null)
         {
             //try pickikng up the item in the middle of the view
             //ignore car collider
-            if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach, ~1 << LayerMask.NameToLayer("Car"))) 
+            if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach, ~1 << LayerMask.NameToLayer("Car")))
                 return;
 
             if (!hitinfo.transform.TryGetComponent<GrabbableItem>(out var grabbable)) return;
@@ -164,12 +173,17 @@ public class ItemGrabber : MonoBehaviour
                 outline = grabbable.GetComponent<Outline>(),  
             };
 
-            grabbable.Grab(controller);
-            workingHandRenderer.position = hitinfo.point;
-            workingHandRenderer.parent = grabbable.Renderer;
+        grabbable.Grab(controller);
+        if(grabbable.ChangeToDynamicWhileGrabbing)
+            grabbableRB.isKinematic = false;
+        workingHandRenderer.position = grabPoint;
+        workingHandRenderer.parent = grabbable.Renderer;
 
-            if (DisableGravity && hitinfo.rigidbody != null)
-                hitinfo.rigidbody.useGravity = false;
+        if (DisableGravity && grabbableRB != null)
+            grabbableRB.useGravity = false;
+
+        if (grabbableRB != null && grabbableRB.interpolation == RigidbodyInterpolation.None)
+            Debug.Log($"grabbed rigidbody '{grabbableRB.gameObject.name}' has interpolation set to None, movement may look janky");
 
             if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) 
                 Debug.Log($"grabbed rigidbody '{hitinfo.rigidbody.gameObject.name}' has interpolation set to None, movement may look janky");
@@ -186,14 +200,8 @@ public class ItemGrabber : MonoBehaviour
             workingHand.grabbable.Release(controller);
             workingHand = null;
 
-            workingHandRenderer.position = transform.position;
-            workingHandRenderer.parent = transform;
-        }
-
-        //set the hand back to the altered working hand - set to a new object if grabbed, or set to null if released
-        if (leftHand)
-            _leftHand = workingHand;
-        else _rightHand = workingHand;
+        workingHandRenderer.position = transform.position;
+        workingHandRenderer.parent = transform;
     }
 
     public GameObject GetLeftHandItem()

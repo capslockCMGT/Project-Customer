@@ -37,7 +37,7 @@ public class GloveBox : MonoBehaviour
                 {
                     if(spot.childCount > 0)
                     Destroy(spot.GetChild(0).gameObject);
-                    var item = Instantiate(_itemsRandomPool[Random.Range(0, _itemsRandomPool.Length)], spot);
+                    GameObject item = Instantiate(_itemsRandomPool[Random.Range(0, _itemsRandomPool.Length)], spot);
                 }
             }
             else
@@ -50,6 +50,5 @@ public class GloveBox : MonoBehaviour
             }
         });
     }
-
 
 }

@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public void OnGasPress(CallbackContext context)
     {
         bool clickEntered = context.action.triggered;
+        if(CarIfDriver == null) return;
         CarIfDriver.UpdateGas(clickEntered ? Vector2.up : Vector2.zero);
 
     }
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         _rightJoystickValue = context.ReadValue<Vector2>();
     }
+    
     //for keyboards to have continuous input
     void FixedUpdate()
     {
