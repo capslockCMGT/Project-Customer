@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: SoundNames
   m_EditorClassIdentifier: 
   Names:
-  - StartClick
-  - EngineRev
-  - EngineRev2
-  - EngineRev3
   - Honk
+  - Honk2
+  - Honk3
+  - GloveBox Open
+  - GloveBox Close
+  - HeavyBrake
+  - Collision Pedestrian 1
+  - Collision Pedestrian 2
+  - Collision Pedestrian 3
+  - Credit Notice

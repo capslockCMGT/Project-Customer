@@ -10,6 +10,8 @@ public class GloveBox : MonoBehaviour
     [SerializeField] Transform _spawnSpots;
 
     [SerializeField] GameObject[] _itemsRandomPool;
+    [SerializeField] SoundName _sound1;
+    [SerializeField] SoundName _sound2;
 
     GrabbableItem _grabbableItem;
 
@@ -26,6 +28,7 @@ public class GloveBox : MonoBehaviour
             _isOpen = !_isOpen;
             if(_isOpen)
             {
+                SoundManager.Instance.PlaySound(_sound1);
                 _renderer.parent = null;
                 _renderer.parent = _openRot;
                 _renderer.localRotation = Quaternion.identity;
@@ -42,6 +45,7 @@ public class GloveBox : MonoBehaviour
                 _renderer.parent = null;
                 _renderer.parent = _closeRot;
                 _renderer.localRotation = Quaternion.identity;
+                SoundManager.Instance.PlaySound(_sound2);
 
             }
         });

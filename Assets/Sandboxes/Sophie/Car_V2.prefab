@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 4321014292650692184}
   - component: {fileID: 2847147933222837468}
   - component: {fileID: 6588284555081939846}
+  - component: {fileID: 2583734959388477212}
   m_Layer: 8
   m_Name: Car_V2
   m_TagString: Car
@@ -536,8 +537,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1906916236121598528}
-  - {fileID: 1648140108523886344}
   - {fileID: 4646411767288947990}
   - {fileID: 4240685639671828580}
   - {fileID: 2513319242025723913}
@@ -551,6 +550,7 @@ Transform:
   - {fileID: 7581998058037802172}
   - {fileID: 6359355391788950037}
   - {fileID: 2191467250571369707}
+  - {fileID: 6195455368282342517}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2117219472132942864
@@ -681,6 +681,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338ec21754299074b96de290695f0b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2583734959388477212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582638049416433318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f0636ff3bb90a4c8bcf195a0443b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _penaltyThreshhold: 3
 --- !u!1 &1977329224227739788
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +783,6 @@ GameObject:
   - component: {fileID: 7342318993578624906}
   - component: {fileID: 7962352702799397996}
   - component: {fileID: 8404092223514185774}
-  - component: {fileID: 1155334407336410315}
   - component: {fileID: 267872072770291766}
   m_Layer: 0
   m_Name: Player 1
@@ -993,9 +1005,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SafetyCredits>k__BackingField: 100
-  _sound:
-    Name: Credit Notice
-    PopUpIndexOfChosenName: 9
 --- !u!114 &7962352702799397996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,31 +1035,6 @@ MonoBehaviour:
   _penaltyThreshhold: -5
   _penaltyCooldown: 3
   _deductionAmount: 5
-  _sound1:
-    Name: Collision Pedestrian 1
-    PopUpIndexOfChosenName: 6
---- !u!114 &1155334407336410315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2270127816248381527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419d24a69188fdb41860e44560d4d6cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _masterVolume: 1
-  _soundClips:
-    _serializedList:
-    - Key:
-        Name: GloveBox Close
-        PopUpIndexOfChosenName: 4
-      Value:
-        Volume: 1
-        Clip: {fileID: 8300000, guid: e5e5382ed7ada1b4fb09915e2f1a2d90, type: 3}
-        Loop: 0
 --- !u!81 &267872072770291766
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1286,12 +1270,6 @@ MonoBehaviour:
   _spawnSpots: {fileID: 265772518495073169}
   _itemsRandomPool:
   - {fileID: 755275588320937708, guid: ea7be52d0fa8b8b4892a608b63eb7df3, type: 3}
-  _sound1:
-    Name: GloveBox Open
-    PopUpIndexOfChosenName: 3
-  _sound2:
-    Name: GloveBox Close
-    PopUpIndexOfChosenName: 4
 --- !u!114 &4932012427184998451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,8 +1597,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1814,124 +1792,6 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
---- !u!1 &3198381997705171945
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1906916236121598528}
-  - component: {fileID: 2112699233803943770}
-  - component: {fileID: 6599775550461434941}
-  m_Layer: 0
-  m_Name: Spot Light (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1906916236121598528
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3198381997705171945}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.650054, y: 0.4, z: 2.0679932}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 426732384452381009}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!108 &2112699233803943770
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3198381997705171945}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 0
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 500
-  m_Range: 20
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!114 &6599775550461434941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3198381997705171945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!1 &3421444345219350433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,124 +1894,6 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
---- !u!1 &3557238265933827447
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1648140108523886344}
-  - component: {fileID: 1399292125697506793}
-  - component: {fileID: 8743378380103074838}
-  m_Layer: 0
-  m_Name: Spot Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1648140108523886344
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3557238265933827447}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.4, z: 2.0679932}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 426732384452381009}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!108 &1399292125697506793
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3557238265933827447}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 0
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 500
-  m_Range: 20
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!114 &8743378380103074838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3557238265933827447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!1 &3725799098224874391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,13 +1994,13 @@ MonoBehaviour:
   Renderer: {fileID: 6904660203198777245}
   carHandler: {fileID: 2847147933222837468}
   _carController: {fileID: 4321014292650692184}
-  _steeringSens: 2
-  _steeringAngle: 25
+  _steeringSens: 1
+  _steeringAngle: 49
   _honksBeforeCooldownStart: 1
   _honkCooldown: 1
   _soundName:
-    Name: Honk2
-    PopUpIndexOfChosenName: 1
+    Name: Honk
+    PopUpIndexOfChosenName: 4
   _canReposition: 1
 --- !u!114 &3259280824667309276
 MonoBehaviour:
@@ -2734,7 +2476,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5856215686473012760}
-  m_Mesh: {fileID: 5841205884072201954, guid: 34a207fa09482204a9ab1e39c139f976, type: 3}
+  m_Mesh: {fileID: 5841205884072201954, guid: d54d3f8486e345e47be4eef95b63dbaa, type: 3}
 --- !u!23 &1715357104578235705
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2809,7 +2551,7 @@ Transform:
   m_GameObject: {fileID: 5977103833412157793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.016, y: 0, z: 0}
+  m_LocalPosition: {x: -0.10635102, y: 0.2735784, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2822,7 +2564,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977103833412157793}
-  m_Mesh: {fileID: 2597706651966916316, guid: 34a207fa09482204a9ab1e39c139f976, type: 3}
+  m_Mesh: {fileID: 2597706651966916316, guid: d54d3f8486e345e47be4eef95b63dbaa, type: 3}
 --- !u!23 &6062517310097815030
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2884,8 +2626,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 25, y: 5, z: 25}
-  m_Center: {x: -10, y: 30, z: 0}
+  m_Size: {x: 25.73, y: 3.3676033, z: 32.09}
+  m_Center: {x: 6.3, y: 0, z: -6.57}
 --- !u!114 &1133269429651397710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3470,6 +3212,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7248032641323081389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6195455368282342517}
+  - component: {fileID: 8367336398755300329}
+  m_Layer: 9
+  m_Name: CarFloor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6195455368282342517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7248032641323081389}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 426732384452381009}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8367336398755300329
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7248032641323081389}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8699646, y: 0.051493227, z: 2.2321777}
+  m_Center: {x: 0.014205933, y: 0.17218953, z: -0.03564453}
 --- !u!1 &7595708054185968999
 GameObject:
   m_ObjectHideFlags: 0
