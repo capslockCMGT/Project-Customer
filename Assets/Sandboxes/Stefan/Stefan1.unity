@@ -1544,7 +1544,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OutlineWidth: 20
-  OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+  OutlineGrabColor: {r: 0, g: 0, b: 0, a: 1}
+  OutlineLookColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   OutlineMode: 1
 --- !u!4 &1674468797
 Transform:
