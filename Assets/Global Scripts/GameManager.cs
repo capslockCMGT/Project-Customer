@@ -1,10 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
+    [SerializeField] Image _gameOverPanel;
+    
+    List<PlayerInput> _playerInputs = new List<PlayerInput>(2);   
     public static GameManager Instance { get; private set; } 
     public GameObject PlayerCar { get; private set; }
 
@@ -48,6 +55,20 @@ public class GameManager : MonoBehaviour
         carInst.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
     }
 
+    public void GameOver()
+    {
+        _gameOverPanel.gameObject.SetActive(true);
+        foreach (var input in _playerInputs)
+        {
+            input.DeactivateInput();
+        }
+        foreach (FirstPersonCamera camController in PlayerCar.GetComponentsInChildren<FirstPersonCamera>())
+        {
+            camController.enabled = false;
+        }
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void FinishLevel()
     {
         //show UI
@@ -55,5 +76,16 @@ public class GameManager : MonoBehaviour
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
+    }
+
+    public void ReloadLevel()
+    {
+        Debug.Log("Reload");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnInputAdd(PlayerInput input)
+    {
+        _playerInputs.Add(input);
     }
 }

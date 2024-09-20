@@ -168,8 +168,8 @@ MonoBehaviour:
   _prefab6: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544,
     type: 3}
   _tileHolder: {fileID: 110689072}
-  _start: {fileID: 5099231861569548205, guid: 7bdf972aee416904fac194cfc2831f9f, type: 3}
-  _end: {fileID: 5099231861569548205, guid: 905730edf263e964592c854796dd5314, type: 3}
+  _start: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544, type: 3}
+  _end: {fileID: 5099231861569548205, guid: f08ee2ba3b4b3e44e81e07966ac087d9, type: 3}
   _pathMat: {fileID: 2100000, guid: 27341f7f9d79fc045be2682c96244763, type: 2}
   _generateNewMap: 0
 --- !u!4 &35787297
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -476,9 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 1277563589}
   _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
 --- !u!135 &298366419
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -619,7 +617,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 20130809ecf4803498c1b061d750174d, type: 2}
   m_BuildHeightMesh: 0
@@ -803,9 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 959014144}
   _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
 --- !u!135 &474536919
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1054,6 +1050,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  _creditViolation: 0
+  _deductionCooldown: 3
 --- !u!4 &751860440
 Transform:
   m_ObjectHideFlags: 0
@@ -1246,9 +1244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 474536922}
   _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
 --- !u!135 &959014141
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1485,11 +1481,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 1427016437}
   _randomObjectives:
   - {fileID: 959014144}
   - {fileID: 474536922}
-  IgnoreFrom: {fileID: 1427016433}
 --- !u!135 &1060199884
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1799,9 +1793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 298366417}
   _randomObjectives: []
-  IgnoreFrom: {fileID: 0}
 --- !u!135 &1277563586
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2026,11 +2018,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e355fcd3d28f054dbd95e68933c0fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainObjective: {fileID: 1060199887}
   _randomObjectives:
   - {fileID: 298366417}
   - {fileID: 1277563589}
-  IgnoreFrom: {fileID: 1060199883}
 --- !u!135 &1427016434
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2630,7 +2620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293ac6705e0b57f438a574c09df3654c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gixmo: {x: 0, y: 0, z: 0}
 --- !u!1001 &81284788606982913
 PrefabInstance:
   m_ObjectHideFlags: 0
