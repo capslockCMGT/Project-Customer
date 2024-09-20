@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 35787296}
-  _carPrefab: {fileID: 1582638049416433318, guid: 941602fb74d05da47a19f968fcabc71f,
+  _carPrefab: {fileID: 1582638049416433318, guid: b9539473c0ad1a14aa27fb874cc6ece3,
     type: 3}
   _gameOverPanel: {fileID: 792068514}
 --- !u!4 &356019372
@@ -612,7 +612,7 @@ MonoBehaviour:
     _serializedList:
     - Key:
         Name: Honk
-        PopUpIndexOfChosenName: 4
+        PopUpIndexOfChosenName: 0
       Value:
         Volume: 1
         Clip: {fileID: 8300000, guid: e5e5382ed7ada1b4fb09915e2f1a2d90, type: 3}

@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SafetyCredits>k__BackingField: 100
   _sound:
-    Name: 
+    Name: Honk
     PopUpIndexOfChosenName: 0
 --- !u!114 &7962352702799397996
 MonoBehaviour:
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   _penaltyCooldown: 3
   _deductionAmount: 5
   _sound1:
-    Name: 
+    Name: Honk
     PopUpIndexOfChosenName: 0
 --- !u!81 &267872072770291766
 AudioListener:
