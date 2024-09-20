@@ -47,6 +47,12 @@ public class ItemGrabber : MonoBehaviour
 
     public void FixedUpdate()
     {
+        //in case I destroy after grabbing
+        if (_leftHand != null && _leftHand.grabbable == null)
+            _leftHand = null;
+        if (_rightHand != null && _rightHand.grabbable == null)
+            _rightHand = null;
+
         ChangeItemDistance(_currentItemDistanceInput);
         TryHoldItemToPosition(_leftHand, transform.position + transform.forward * HoldingItemDistance - .5f * DistanceBetweenHands * transform.right);
         TryHoldItemToPosition(_rightHand, transform.position + transform.forward * HoldingItemDistance + .5f * DistanceBetweenHands * transform.right);
@@ -84,6 +90,7 @@ public class ItemGrabber : MonoBehaviour
 
     void SetGrabOutline(Outline outline)
     {
+
         outline.OutlineColor = OutlineSettings.Instance.OutlineGrabColor;
         outline.OutlineWidth = OutlineSettings.Instance.OutlineWidth;
         outline.OutlineMode = OutlineSettings.Instance.OutlineMode;
@@ -133,14 +140,12 @@ public class ItemGrabber : MonoBehaviour
         rb.AddForce(-posDifferenceNormalized * centeringForce, ForceMode.Force);
         rb.angularVelocity *= .9f;
     }
-    
     public void TryInteractWithItem(bool leftHand, PlayerController controller)
     {
         GrabbedItem hand = leftHand ? _leftHand : _rightHand;
         if (hand == null) return;
         hand.grabbable.onPlayerInteract?.Invoke(controller);
     }
-
     public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
         //the hand were working with to make code more agnostic
@@ -174,22 +179,23 @@ public class ItemGrabber : MonoBehaviour
                 outline = grabbable.GetComponent<Outline>(),
             };
 
-        grabbable.Grab(controller);
-        if(grabbable.ChangeToDynamicWhileGrabbing)
-            grabbableRB.isKinematic = false;
-        workingHandRenderer.position = grabPoint;
-        workingHandRenderer.parent = grabbable.Renderer;
+            if (grabbable.ChangeToDynamicWhileGrabbing)
+            {
+                workingHand.itemRB.isKinematic = false;
+                workingHand.itemRB.velocity = Car.velocity;
+            }
 
-        if (DisableGravity && grabbableRB != null)
-            grabbableRB.useGravity = false;
+            workingHandRenderer.position = hitinfo.point;
+            workingHandRenderer.parent = grabbable.Renderer;
 
-        if (grabbableRB != null && grabbableRB.interpolation == RigidbodyInterpolation.None)
-            Debug.Log($"grabbed rigidbody '{grabbableRB.gameObject.name}' has interpolation set to None, movement may look janky");
+            if (DisableGravity && hitinfo.rigidbody != null)
+                hitinfo.rigidbody.useGravity = false;
 
             if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None)
                 Debug.Log($"grabbed rigidbody '{hitinfo.rigidbody.gameObject.name}' has interpolation set to None, movement may look janky");
+            grabbable.Grab(controller);
         }
-        else
+        else if(workingHand.grabbable != null)
         {
             //add a force to the thrown object and release it
             if (workingHand.itemRB != null)
@@ -198,13 +204,21 @@ public class ItemGrabber : MonoBehaviour
                 if (DisableGravity)
                     workingHand.itemRB.useGravity = true;
             }
+            //if (workingHand.grabbable.ChangeToDynamicWhileGrabbing)
+            //    workingHand.itemRB.isKinematic = true;
             workingHand.grabbable.Release(controller);
+
             workingHand = null;
+            workingHandRenderer.position = transform.position;
+            workingHandRenderer.parent = transform;
+        }
 
-        workingHandRenderer.position = transform.position;
-        workingHandRenderer.parent = transform;
+        //set the hand back to the altered working hand - set to a new object if grabbed, or set to null if released
+        if (leftHand)
+            _leftHand = workingHand;
+        else _rightHand = workingHand;
     }
-
+   
     public GameObject GetLeftHandItem()
     {
         if (_leftHand == null) return null;

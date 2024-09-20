@@ -310,9 +310,9 @@ Transform:
   m_GameObject: {fileID: 896459752232133698}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0, y: 0.5, z: 0.002}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 426732384452381009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -323,7 +323,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896459752232133698}
-  m_Mesh: {fileID: 4511611206647714592, guid: 3aa928948fb497a4aa0656012e0b4a33, type: 3}
+  m_Mesh: {fileID: 4511611206647714592, guid: b85d8c756b0910743ad14e7013b120f2, type: 3}
 --- !u!23 &8946733148750716803
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 6588284555081939846}
   - component: {fileID: 2583734959388477212}
   m_Layer: 8
-  m_Name: Car_V2
+  m_Name: StefanCar
   m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -533,9 +533,9 @@ Transform:
   m_GameObject: {fileID: 1582638049416433318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 328.65085, y: 0.062032968, z: -633.50854}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4646411767288947990}
   - {fileID: 4240685639671828580}
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SafetyCredits>k__BackingField: 100
   _sound:
-    Name: 
+    Name: Honk
     PopUpIndexOfChosenName: 0
 --- !u!114 &7962352702799397996
 MonoBehaviour:
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   _penaltyCooldown: 3
   _deductionAmount: 5
   _sound1:
-    Name: 
+    Name: Honk
     PopUpIndexOfChosenName: 0
 --- !u!81 &267872072770291766
 AudioListener:
@@ -1278,10 +1278,10 @@ MonoBehaviour:
   _itemsRandomPool:
   - {fileID: 755275588320937708, guid: ea7be52d0fa8b8b4892a608b63eb7df3, type: 3}
   _sound1:
-    Name: 
+    Name: Honk
     PopUpIndexOfChosenName: 0
   _sound2:
-    Name: 
+    Name: Honk
     PopUpIndexOfChosenName: 0
 --- !u!114 &7651148675786905600
 MonoBehaviour:
@@ -1323,6 +1323,7 @@ MonoBehaviour:
   onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
+  <ChangeToDynamicWhileGrabbing>k__BackingField: 0
 --- !u!54 &894875885084038488
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1571,6 +1572,7 @@ MonoBehaviour:
   onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
+  <ChangeToDynamicWhileGrabbing>k__BackingField: 0
 --- !u!114 &1730475119872457245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2007,13 +2009,13 @@ MonoBehaviour:
   Renderer: {fileID: 6904660203198777245}
   carHandler: {fileID: 2847147933222837468}
   _carController: {fileID: 4321014292650692184}
-  _steeringSens: 1
+  _steeringSens: 0.2
   _steeringAngle: 49
   _honksBeforeCooldownStart: 1
-  _honkCooldown: 1
+  _honkCooldown: 4
   _soundName:
-    Name: GloveBox Close
-    PopUpIndexOfChosenName: 4
+    Name: Honk
+    PopUpIndexOfChosenName: 0
   _canReposition: 1
 --- !u!114 &3259280824667309276
 MonoBehaviour:
@@ -2037,6 +2039,7 @@ MonoBehaviour:
   onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
+  <ChangeToDynamicWhileGrabbing>k__BackingField: 0
 --- !u!114 &1947778872602692283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2360,7 +2363,7 @@ Transform:
   m_GameObject: {fileID: 4696705076339275969}
   serializedVersion: 2
   m_LocalRotation: {x: -0.10059944, y: 0.0944909, z: 0.009598032, w: 0.9903833}
-  m_LocalPosition: {x: -0.227, y: 0.899, z: 0.437}
+  m_LocalPosition: {x: -0.249, y: 0.875, z: 0.322}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2414,12 +2417,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ads:
-  - {fileID: 1188833164782401763, guid: 698179763c32c0748ae9400e7fbf71a2, type: 3}
-  - {fileID: 1188833164782401763, guid: 40c751bcce3cd68489394bd39c8bacae, type: 3}
-  - {fileID: 1188833164782401763, guid: cd042312b3a626343aad381875216139, type: 3}
+  - {fileID: 389965249080716159, guid: 698179763c32c0748ae9400e7fbf71a2, type: 3}
+  - {fileID: 2729705954869328213, guid: c8bbdd5b5d8a2d040ab2415c3253c90c, type: 3}
+  - {fileID: 137566124939232097, guid: d6ec891e4dbb82144a4955b489665887, type: 3}
   _spawnTimeRange:
-    Min: 5
-    Max: 10
+    Min: 1
+    Max: 3
 --- !u!1 &5028088278744854905
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,7 +2577,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5856215686473012760}
-  m_Mesh: {fileID: 5841205884072201954, guid: d54d3f8486e345e47be4eef95b63dbaa, type: 3}
+  m_Mesh: {fileID: 5841205884072201954, guid: b85d8c756b0910743ad14e7013b120f2, type: 3}
 --- !u!23 &1715357104578235705
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2642,7 +2645,7 @@ Transform:
   m_GameObject: {fileID: 5943579763552142578}
   serializedVersion: 2
   m_LocalRotation: {x: -0.2548152, y: 0.20631409, z: 0.055745084, w: 0.94307804}
-  m_LocalPosition: {x: 0.049, y: 0.986, z: 0.211}
+  m_LocalPosition: {x: -0.072, y: 0.951, z: 0.201}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2693,7 +2696,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977103833412157793}
-  m_Mesh: {fileID: 2597706651966916316, guid: d54d3f8486e345e47be4eef95b63dbaa, type: 3}
+  m_Mesh: {fileID: 2597706651966916316, guid: b85d8c756b0910743ad14e7013b120f2, type: 3}
 --- !u!23 &6062517310097815030
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2779,6 +2782,7 @@ MonoBehaviour:
   onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
+  <ChangeToDynamicWhileGrabbing>k__BackingField: 0
 --- !u!114 &6777278211594019475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3367,7 +3371,7 @@ Transform:
   m_GameObject: {fileID: 7248032641323081389}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.029, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3720,7 +3724,7 @@ Transform:
   m_GameObject: {fileID: 9040151938752741851}
   serializedVersion: 2
   m_LocalRotation: {x: -0.25498426, y: -0.20343263, z: -0.054966517, w: 0.9437039}
-  m_LocalPosition: {x: -0.628, y: 0.98600006, z: 0.318}
+  m_LocalPosition: {x: -0.577, y: 0.914, z: 0.206}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []

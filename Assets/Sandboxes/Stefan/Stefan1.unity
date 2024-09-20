@@ -612,7 +612,7 @@ MonoBehaviour:
     _serializedList:
     - Key:
         Name: Honk
-        PopUpIndexOfChosenName: 4
+        PopUpIndexOfChosenName: 0
       Value:
         Volume: 1
         Clip: {fileID: 8300000, guid: e5e5382ed7ada1b4fb09915e2f1a2d90, type: 3}

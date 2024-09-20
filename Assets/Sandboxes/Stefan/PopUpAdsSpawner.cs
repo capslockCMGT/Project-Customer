@@ -12,8 +12,8 @@ public class PopUpAdsSpawner : MonoBehaviour
 
     void Start()
     {
-        StartSpawning();    
         _randomSpots = GetComponentsInChildren<Transform>();
+        StartSpawning();    
     }
     
     public void StartSpawning()
@@ -41,7 +41,7 @@ public class PopUpAdsSpawner : MonoBehaviour
 
         if (spot.childCount > 0) return;
 
-        Instantiate(_ads[Random.Range(0, _ads.Length)], Vector3.zero, Quaternion.identity, spot);
+        Instantiate(_ads[Random.Range(0, _ads.Length)], spot);
 
     }
 }
