@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 35787296}
-  _carPrefab: {fileID: 1582638049416433318, guid: d2e2c9d6df03c0349ba90540700a829d,
+  _carPrefab: {fileID: 1582638049416433318, guid: db2cb15f465980742801ba83dbdea778,
     type: 3}
   _gameOverPanel: {fileID: 0}
 --- !u!4 &356019372
@@ -1267,7 +1267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OutlineWidth: 20
-  OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+  OutlineGrabColor: {r: 0.25695273, g: 0.7264151, b: 0.17475079, a: 1}
+  OutlineLookColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
   OutlineMode: 1
 --- !u!4 &1674468797
 Transform:
