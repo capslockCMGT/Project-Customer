@@ -11,37 +11,25 @@ public class GrabbableItem : MonoBehaviour
     public UnityEvent<PlayerController> onPlayerInteract;
 
     List<PlayerController> _holdingPlayers = new();
-    Outline _outline;
-
-    void Awake()
-    {
-        _outline = GetComponent<Outline>();
-        _outline.enabled = false;
-    }
 
     void Start()
     {
         if (Renderer == null)
             Renderer = this.transform;
 
-        _outline.OutlineWidth = OutlineSettings.Instance.OutlineWidth;
-        _outline.OutlineColor = OutlineSettings.Instance.OutlineColor;
-        _outline.OutlineMode = OutlineSettings.Instance.OutlineMode;
     }
 
     public void Grab(PlayerController controller)
     {
-        Debug.Log($"i ({transform.name}) just got grabbed (:");
         onItemGrabbed?.Invoke(controller);
         _holdingPlayers.Add(controller);
-
-        _outline.enabled = true;
     }
 
     public void Release(PlayerController controller)
     {
         onItemReleased?.Invoke(controller);
         _holdingPlayers.Remove(controller);
-        _outline.enabled = false;
     }
+
+    
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemGrabber : MonoBehaviour
 {
@@ -22,12 +23,17 @@ public class ItemGrabber : MonoBehaviour
     {
         public GrabbableItem grabbable;
         public Rigidbody itemRB;
+        public Outline outline;
     }
 
     GrabbedItem _leftHand;
     GrabbedItem _rightHand;
+
     PlayerController _playerController;
     float _currentItemDistanceInput;
+
+    Outline _lastLeftHandOutline;
+    Outline _lastRightHandOutline;
 
     private void Start()
     {
@@ -42,6 +48,48 @@ public class ItemGrabber : MonoBehaviour
         ChangeItemDistance(_currentItemDistanceInput);
         TryHoldItemToPosition(_leftHand, transform.position + transform.forward*HoldingItemDistance - .5f * DistanceBetweenHands * transform.right);
         TryHoldItemToPosition(_rightHand, transform.position + transform.forward * HoldingItemDistance + .5f * DistanceBetweenHands * transform.right);
+
+        OutlineLookedAtItem(_leftHand, ref _lastLeftHandOutline);   
+        OutlineLookedAtItem(_rightHand, ref _lastRightHandOutline);
+    }
+
+    void OutlineLookedAtItem(GrabbedItem heldItem, ref Outline previousFrameOutline)
+    {
+        if(previousFrameOutline != null)
+        {   //remove outline if not looking (called for every frame when you're not looking)
+            previousFrameOutline.enabled = false;
+            previousFrameOutline = null;
+        }
+        if (heldItem != null)
+        {
+            SetGrabOutline(heldItem.outline);
+            previousFrameOutline = heldItem.outline;
+            return;
+        }
+
+        if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach, ~1 << LayerMask.NameToLayer("Car")))
+            return;
+
+        if (!hitinfo.transform.CompareTag("Interactable")) return;
+
+        Outline outline = hitinfo.transform.GetComponent<Outline>();
+        //if other person is grabbing it, don't color it to look color
+        if (outline.enabled == true) return;
+
+        SetLookOutline(outline);
+        previousFrameOutline = outline;
+    }
+
+    void SetGrabOutline(Outline outline)
+    {
+        outline.OutlineColor = OutlineSettings.Instance.OutlineGrabColor;
+        outline.enabled = true;
+    }
+
+    void SetLookOutline(Outline outline)
+    {
+        outline.OutlineColor = OutlineSettings.Instance.OutlineGrabColor;
+        outline.enabled = true;
     }
 
     void ChangeItemDistance(float amount)
@@ -107,13 +155,13 @@ public class ItemGrabber : MonoBehaviour
             if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach, ~1 << LayerMask.NameToLayer("Car"))) 
                 return;
 
-            
             if (!hitinfo.transform.TryGetComponent<GrabbableItem>(out var grabbable)) return;
 
             //if theres a grabbable item, set it
             workingHand = new GrabbedItem() { 
                 grabbable = grabbable, 
-                itemRB = hitinfo.rigidbody, 
+                itemRB = hitinfo.rigidbody,
+                outline = grabbable.GetComponent<Outline>(),  
             };
 
             grabbable.Grab(controller);
