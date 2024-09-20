@@ -167,10 +167,11 @@ public class ItemGrabber : MonoBehaviour
             if (!hitinfo.transform.TryGetComponent<GrabbableItem>(out var grabbable)) return;
 
             //if theres a grabbable item, set it
-            workingHand = new GrabbedItem() { 
-                grabbable = grabbable, 
+            workingHand = new GrabbedItem()
+            {
+                grabbable = grabbable,
                 itemRB = hitinfo.rigidbody,
-                outline = grabbable.GetComponent<Outline>(),  
+                outline = grabbable.GetComponent<Outline>(),
             };
 
         grabbable.Grab(controller);
@@ -185,7 +186,7 @@ public class ItemGrabber : MonoBehaviour
         if (grabbableRB != null && grabbableRB.interpolation == RigidbodyInterpolation.None)
             Debug.Log($"grabbed rigidbody '{grabbableRB.gameObject.name}' has interpolation set to None, movement may look janky");
 
-            if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None) 
+            if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None)
                 Debug.Log($"grabbed rigidbody '{hitinfo.rigidbody.gameObject.name}' has interpolation set to None, movement may look janky");
         }
         else
