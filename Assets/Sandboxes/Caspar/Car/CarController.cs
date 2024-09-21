@@ -23,12 +23,10 @@ public class CarController : MonoBehaviour
     [SerializeField] float BrakeStrength = 5000;
     [SerializeField][Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
     [SerializeField] float MaxTurnAngle = 30;
-    [SerializeField] float _engineToMaxPowerTime = .8f;
-
+    [SerializeField] float CenterOfMassOffset = .2f;
     public Vector3 CarVelocity => _carRB.velocity;
 
     Rigidbody _carRB;
-    float _targetSpeed = 0;
     bool _inReverse = false;
     private void Start()
     {
@@ -44,6 +42,8 @@ public class CarController : MonoBehaviour
 
         controlsHandler.CarSpeedChanged += OnGas;
         controlsHandler.GearshiftReversed += () => { _inReverse = !_inReverse; };
+
+        _carRB.centerOfMass -= Vector3.up*CenterOfMassOffset;
     }
 
 
@@ -70,20 +70,15 @@ public class CarController : MonoBehaviour
         float maxVel = MaximumSpeed;
         if(_inReverse)
         {
-            input = -input;
             reversing = -1;
             maxVel = MaxSpeedBackwards;
         }
-
-        //targetSpeed is between 0-1, defining the speed at which the car is trying to cruise
-        _targetSpeed += input * Time.deltaTime * _engineToMaxPowerTime;
-        _targetSpeed = Mathf.Clamp01(_targetSpeed);
 
         //if the car is already near maximum speed, power down the engine
         float currentSpeed = Vector3.Dot(_carRB.velocity,transform.forward) / maxVel;
         float engineStrength = EngineStrengthAtSpeed.Evaluate(currentSpeed);
 
-        float torque = engineStrength*_targetSpeed;
+        float torque = engineStrength*input;
         foreach (Wheel wheel in Wheels)
         {
             //if gas is hit or neutral, dont brake but gas
