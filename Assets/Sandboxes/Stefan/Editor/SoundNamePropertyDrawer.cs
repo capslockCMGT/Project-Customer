@@ -17,7 +17,7 @@ public class SoundNamePropertyDrawer : PropertyDrawer
 
         EditorGUI.BeginProperty(position, label, property);
 
-        indexProperty.intValue = EditorGUI.Popup(position, indexProperty.intValue, _soundNamesContainer.Names);
+        indexProperty.intValue = EditorGUI.Popup(position, property.displayName, indexProperty.intValue, _soundNamesContainer.Names);
         nameProperty.stringValue = _soundNamesContainer.Names[indexProperty.intValue];
         
         EditorGUI.EndProperty();

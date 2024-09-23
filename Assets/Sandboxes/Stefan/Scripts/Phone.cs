@@ -10,10 +10,16 @@ public class Phone : MonoBehaviour
     [SerializeField] GameObject _idleState;
     [SerializeField] bool _inspectorCall;
     [SerializeField] float _callTime = 10;
+    [SerializeField] Range _callRange;
+    [SerializeField] SoundName _callSound;
+    [SerializeField] SoundName _talkSound;
+
+    public bool CanCall { get; set; } = true;
 
     void Awake()
     {
-        _grababble = GetComponent<GrabbableItem>();    
+        _grababble = GetComponent<GrabbableItem>();
+        StartCoroutine(RandomCall());
     }
 
     void OnEnable()
@@ -38,6 +44,9 @@ public class Phone : MonoBehaviour
     public void StartCall()
     {
         _idleState.SetActive(false);
+        _talkState.SetActive(false);
+        SoundManager.Instance.PlaySound(_callSound);
+        
         _callState.SetActive(true);
     }
 
@@ -65,8 +74,20 @@ public class Phone : MonoBehaviour
     IEnumerator Talk()
     {
         _talkState.SetActive(true);
+        SoundManager.Instance.PlaySound(_callSound);
+
         yield return new WaitForSeconds(_callTime);
         _talkState.SetActive(false);
         _idleState.SetActive(true);
     }    
+
+    IEnumerator RandomCall()
+    {
+        while(CanCall)
+        {
+            yield return new WaitForSeconds(Random.Range(_callRange.Min, _callRange.Max));
+            StartCall();
+        }
+
+    }
 }
