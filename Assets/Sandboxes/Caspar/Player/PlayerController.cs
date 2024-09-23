@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public int Player = 0;
     [field:SerializeField] public bool PlayerCanSteer { get; private set; } = true;
+    [SerializeField] float SteeringStrength = 1f;
     [SerializeField] CarControlsHandler CarIfDriver;
 
     public UnityEvent<float> ItemControl;
@@ -25,8 +26,9 @@ public class PlayerController : MonoBehaviour
     public void OnMove(CallbackContext context)
     {
         //Debug.Log($"Tryina move, value: {val} carIfDriver: " + CarIfDriver);
-        if (CarIfDriver == null) return;
+        //i ate a line here. yum!
         Vector2 val = context.ReadValue<Vector2>();
+        val.x *= SteeringStrength;
         UpdateLeftJoystick?.Invoke(val);
 
     }
