@@ -171,7 +171,7 @@ MonoBehaviour:
     type: 3}
   _tileHolder: {fileID: 52199711}
   _start: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544, type: 3}
-  _end: {fileID: 5099231861569548205, guid: f08ee2ba3b4b3e44e81e07966ac087d9, type: 3}
+  _end: {fileID: 5099231861569548205, guid: 76b20b9e194434c44869fd5a173087ee, type: 3}
   _pathMat: {fileID: 2100000, guid: 27341f7f9d79fc045be2682c96244763, type: 2}
   _generateNewMap: 0
 --- !u!4 &35787297
