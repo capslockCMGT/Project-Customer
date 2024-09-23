@@ -75,7 +75,7 @@ public class ItemGrabber : MonoBehaviour
             return;
         }
 
-        if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach, ~1 << LayerMask.NameToLayer("Car")))
+        if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach))
             return;
 
         if (!hitinfo.transform.CompareTag("Interactable")) return;
@@ -166,7 +166,7 @@ public class ItemGrabber : MonoBehaviour
         {
             //try pickikng up the item in the middle of the view
             //ignore car collider
-            if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach, ~1 << LayerMask.NameToLayer("Car")))
+            if (!Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitinfo, _maxHandReach))
                 return;
 
             if (!hitinfo.transform.TryGetComponent<GrabbableItem>(out var grabbable)) return;

@@ -763,7 +763,7 @@ MonoBehaviour:
   BrakeStrength: 5000
   FrontWheelBrakeStrengthMultiplier: 0.5
   MaxTurnAngle: 30
-  _engineToMaxPowerTime: 0.8
+  CenterOfMassOffset: 0.2
 --- !u!114 &2847147933222837468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3979,6 +3979,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2cb34564f2d5fe34f967954d14313721,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
