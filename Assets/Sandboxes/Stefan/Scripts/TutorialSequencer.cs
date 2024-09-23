@@ -12,7 +12,6 @@ public class TutorialSequencer : MonoBehaviour
     //this is just an example, you can create as many fields as you want
     [SerializeField] Image panelGoalDriver1;
     [SerializeField] Image panelGoalDriver2;
-    [SerializeField] Image panelCreditDriver;
     [SerializeField] Image panelStickDriver;
     [SerializeField] Image panelGrabDriver1;
     [SerializeField] Image panelGrabDriver2;
@@ -49,7 +48,6 @@ public class TutorialSequencer : MonoBehaviour
             {
 
                 panelGoalDriver2.gameObject.SetActive(true);
-                panelCreditDriver.gameObject.SetActive(true);
                 FadePanelAfterSeconds(panelGoalDriver2, 2, 2, () =>
                 {
                     panelStickDriver.gameObject.SetActive(true);
@@ -175,7 +173,7 @@ public class TutorialSequencer : MonoBehaviour
             //example
             if (v != Vector2.zero && orderpassenger >= 2)
             {
-                FadePanelAfterSeconds(panelStickPassenger, 1, 1, () =>
+                FadePanelAfterSeconds(panelStickPassenger, 2, 2, () =>
                 {
                     panelGrabPassenger1.gameObject.SetActive(true);
                 });
