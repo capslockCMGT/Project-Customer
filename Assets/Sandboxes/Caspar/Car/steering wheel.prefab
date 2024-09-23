@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5780903102094385329}
   - component: {fileID: 7063235935451995881}
   - component: {fileID: 4530852602653909674}
+  - component: {fileID: 2797902856776631962}
   m_Layer: 0
   m_Name: steering wheel
   m_TagString: Untagged
@@ -181,6 +182,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Renderer: {fileID: 1026875114861203561}
   carHandler: {fileID: 0}
+  _carController: {fileID: 0}
+  _steeringSens: 4.3
+  _steeringAngle: 25
+  _honksBeforeCooldownStart: 0
+  _honkCooldown: 0
+  _soundName:
+    Name: Honk
+    PopUpIndexOfChosenName: 0
+  _canReposition: 0
 --- !u!114 &4530852602653909674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,3 +213,22 @@ MonoBehaviour:
   onPlayerInteract:
     m_PersistentCalls:
       m_Calls: []
+  <ChangeToDynamicWhileGrabbing>k__BackingField: 0
+--- !u!114 &2797902856776631962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8282430069508681510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
