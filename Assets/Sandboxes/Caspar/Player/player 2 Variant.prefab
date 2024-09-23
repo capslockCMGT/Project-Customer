@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: Player
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5546736192894436183, guid: 9348008d3deb7024e88eda26dff04995,
+        type: 3}
+      propertyPath: SteeringStrength
+      value: 0.55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent (typeof(MyGrid))]
+[RequireComponent(typeof(MyGrid))]
 public class StreetGenerator : MonoBehaviour
 {
     [SerializeField] NPC _npcPrefab;
@@ -19,11 +19,11 @@ public class StreetGenerator : MonoBehaviour
     }
     void OnEnable()
     {
-        _cityGenerator.MapGenerated += MakeRandomCrosswalks;
+        _cityGenerator.MapGenerated.AddListener(MakeRandomCrosswalks);
     }
     void OnDisable()
     {
-        _cityGenerator.MapGenerated -= MakeRandomCrosswalks;
+        _cityGenerator.MapGenerated.RemoveListener(MakeRandomCrosswalks);
     }
 
     //void OnTileCollapse(Tile tile, GameObject gameObject)
@@ -44,7 +44,7 @@ public class StreetGenerator : MonoBehaviour
         foreach (Cell cell in _cityGenerator.Cells)
         {
             CrossManager crossPoint = cell.WorldObj.GetComponentInChildren<CrossManager>();
-            if (crossPoint == null) continue ;
+            if (crossPoint == null) continue;
 
             Instantiate(_npcPrefab, crossPoint.transform.position, Quaternion.identity, _npcHolder);
             Instantiate(_npcPrefab, crossPoint.transform.position, Quaternion.identity, _npcHolder);
