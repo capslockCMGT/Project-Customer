@@ -44,7 +44,10 @@ public class TutorialSequencer : MonoBehaviour
             {
                 panel2driver.gameObject.SetActive(true);
                 panel3driver.gameObject.SetActive(true);
-                FadePanelAfterSeconds(panel2driver, 1, 1);
+                FadePanelAfterSeconds(panel2driver, 1, 1, () =>
+                {
+                    panel4driver.gameObject.SetActive(true);
+                });
             });
 
             //write your code here
@@ -54,19 +57,22 @@ public class TutorialSequencer : MonoBehaviour
 
         driver.GasPressed.AddListener(() =>
         {
-
+            panel8driver.gameObject.SetActive(true);
+            FadePanelAfterSeconds(panel8driver, 1, 1);
             driver.GasPressed.RemoveAllListeners();
         });
 
         driver.ItemGrab.AddListener(() =>
         {
-
+            panel5driver.gameObject.SetActive(true);
+            FadePanelAfterSeconds(panel5driver, 1, 1);
             driver.ItemGrab.RemoveAllListeners();
         });
 
         driver.ItemInteract.AddListener(() =>
         {
-
+            panel6driver.gameObject.SetActive(true);
+            FadePanelAfterSeconds(panel6driver, 1, 1);
             driver.ItemInteract.RemoveAllListeners();
         });
 
@@ -93,7 +99,10 @@ public class TutorialSequencer : MonoBehaviour
         passenger.BrakePressed.AddListener(() =>
         {
             //write your code here
-            FadePanelAfterSeconds(panel1passenger, 1, 1);
+            FadePanelAfterSeconds(panel1passenger, 1, 1, () =>
+            {
+                panel2passenger.gameObject.SetActive(true);
+            });
             //write your code here
 
             //this stops the input to run the code above again
@@ -108,13 +117,17 @@ public class TutorialSequencer : MonoBehaviour
 
         passenger.ItemGrab.AddListener(() =>
         {
-
+            FadePanelAfterSeconds(panel3passenger, 1, 1);
             passenger.ItemGrab.RemoveAllListeners();
         });
 
         passenger.ItemInteract.AddListener(() =>
         {
-
+            FadePanelAfterSeconds(panel4passenger, 1, 1, () =>
+            {
+                panel5passenger.gameObject.SetActive(true);
+                FadePanelAfterSeconds(panel5passenger, 1, 1);
+            });
             passenger.ItemInteract.RemoveAllListeners();
         });
 
