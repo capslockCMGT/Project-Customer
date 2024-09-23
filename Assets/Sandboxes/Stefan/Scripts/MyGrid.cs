@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class MyGrid : MonoBehaviour
@@ -19,7 +20,7 @@ public class MyGrid : MonoBehaviour
     [SerializeField] GameObject _cornerPrefab;
     [SerializeField] GameObject _blankPrefab;
     [SerializeField] GameObject _capPrefab;
-    
+
     [SerializeField] Transform _tileHolder;
 
     [SerializeField] GameObject _start;
@@ -30,7 +31,7 @@ public class MyGrid : MonoBehaviour
     [SerializeField] bool _generateNewMap;
 
     public event Action<Tile, GameObject> TileCollapsed;
-    public event Action MapGenerated;
+    public UnityEvent MapGenerated;
 
     public bool Done { get; private set; }
     public Cell[,] Cells { get; private set; }
@@ -79,7 +80,7 @@ public class MyGrid : MonoBehaviour
 
     void Update()
     {
-        if(_generateNewMap)
+        if (_generateNewMap)
         {
             _generateNewMap = false;
 
@@ -135,7 +136,7 @@ public class MyGrid : MonoBehaviour
 
     public void VisualizeAStar(List<Cell> path)
     {
-        if(path == null) return;
+        if (path == null) return;
         List<GameObject> roads = new();
 
         foreach (Cell pathPoint in path)
@@ -165,7 +166,7 @@ public class MyGrid : MonoBehaviour
     {
         int emptyTileIndex = _tiles.Length - 2;//hard coded to be empty tile
 
-        for (int i = 0, y = 0; i < 2; i++, y+=columns-1)//horizontal edges
+        for (int i = 0, y = 0; i < 2; i++, y += columns - 1)//horizontal edges
             for (int x = 0; x < columns; x++)
                 PrePlaceTile(x, y, _tiles[emptyTileIndex]);
 
@@ -184,8 +185,8 @@ public class MyGrid : MonoBehaviour
         do
         {
             //exclude edges because they will already be blanck
-            randomEnd = new(Random.Range(2, columns - 3), Random.Range(2, columns-3));
-            randomStart = new(Random.Range(2, columns - 3), Random.Range(2, columns-3));
+            randomEnd = new(Random.Range(2, columns - 3), Random.Range(2, columns - 3));
+            randomStart = new(Random.Range(2, columns - 3), Random.Range(2, columns - 3));
             manhatanDistance = randomStart.GetManhattanDistance(randomEnd);
             maxTries--;
         } while (_objectiveMinDistance > manhatanDistance && maxTries > 0);
@@ -363,7 +364,7 @@ public class MyGrid : MonoBehaviour
             if (y + 1 < Cells.GetLength(0))
                 ConnectTiles(Cells[y + 1, x], currentTile, (int)NeighbourDir.Down);
 
-            
+
         }
 
         static void ConnectTiles(Cell neighbour, Tile currentTile, int dir)

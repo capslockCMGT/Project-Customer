@@ -21,6 +21,8 @@ public class SteeringWheel : MonoBehaviour
     int _honks;
     float _currAngle;
 
+    List<PlayerController> _playersHolding = new();
+
     void Start()
     {
         var grab = GetComponent<GrabbableItem>();
@@ -41,15 +43,24 @@ public class SteeringWheel : MonoBehaviour
         if(Renderer == null)
             Debug.LogWarning("steering wheel doesnt have a renderer set. can you add it pls");
 
+        //this sucks ass.
         grab.onItemGrabbed.AddListener((PlayerController addedController) => 
         {
-            if(addedController.PlayerCanSteer)
-                addedController.UpdateLeftJoystick.AddListener(carHandler.UpdateSteeringAngle);
+            if (!addedController.PlayerCanSteer) return;
+
+            addedController.UpdateLeftJoystick.AddListener( carHandler.UpdateSteeringAngle );
+            _playersHolding.Add( addedController );
         });
-        grab.onItemReleased.AddListener((PlayerController addedController) => 
+        grab.onItemReleased.AddListener((PlayerController addedController) =>
         {
-            if(addedController.PlayerCanSteer)
-                addedController.UpdateLeftJoystick.RemoveListener(carHandler.UpdateSteeringAngle);
+            if (!addedController.PlayerCanSteer) return;
+
+            _playersHolding.Remove( addedController );
+
+            //unity events will allow you to add duplicates of a function, but when you try to remove one, it will remove ALL.
+            //List<> does not have this quirk - so it will be the one to make sure nothing goes wrong here.
+            if(!_playersHolding.Contains(addedController))
+                addedController.UpdateLeftJoystick.RemoveListener( carHandler.UpdateSteeringAngle );
         });
 
         grab.onPlayerInteract.AddListener((PlayerController addedController) =>
