@@ -303,6 +303,7 @@ MonoBehaviour:
   _carPrefab: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
   _gameOverPanel: {fileID: 1822082288}
+  <PlayerCar>k__BackingField: {fileID: 0}
 --- !u!4 &356019372
 Transform:
   m_ObjectHideFlags: 0
