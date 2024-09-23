@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -75,6 +76,23 @@ public class TutorialSequencer : MonoBehaviour
             driver.ItemInteract.RemoveAllListeners();
         });
 
+        void onJoystickRightDriver(Vector2 v)
+        {
+            //your code here
+            //example
+            if(v != Vector2.zero)
+            FadePanelAfterSeconds(panel5passenger, 1, 1);
+            driver.UpdateRightJoystick.RemoveListener(onJoystickRightDriver);
+        }
+
+        void onJoystickLeftDriver(Vector2 v)
+        {
+            //your code here
+            //example
+            if(v != Vector2.zero)
+            FadePanelAfterSeconds(panel5passenger, 1, 1);
+            driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftDriver);
+        }
 
         // PASSENGER INPUTS
 
@@ -86,6 +104,7 @@ public class TutorialSequencer : MonoBehaviour
                 panel2passenger.gameObject.SetActive(true);
             });
             //write your code here
+
             //this stops the input to run the code above again
             passenger.BrakePressed.RemoveAllListeners();
         });
@@ -111,9 +130,28 @@ public class TutorialSequencer : MonoBehaviour
             });
             passenger.ItemInteract.RemoveAllListeners();
         });
+
+
+        void onJoystickRightPassenger(Vector2 v)
+        {
+            //your code here
+            //example
+            if(v != Vector2.zero)
+            FadePanelAfterSeconds(panel5passenger, 1, 1);
+
+
+            driver.UpdateRightJoystick.RemoveListener(onJoystickRightPassenger);
+        }
+
+        void onJoystickLeftPassenger(Vector2 v)
+        {
+            //your code here
+            //example
+            if(v != Vector2.zero)
+            FadePanelAfterSeconds(panel5passenger, 1, 1);
+            driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftPassenger);
+        }
     }
-
-
 
     IEnumerator GetPlayerCar(Action<GameObject> onGet)
     {
