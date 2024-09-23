@@ -2,10 +2,11 @@ Shader "CustomRenderTexture/NavDisplayTexture"
 {
     Properties
     {
+        _FinishIcon("Finish icon", 2D) = "white" {}
         _BackgroundColor("Background color", Color) = (0,0,0,1)
         _RoadColor("Road color", Color) = (0,.3,.8,1)
         _RouteColor("Route color", Color) = (.6,.9,1,1)
-
+        _DestMarkerScale("Destination marker size", Float) = .1
      }
 
      SubShader
@@ -22,19 +23,22 @@ Shader "CustomRenderTexture/NavDisplayTexture"
             #pragma fragment frag
             #pragma target 3.0
 
-            float       _TileWidth;
-            float       _TileHeight;
+            int         _Width;
+            int         _Height;
+            int         _DestX;
+            int         _DestY;
 
             sampler2D   _MapTex;
             sampler2D   _RouteTex;
             sampler2D   _RoadTex;
+            sampler2D   _FinishIcon;
 
             float4      _BackgroundColor;
             float4      _RoadColor;
             float4      _RouteColor;
 
             float4      _PositionDirection;
-            float       _CarOffset;
+            float       _DestMarkerScale;
 
             float4 frag(v2f_customrendertexture IN) : SV_Target
             {
@@ -46,10 +50,20 @@ Shader "CustomRenderTexture/NavDisplayTexture"
                 float4 currentTile = tex2D(_MapTex, uv);
                 float4 currentRoute = tex2D(_RouteTex, uv);
 
-                float2 TileUV = uv/float2(_TileWidth, _TileHeight);
-                TileUV = frac(TileUV);
+                float2 TilePos = uv*float2(_Width, _Height);
+                float2 localUV = frac(TilePos);
 
-                float4 Road = tex2D(_RoadTex, TileUV);
+                int2 rah = int2(TilePos);
+                if(rah.x == _DestY && rah.y == _DestX)
+                {
+                    float4 finish = tex2D(_FinishIcon, localUV);
+                    if(finish.x > .7)
+                        return _RouteColor;
+                    if(finish.x > .4)
+                        return _BackgroundColor;
+                }
+
+                float4 Road = tex2D(_RoadTex, localUV);
                 Road *= currentTile;
                 
                 bool isRoad = Road.x > .3 | Road.y > .3 | Road.z > .3 | Road.w > .3;

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     List<PlayerInput> _playerInputs = new List<PlayerInput>(2);
     public static GameManager Instance { get; private set; }
-    public GameObject PlayerCar { get; private set; }
+    [field: SerializeField] public GameObject PlayerCar { get; private set; }
 
     void Awake()
     {
@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     {
         if (_grid != null)
             OnMapGenerated();
+
+        PlayerCar.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
     }
 
     void OnDisable()
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         GameObject carInst = Instantiate(_carPrefab, hit.point + Vector3.up * 5, Quaternion.AngleAxis(startCell.WorldObj.transform.rotation.eulerAngles.y - 90, Vector3.up));
         PlayerCar = carInst;
-        carInst.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
+
     }
 
     public void GameOver()
