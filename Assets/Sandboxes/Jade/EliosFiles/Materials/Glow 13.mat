@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Glow 13
-  m_Shader: {fileID: -6465566751694194690, guid: 3eb32c49256cc814999045a058b151c6,
+  m_Shader: {fileID: -6465566751694194690, guid: d424c64cb2be9744aba06aadfc6ffa60,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8fd11d9b78605d245b5afcb40481d9b6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6bda73b0aa8d5df458771215ab66b5b4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:

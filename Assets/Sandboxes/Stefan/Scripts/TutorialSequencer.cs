@@ -10,19 +10,23 @@ using UnityEngine.UI;
 public class TutorialSequencer : MonoBehaviour
 {
     //this is just an example, you can create as many fields as you want
-    [SerializeField] Image panel1driver;
-    [SerializeField] Image panel2driver;
-    [SerializeField] Image panel3driver;
-    [SerializeField] Image panel4driver;
-    [SerializeField] Image panel5driver;
-    [SerializeField] Image panel6driver;
-    [SerializeField] Image panel7driver;
-    [SerializeField] Image panel8driver;
-    [SerializeField] Image panel1passenger;
-    [SerializeField] Image panel2passenger;
-    [SerializeField] Image panel3passenger;
-    [SerializeField] Image panel4passenger;
-    [SerializeField] Image panel5passenger;
+    [SerializeField] Image panelGoalDriver1;
+    [SerializeField] Image panelGoalDriver2;
+    [SerializeField] Image panelStickDriver;
+    [SerializeField] Image panelGrabDriver1;
+    [SerializeField] Image panelGrabDriver2;
+    [SerializeField] Image panelGrabDriver3;
+    [SerializeField] Image panelGrabDriver4;
+    [SerializeField] Image panelGasDriver;
+    [SerializeField] Image panelGoalPassenger;
+    [SerializeField] Image panelStickPassenger;
+    [SerializeField] Image panelGrabPassenger1;
+    [SerializeField] Image panelGrabPassenger2;
+    [SerializeField] Image panelGrabPassenger3;
+
+
+    int orderdriver = 1;
+    int orderpassenger = 1;
 
 
     void Interface(GameObject playerCar)
@@ -40,13 +44,15 @@ public class TutorialSequencer : MonoBehaviour
             //write your code here
 
             //just an example
-            FadePanelAfterSeconds(panel1driver, 1, 1, () =>
+            FadePanelAfterSeconds(panelGoalDriver1, 2, 2, () =>
             {
-                panel2driver.gameObject.SetActive(true);
-                panel3driver.gameObject.SetActive(true);
-                FadePanelAfterSeconds(panel2driver, 1, 1, () =>
+
+                panelGoalDriver2.gameObject.SetActive(true);
+                FadePanelAfterSeconds(panelGoalDriver2, 2, 2, () =>
                 {
-                    panel4driver.gameObject.SetActive(true);
+                    panelStickDriver.gameObject.SetActive(true);
+                    orderdriver += 1;
+                    Debug.Log(orderdriver);
                 });
             });
 
@@ -55,102 +61,167 @@ public class TutorialSequencer : MonoBehaviour
             driver.BrakePressed.RemoveAllListeners();
         });
 
+
+
         driver.GasPressed.AddListener(() =>
         {
-            panel8driver.gameObject.SetActive(true);
-            FadePanelAfterSeconds(panel8driver, 1, 1);
-            driver.GasPressed.RemoveAllListeners();
+            if (orderdriver >= 6)
+            {
+
+                FadePanelAfterSeconds(panelGasDriver, 1, 1);
+                driver.GasPressed.RemoveAllListeners();
+                orderdriver += 1;
+                Debug.Log(orderdriver);
+            }
         });
 
         driver.ItemGrab.AddListener(() =>
         {
-            panel5driver.gameObject.SetActive(true);
-            FadePanelAfterSeconds(panel5driver, 1, 1);
-            driver.ItemGrab.RemoveAllListeners();
+            if (orderdriver >= 3)
+            {
+                FadePanelAfterSeconds(panelGrabDriver1, 1, 1, () =>
+                {
+                    panelGrabDriver2.gameObject.SetActive(true);
+                }); ;
+
+                driver.ItemGrab.RemoveAllListeners();
+                orderdriver += 1;
+                Debug.Log(orderdriver);
+            }
         });
 
         driver.ItemInteract.AddListener(() =>
         {
-            panel6driver.gameObject.SetActive(true);
-            FadePanelAfterSeconds(panel6driver, 1, 1);
-            driver.ItemInteract.RemoveAllListeners();
+            if (orderdriver >= 4)
+            {
+
+                FadePanelAfterSeconds(panelGrabDriver2, 1, 1, () =>
+                {
+                    panelGrabDriver3.gameObject.SetActive(true);
+                });
+                driver.ItemInteract.RemoveAllListeners();
+                orderdriver += 1;
+                Debug.Log(orderdriver);
+            }
         });
+
+        driver.UpdateRightJoystick.AddListener(onJoystickRightDriver);
 
         void onJoystickRightDriver(Vector2 v)
         {
             //your code here
             //example
-            if(v != Vector2.zero)
-            FadePanelAfterSeconds(panel5passenger, 1, 1);
-            driver.UpdateRightJoystick.RemoveListener(onJoystickRightDriver);
+            if (v != Vector2.zero && orderdriver >= 2)
+            {
+                Debug.Log("updating");
+
+                FadePanelAfterSeconds(panelStickDriver, 1, 1, () =>
+                {
+                    panelGrabDriver1.gameObject.SetActive(true);
+                });
+                driver.UpdateRightJoystick.RemoveListener(onJoystickRightDriver);
+                orderdriver += 1;
+                Debug.Log(orderdriver);
+            }
+
         }
 
+        driver.UpdateLeftJoystick.AddListener(onJoystickLeftDriver);
         void onJoystickLeftDriver(Vector2 v)
         {
             //your code here
             //example
-            if(v != Vector2.zero)
-            FadePanelAfterSeconds(panel5passenger, 1, 1);
-            driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftDriver);
+            if (v != Vector2.zero && orderdriver >= 5)
+            {
+                FadePanelAfterSeconds(panelGrabDriver3, 1, 1, () =>
+                {
+                    panelGasDriver.gameObject.SetActive(true);
+
+                });
+                driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftDriver);
+                orderdriver += 1;
+                Debug.Log(orderdriver);
+            }
         }
 
         // PASSENGER INPUTS
 
         passenger.BrakePressed.AddListener(() =>
         {
+            Debug.Log(" before pp" + orderpassenger);
+
+
             //write your code here
-            FadePanelAfterSeconds(panel1passenger, 1, 1, () =>
+            FadePanelAfterSeconds(panelGoalPassenger, 1, 1, () =>
             {
-                panel2passenger.gameObject.SetActive(true);
+                panelStickPassenger.gameObject.SetActive(true);
             });
             //write your code here
 
             //this stops the input to run the code above again
             passenger.BrakePressed.RemoveAllListeners();
+            orderpassenger++;
+            Debug.Log("+pp" + orderpassenger);
+
         });
 
-        passenger.GasPressed.AddListener(() =>
-        {
-
-            passenger.GasPressed.RemoveAllListeners();
-        });
-
-        passenger.ItemGrab.AddListener(() =>
-        {
-            FadePanelAfterSeconds(panel3passenger, 1, 1);
-            passenger.ItemGrab.RemoveAllListeners();
-        });
-
-        passenger.ItemInteract.AddListener(() =>
-        {
-            FadePanelAfterSeconds(panel4passenger, 1, 1, () =>
-            {
-                panel5passenger.gameObject.SetActive(true);
-                FadePanelAfterSeconds(panel5passenger, 1, 1);
-            });
-            passenger.ItemInteract.RemoveAllListeners();
-        });
-
+        passenger.UpdateRightJoystick.AddListener(onJoystickRightPassenger);
 
         void onJoystickRightPassenger(Vector2 v)
         {
             //your code here
             //example
-            if(v != Vector2.zero)
-            FadePanelAfterSeconds(panel5passenger, 1, 1);
+            if (v != Vector2.zero && orderpassenger >= 2)
+            {
+                FadePanelAfterSeconds(panelStickPassenger, 2, 2, () =>
+                {
+                    panelGrabPassenger1.gameObject.SetActive(true);
+                });
 
-
-            driver.UpdateRightJoystick.RemoveListener(onJoystickRightPassenger);
+                passenger.UpdateRightJoystick.RemoveListener(onJoystickRightPassenger);
+                orderpassenger++;
+                Debug.Log("+pp" + orderpassenger);
+            }
         }
 
-        void onJoystickLeftPassenger(Vector2 v)
+        //passenger.GasPressed.AddListener(() =>
+        //{
+
+        //    passenger.GasPressed.RemoveAllListeners();
+        //});
+
+        passenger.ItemGrab.AddListener(() =>
         {
-            //your code here
-            //example
-            if(v != Vector2.zero)
-            FadePanelAfterSeconds(panel5passenger, 1, 1);
-            driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftPassenger);
-        }
+            if (orderpassenger >= 3)
+            {
+                FadePanelAfterSeconds(panelGrabPassenger1, 1, 1, () =>
+                {
+                    panelGrabPassenger2.gameObject.SetActive(true);
+                });
+                passenger.ItemGrab.RemoveAllListeners();
+                orderpassenger++;
+                Debug.Log("+pp" + orderpassenger);
+            }
+        });
+
+        passenger.ItemInteract.AddListener(() =>
+        {
+            if (orderpassenger >= 4)
+            {
+                FadePanelAfterSeconds(panelGrabPassenger2, 1, 1, () =>
+                {
+                    panelGrabPassenger3.gameObject.SetActive(true);
+                    FadePanelAfterSeconds(panelGrabPassenger3, 1, 1);
+                });
+                passenger.ItemInteract.RemoveAllListeners();
+                orderpassenger++;
+                Debug.Log("+pp" + orderpassenger);
+            }
+        });
+
+
+
+
     }
 
     IEnumerator GetPlayerCar(Action<GameObject> onGet)

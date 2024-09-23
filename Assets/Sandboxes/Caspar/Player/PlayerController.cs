@@ -6,7 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerController : MonoBehaviour
 {
     public int Player = 0;
-    [field:SerializeField] public bool PlayerCanSteer { get; private set; } = true;
+    [field: SerializeField] public bool PlayerCanSteer { get; private set; } = true;
     [SerializeField] float SteeringStrength = 1f;
     [SerializeField] CarControlsHandler CarIfDriver;
 
@@ -41,40 +41,40 @@ public class PlayerController : MonoBehaviour
     public void OnGasPress(CallbackContext context)
     {
         bool clickEntered = context.action.triggered;
-        if(CarIfDriver == null) return;
-        CarIfDriver.UpdateGas(clickEntered ? Vector2.up : Vector2.zero);
         GasPressed?.Invoke();
+        if (CarIfDriver == null) return;
+        CarIfDriver.UpdateGas(clickEntered ? Vector2.up : Vector2.zero);
     }
 
     public void OnBrakePress(CallbackContext context)
     {
         bool clickEntered = context.action.triggered;
-        if(CarIfDriver == null) return;
-        CarIfDriver.UpdateGas(clickEntered ? Vector2.down : Vector2.zero);
         BrakePressed?.Invoke();
+        if (CarIfDriver == null) return;
+        CarIfDriver.UpdateGas(clickEntered ? Vector2.down : Vector2.zero);
 
     }
 
     public void OnInteractLeft(CallbackContext context)
     {
         bool clickEntered = context.action.triggered;
-        if(clickEntered)
-            _grabber.TryInteractWithItem(true,this);
+        if (clickEntered)
+            _grabber.TryInteractWithItem(true, this);
         ItemInteract?.Invoke();
     }
 
     public void OnInteractRight(CallbackContext context)
     {
         bool clickEntered = context.action.triggered;
-        if(clickEntered)
-            _grabber.TryInteractWithItem(false,this);
+        if (clickEntered)
+            _grabber.TryInteractWithItem(false, this);
         ItemInteract?.Invoke();
     }
 
     public void OnGrabRight(CallbackContext context)
     {
         bool interacted = context.action.triggered;
-        if(interacted)
+        if (interacted)
             _grabber.TryGrabReleaseItem(false, this);
         ItemGrab?.Invoke();
 
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
     {
         _rightJoystickValue = context.ReadValue<Vector2>();
     }
-    
+
     //for keyboards to have continuous input
     void FixedUpdate()
     {

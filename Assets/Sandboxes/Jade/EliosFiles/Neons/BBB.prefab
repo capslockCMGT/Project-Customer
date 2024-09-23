@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 594f79b3c17875b4bba11b8d01abe794, type: 2}
+  - {fileID: 2100000, guid: 791b80358162d2b408b606bbd2e16c30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b21202e89983fd46a31bb8d0b1194c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture1: {fileID: 2800000, guid: 1b4653283d8682f47a20c7517e0d92fb, type: 3}
-  texture2: {fileID: 2800000, guid: afe4373dcc89df94fbad3bd4e4e28c0e, type: 3}
-  Glow: {fileID: 2100000, guid: f5cb07dcbdba36d4b808bf25c2e629f4, type: 2}
+  texture1: {fileID: 2800000, guid: 4048f48bdf2f3aa48892d5ff9ae7c428, type: 3}
+  texture2: {fileID: 2800000, guid: 4048f48bdf2f3aa48892d5ff9ae7c428, type: 3}
+  Glow: {fileID: 2100000, guid: 791b80358162d2b408b606bbd2e16c30, type: 2}
   Timer: 0
   CD: 0.5
   State: 0
