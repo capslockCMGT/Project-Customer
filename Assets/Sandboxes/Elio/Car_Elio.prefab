@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 6588284555081939846}
   - component: {fileID: 2583734959388477212}
   m_Layer: 8
-  m_Name: Car_V2
+  m_Name: Car_Elio
   m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
