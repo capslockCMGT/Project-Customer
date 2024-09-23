@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.16862746, g: 0.23529412, b: 0.34117648, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.02
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: c146daf0163687f47b4c34424b41c4be, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d634309f564247f4b9bc598c304a63e0, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -173,6 +173,9 @@ MonoBehaviour:
   _end: {fileID: 5099231861569548205, guid: 3663d0b5bf0dd4e4ab993a187815d678, type: 3}
   _pathMat: {fileID: 2100000, guid: 27341f7f9d79fc045be2682c96244763, type: 2}
   _generateNewMap: 0
+  MapGenerated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &35787297
 Transform:
   m_ObjectHideFlags: 0
@@ -2027,7 +2030,7 @@ SceneRoots:
   - {fileID: 898902743}
   - {fileID: 1249535669}
   - {fileID: 1174082461}
-  - {fileID: 356019372}
   - {fileID: 1889564772}
   - {fileID: 1674468797}
   - {fileID: 2049434311}
+  - {fileID: 356019372}

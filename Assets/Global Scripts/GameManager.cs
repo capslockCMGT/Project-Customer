@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
     [SerializeField] Image _gameOverPanel;
-    
-    List<PlayerInput> _playerInputs = new List<PlayerInput>(2);   
-    public static GameManager Instance { get; private set; } 
+
+    List<PlayerInput> _playerInputs = new List<PlayerInput>(2);
+    public static GameManager Instance { get; private set; }
     public GameObject PlayerCar { get; private set; }
 
     void Awake()
@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        OnMapGenerated();    
+        if (_grid != null)
+            OnMapGenerated();
     }
 
     void OnDisable()
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         Cell startCell = _grid.Cells[_grid.StartPos.y, _grid.StartPos.x];
         //shoot a ray from above to spawn the car exactly on road
         Vector3 startCenter = startCell.WorldObj.transform.position;
-        Physics.Raycast(startCenter + Vector3.up * 20,Vector3.down, out RaycastHit hit, 25);
+        Physics.Raycast(startCenter + Vector3.up * 20, Vector3.down, out RaycastHit hit, 25);
 
         GameObject carInst = Instantiate(_carPrefab, hit.point + Vector3.up * 5, Quaternion.AngleAxis(startCell.WorldObj.transform.rotation.eulerAngles.y - 90, Vector3.up));
         PlayerCar = carInst;
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         //show UI
         //make darkening transition etc
-        
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
@@ -87,5 +88,10 @@ public class GameManager : MonoBehaviour
     public void OnInputAdd(PlayerInput input)
     {
         _playerInputs.Add(input);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
