@@ -2,14 +2,15 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class DeductionUI : MonoBehaviour
 {
-    [SerializeField] Image _bg;
-    [SerializeField] TextMeshProUGUI _textMesh;
+    [SerializeField] TextMeshProUGUI _totalCountMesh;
+    [SerializeField] Image _deductionPanelPrefab;
+    [SerializeField] Transform _deductionSignsHolder;
     [SerializeField] float _displayTime;
 
     SafetyCreditsManager _safetyCreditsManager;
-    Coroutine _currentSign;
 
     void OnEnable()
     {
@@ -23,28 +24,36 @@ public class DeductionUI : MonoBehaviour
 
     void OnDeduction(int newValue, int deductedAmount, string message)
     {
-        if (_currentSign != null)
-            StopCoroutine(_currentSign);
-        _currentSign = StartCoroutine(DisplayDeductionWarning(newValue, deductedAmount, message));
+        StartCoroutine(DisplayDeductionWarning(newValue, deductedAmount, message));
     }
 
     IEnumerator DisplayDeductionWarning(int newValue, int deductedAmount, string message)
     {
-        _bg.gameObject.SetActive(true);
-        _textMesh.text = $"Lost {deductedAmount} safety points because: {message}!";
+        Image panel = Instantiate(_deductionPanelPrefab, _deductionSignsHolder);
+        TextMeshProUGUI txtMesh = panel.GetComponentInChildren<TextMeshProUGUI>();
+        txtMesh.text = $"Lost {deductedAmount} safety points because: {message}!";
+
+        UpdateTotalCount(newValue);
         yield return new WaitForSeconds(_displayTime);
         //fade
-        _bg.gameObject.SetActive(false);
+        Destroy(panel.gameObject);
     }
 
     IEnumerator GetSafetyManager()
     {
-        while(_safetyCreditsManager == null) 
+        while (_safetyCreditsManager == null)
         {
             yield return null;
             _safetyCreditsManager = GameManager.Instance.PlayerCar.GetComponentInChildren<SafetyCreditsManager>();
             _safetyCreditsManager.CreditsChanged += OnDeduction;
 
         }
+        UpdateTotalCount(_safetyCreditsManager.SafetyCredits);
+
+    }
+
+    void UpdateTotalCount(int val)
+    {
+        _totalCountMesh.text = "Count: " +  val + "$";
     }
 }
