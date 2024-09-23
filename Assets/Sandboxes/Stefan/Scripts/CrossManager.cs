@@ -40,6 +40,12 @@ public class CrossManager : MonoBehaviour
             return;
         }
 
+        if(_randomObjectives.Count == 1)
+        {
+            SetDestinationToCrossPoint(_randomObjectives[0], npc);
+            return;
+        }
+
         List<Transform> shufledObjectives = new(_randomObjectives);
         shufledObjectives.Shuffle();
 
