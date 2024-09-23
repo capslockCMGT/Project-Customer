@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     public UnityEvent<Vector2> UpdateLeftJoystick;
     public UnityEvent<Vector2> UpdateRightJoystick;
 
+    public UnityEvent GasPressed;
+    public UnityEvent BrakePressed;
+    public UnityEvent ItemInteract;
+    public UnityEvent ItemGrab;
+
     Vector2 _rightJoystickValue;
     ItemGrabber _grabber;
 
@@ -38,13 +43,15 @@ public class PlayerController : MonoBehaviour
         bool clickEntered = context.action.triggered;
         if(CarIfDriver == null) return;
         CarIfDriver.UpdateGas(clickEntered ? Vector2.up : Vector2.zero);
-
+        GasPressed?.Invoke();
     }
 
     public void OnBrakePress(CallbackContext context)
     {
         bool clickEntered = context.action.triggered;
+        if(CarIfDriver == null) return;
         CarIfDriver.UpdateGas(clickEntered ? Vector2.down : Vector2.zero);
+        BrakePressed?.Invoke();
 
     }
 
@@ -53,6 +60,7 @@ public class PlayerController : MonoBehaviour
         bool clickEntered = context.action.triggered;
         if(clickEntered)
             _grabber.TryInteractWithItem(true,this);
+        ItemInteract?.Invoke();
     }
 
     public void OnInteractRight(CallbackContext context)
@@ -60,6 +68,7 @@ public class PlayerController : MonoBehaviour
         bool clickEntered = context.action.triggered;
         if(clickEntered)
             _grabber.TryInteractWithItem(false,this);
+        ItemInteract?.Invoke();
     }
 
     public void OnGrabRight(CallbackContext context)
@@ -67,6 +76,7 @@ public class PlayerController : MonoBehaviour
         bool interacted = context.action.triggered;
         if(interacted)
             _grabber.TryGrabReleaseItem(false, this);
+        ItemGrab?.Invoke();
 
     }
 
@@ -75,7 +85,7 @@ public class PlayerController : MonoBehaviour
         bool clickEntered = context.action.triggered;
         if (clickEntered)
             _grabber.TryGrabReleaseItem(true, this);
-
+        ItemGrab?.Invoke();
     }
 
     public void OnCameraMove(CallbackContext context)
