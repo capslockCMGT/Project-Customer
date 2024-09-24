@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
-    [SerializeField] Image _gameOverPanel;
-    [SerializeField] Image _gameOverPanel;
+    [SerializeField] Image _driverGameOverPanel;
+    [SerializeField] Image _passengerGameOverPanel;
     [SerializeField] CanvasGroup _fadeScreen;
     [SerializeField] float _fadeScreenTime = .8f;
 
