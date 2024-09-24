@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public UnityEvent BrakePressed;
     public UnityEvent ItemInteract;
     public UnityEvent ItemGrab;
+    public UnityEvent OptionPress;
 
     Vector2 _rightJoystickValue;
     ItemGrabber _grabber;
@@ -103,7 +104,13 @@ public class PlayerController : MonoBehaviour
     public void OnItemControl(CallbackContext context)
     {
         Vector2 val = context.ReadValue<Vector2>();
-        Debug.Log(val);
         ItemControl?.Invoke(val.y);
+    }
+
+    public void OnOptionsPress(CallbackContext context)
+    {
+        bool interacted = context.action.triggered;
+        if (interacted)
+            OptionPress?.Invoke();
     }
 }

@@ -76,4 +76,10 @@ public class PlayerInputHandler : MonoBehaviour
         if (controller != null)
             controller.OnItemControl(context);
     }
+
+    public void OnOptionPress(CallbackContext context)
+    {
+        if (controller != null)
+            controller.OnOptionsPress(context);
+    }
 }
