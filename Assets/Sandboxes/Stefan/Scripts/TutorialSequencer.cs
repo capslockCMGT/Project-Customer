@@ -3,8 +3,6 @@ using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class TutorialSequencer : MonoBehaviour
@@ -250,20 +248,16 @@ public class TutorialSequencer : MonoBehaviour
     {
         yield return new WaitForSeconds(bufferTime);
         float currTime = fadeTime;
-        Color startClrPanel = panel.color;
-        TextMeshProUGUI text = panel.GetComponentInChildren<TextMeshProUGUI>();
-        Color startClrTxt = text.color;
+        CanvasGroup group = panel.GetComponent<CanvasGroup>();
 
         while (currTime > 0)
         {
-            panel.color = new Color(startClrPanel.r, startClrPanel.g, startClrPanel.b, currTime / fadeTime);
-            text.color = new Color(startClrTxt.r, startClrTxt.g, startClrTxt.b, currTime / fadeTime);
+            group.alpha = currTime/fadeTime;
 
             currTime -= Time.deltaTime;
             yield return null;
         }
-        panel.color = new Color(startClrPanel.r, startClrPanel.g, startClrPanel.b, 0);
-        panel.color = new Color(startClrTxt.r, startClrTxt.g, startClrTxt.b, 0);
+        group.alpha = 0;
         panel.gameObject.SetActive(false);
 
         onComplete?.Invoke();

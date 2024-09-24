@@ -2209,9 +2209,13 @@ MonoBehaviour:
   _steeringAngle: 49
   _honksBeforeCooldownStart: 1
   _honkCooldown: 1
-  _soundName:
-    Name: GloveBox Close
-    PopUpIndexOfChosenName: 4
+  _honkSounds:
+  - Name: Honk
+    PopUpIndexOfChosenName: 0
+  - Name: Honk2
+    PopUpIndexOfChosenName: 1
+  - Name: Honk3
+    PopUpIndexOfChosenName: 2
   _canReposition: 1
 --- !u!114 &3259280824667309276
 MonoBehaviour:

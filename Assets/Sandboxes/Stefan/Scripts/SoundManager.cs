@@ -67,6 +67,11 @@ public class SoundManager : MonoBehaviour
     //However, you CAN have custom volume/soundData in each object in case you want to make one more quiet than the others
     //Use SoundAdapter if you want to play sounds onclick or on other UnityEvent calls
 
+    public static int PlayRandomSound(SoundName[] names)
+    {
+        return Instance.PlaySound(names[UnityEngine.Random.Range(0, names.Length)]);
+    }
+
     public bool ContainsSoundWithID(int id)
     {
         return _activeSources.Any(s => s.ID == id);

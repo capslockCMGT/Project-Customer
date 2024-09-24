@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 [SelectionBase]
 public class SteeringWheel : MonoBehaviour
@@ -13,7 +12,7 @@ public class SteeringWheel : MonoBehaviour
     [SerializeField] float _steeringAngle = 25f;
     [SerializeField] int _honksBeforeCooldownStart;
     [SerializeField] float _honkCooldown;
-    [SerializeField] SoundName _soundName;
+    [SerializeField] SoundName[] _honkSounds;
 
     [SerializeField] bool _canReposition;
 
@@ -67,7 +66,7 @@ public class SteeringWheel : MonoBehaviour
         {
             if (!_canHonk) return;
             Debug.Log("HONLK!!1!");
-            SoundManager.Instance.PlaySound(_soundName);
+            SoundManager.PlayRandomSound(_honkSounds);
             if (++_honks > _honksBeforeCooldownStart)
                 StartCoroutine(HonkTimer());
         });
