@@ -25,4 +25,6 @@ MonoBehaviour:
   - Credit Notice
   - PhoneTalk
   - PhoneCall
-  - IntroSequence
+  - EngineIdle
+  - Sidewalk impact 1
+  - Sidewalk impact 2
