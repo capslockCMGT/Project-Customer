@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _driverGameOver;
     [SerializeField] GameObject _passengerWin;
     [SerializeField] GameObject _driverWin;
+    [SerializeField] bool _gameOverTest;
 
     readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
@@ -31,6 +32,15 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
+    }
+
+    void Update()
+    {
+        if(_gameOverTest)
+        {
+            _gameOverTest = false;
+            GameOver(false,true);
+        }
     }
 
     void Start()

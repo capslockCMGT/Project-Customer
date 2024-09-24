@@ -10,7 +10,7 @@ public class AutoSelect : MonoBehaviour
 
     public void SelectObject(GameObject go)
     {
-        //EventSystem.current.SetSelectedGameObject(go);
+        EventSystem.current.SetSelectedGameObject(go);
 
     }
 

@@ -154,9 +154,13 @@ MonoBehaviour:
   _grid: {fileID: 0}
   _carPrefab: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
-  _gameOverPanel: {fileID: 0}
   _fadeScreen: {fileID: 1426247062}
   _fadeScreenTime: 0.8
+  _passengerGameOver: {fileID: 0}
+  _driverGameOver: {fileID: 0}
+  _passengerWin: {fileID: 0}
+  _driverWin: {fileID: 0}
+  _gameOverTest: 0
   <PlayerCar>k__BackingField: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
 --- !u!4 &325936699
@@ -897,7 +901,7 @@ MonoBehaviour:
   _soundClips:
     _serializedList:
     - Key:
-        Name: IntroSequence
+        Name: EngineIdle
         PopUpIndexOfChosenName: 12
       Value:
         Volume: 0.753
