@@ -93,7 +93,7 @@ public class CrossManager : MonoBehaviour
         //doing a spherecast because some connections are not alligned properly so a simple ray just misses the sidewalk
         Physics.SphereCast(crossPoint.position + Vector3.up * 11,5, -Vector3.up, out RaycastHit hit, 20, 1 << LayerMask.NameToLayer("Walkable"));
         //Physics.Raycast(crossPoint.position + Vector3.up * 11, -Vector3.up, out RaycastHit hit, 20, 1 << LayerMask.NameToLayer("Walkable"));
-        npc.gixmo = hit.point;
+        //npc.gixmo = hit.point;
         //Debug.Log("Setting destonation to " + crossPoint.gameObject.name + "pos: " + hit.point);
 
         npc.Agent.SetDestination(hit.point);

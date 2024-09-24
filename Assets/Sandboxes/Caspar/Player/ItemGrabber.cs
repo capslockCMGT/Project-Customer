@@ -1,8 +1,4 @@
-using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.UI;
 
 public class ItemGrabber : MonoBehaviour
 {

@@ -990,11 +990,18 @@ MonoBehaviour:
   _soundClips:
     _serializedList:
     - Key:
+        Name: IntroSound
+        PopUpIndexOfChosenName: 15
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 649e3b0cb88f82846a2e6b6fbc345c93, type: 3}
+        Loop: 0
+    - Key:
         Name: EngineIdle
         PopUpIndexOfChosenName: 12
       Value:
         Volume: 0.753
-        Clip: {fileID: 8300000, guid: 7110897e01f789b4087344932ce64c39, type: 3}
+        Clip: {fileID: 8300000, guid: 4d65b2ddf91f94345b2dae33120c147f, type: 3}
         Loop: 0
     - Key:
         Name: Collision Pedestrian 3
@@ -1058,6 +1065,34 @@ MonoBehaviour:
       Value:
         Volume: 0.753
         Clip: {fileID: 8300000, guid: c86fa8af64ee4e94b8c33b73d0f5f0ed, type: 3}
+        Loop: 0
+    - Key:
+        Name: PhoneCall
+        PopUpIndexOfChosenName: 11
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 7204d18cf76cffe479ccd40ec157725d, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 1
+        PopUpIndexOfChosenName: 13
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 9a411e6c6aff449479aa84a9dbd8593d, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 2
+        PopUpIndexOfChosenName: 14
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 29a70804a78f34c49867ddf997ad0e69, type: 3}
+        Loop: 0
+    - Key:
+        Name: PhoneTalk
+        PopUpIndexOfChosenName: 10
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 502f60b39eaad7549bd39cedb496c364, type: 3}
         Loop: 0
     - Key:
         Name: Honk
