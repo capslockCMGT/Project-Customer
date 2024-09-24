@@ -6,7 +6,7 @@ public class SafetyCreditsManager : MonoBehaviour
     public event Action<int, int, string> CreditsChanged;
 
     [field: SerializeField] public int SafetyCredits { get; private set; }
-    [SerializeField] SoundName _sound;
+    [SerializeField] SoundName _deductionSound;
     [SerializeField] CarController _car;
     [SerializeField] float _speedThreshHold = .01f;
 
