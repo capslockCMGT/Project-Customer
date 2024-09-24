@@ -790,7 +790,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 356019371}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ReloadLevel
         m_Mode: 1
@@ -1926,6 +1926,13 @@ MonoBehaviour:
   _soundClips:
     _serializedList:
     - Key:
+        Name: EngineIdle
+        PopUpIndexOfChosenName: 12
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 4d65b2ddf91f94345b2dae33120c147f, type: 3}
+        Loop: 1
+    - Key:
         Name: Collision Pedestrian 3
         PopUpIndexOfChosenName: 8
       Value:
@@ -1987,6 +1994,20 @@ MonoBehaviour:
       Value:
         Volume: 0.753
         Clip: {fileID: 8300000, guid: c86fa8af64ee4e94b8c33b73d0f5f0ed, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 1
+        PopUpIndexOfChosenName: 13
+      Value:
+        Volume: 0.78
+        Clip: {fileID: 8300000, guid: 9a411e6c6aff449479aa84a9dbd8593d, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 2
+        PopUpIndexOfChosenName: 14
+      Value:
+        Volume: 0.78
+        Clip: {fileID: 8300000, guid: 29a70804a78f34c49867ddf997ad0e69, type: 3}
         Loop: 0
     - Key:
         Name: Honk
