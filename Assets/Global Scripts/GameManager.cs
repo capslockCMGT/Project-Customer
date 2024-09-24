@@ -83,7 +83,8 @@ public class GameManager : MonoBehaviour
         }
         //Cursor.lockState = CursorLockMode.None;
 
-        _gameOverPanel.gameObject.SetActive(true);
+        _driverGameOverPanel.gameObject.SetActive(true);
+        _passengerGameOverPanel.gameObject.SetActive(true);
 
     }
 
