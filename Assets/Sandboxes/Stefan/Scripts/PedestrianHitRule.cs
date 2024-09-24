@@ -6,7 +6,7 @@ public class PedestrianHitRule : RuleChecker
 {
     TriggerDelegator _triggerDelegator;
     HashSet<Collider> _pedestrianHitList = new();
-    [SerializeField] SoundName _sound1;
+    [SerializeField] SoundName[] _pedestrianHitSound;
 
     protected override void OnAwake()
     {
@@ -27,7 +27,7 @@ public class PedestrianHitRule : RuleChecker
         if(other.CompareTag("NPC"))
         {
             _pedestrianHitList.Add(other);
-            SoundManager.Instance.PlaySound(_sound1);
+            SoundManager.PlayRandomSound(_pedestrianHitSound);
         }
 
     }

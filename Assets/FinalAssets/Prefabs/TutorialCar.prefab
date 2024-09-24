@@ -61,7 +61,12 @@ PrefabInstance:
     - target: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
         type: 3}
       propertyPath: m_Name
-      value: Car_VC Variant
+      value: TutorialCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730475119872457245, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6283307610981432822, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
         type: 3}

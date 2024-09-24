@@ -10,6 +10,7 @@ public class DeductionUI : MonoBehaviour
     [SerializeField] Transform _deductionSignsHolder;
     [SerializeField] float _displayTime;
 
+
     SafetyCreditsManager _safetyCreditsManager;
 
     void OnEnable()

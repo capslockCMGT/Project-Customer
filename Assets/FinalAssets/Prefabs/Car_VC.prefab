@@ -1341,9 +1341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SafetyCredits>k__BackingField: 100
-  _sound:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+  _deductionSound:
+    Name: Credit Notice
+    PopUpIndexOfChosenName: 9
 --- !u!114 &7962352702799397996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,9 +1374,13 @@ MonoBehaviour:
   _penaltyThreshhold: -5
   _penaltyCooldown: 3
   _deductionAmount: 5
-  _sound1:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+  _pedestrianHitSound:
+  - Name: Collision Pedestrian 1
+    PopUpIndexOfChosenName: 6
+  - Name: Collision Pedestrian 2
+    PopUpIndexOfChosenName: 7
+  - Name: Collision Pedestrian 3
+    PopUpIndexOfChosenName: 8
 --- !u!81 &267872072770291766
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1583,11 +1587,11 @@ MonoBehaviour:
   _itemsRandomPool:
   - {fileID: 755275588320937708, guid: ea7be52d0fa8b8b4892a608b63eb7df3, type: 3}
   _sound1:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+    Name: GloveBox Open
+    PopUpIndexOfChosenName: 3
   _sound2:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+    Name: GloveBox Close
+    PopUpIndexOfChosenName: 4
 --- !u!114 &7651148675786905600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4040,6 +4044,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Phone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: _callSound.Name
+      value: PhoneCall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: _talkSound.Name
+      value: PhoneTalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: _callSound.PopUpIndexOfChosenName
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: _talkSound.PopUpIndexOfChosenName
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3326446383880971365, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
