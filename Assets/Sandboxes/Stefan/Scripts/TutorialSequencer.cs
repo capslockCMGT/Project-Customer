@@ -3,8 +3,6 @@ using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class TutorialSequencer : MonoBehaviour
@@ -23,10 +21,15 @@ public class TutorialSequencer : MonoBehaviour
     [SerializeField] Image panelGrabPassenger1;
     [SerializeField] Image panelGrabPassenger2;
     [SerializeField] Image panelGrabPassenger3;
+    [SerializeField] Image panelEndDriver;
+    [SerializeField] Image panelEndPassenger;
+    [SerializeField] GameManager gameManager;
 
 
     int orderdriver = 1;
     int orderpassenger = 1;
+    bool passengerReady = false;
+    bool driverReady = false;
 
 
     void Interface(GameObject playerCar)
@@ -41,24 +44,32 @@ public class TutorialSequencer : MonoBehaviour
 
         driver.BrakePressed.AddListener(() =>
         {
-            //write your code here
 
-            //just an example
-            FadePanelAfterSeconds(panelGoalDriver1, 2, 2, () =>
+            if (orderdriver == 1)
             {
-
-                panelGoalDriver2.gameObject.SetActive(true);
-                FadePanelAfterSeconds(panelGoalDriver2, 2, 2, () =>
+                FadePanelAfterSeconds(panelGoalDriver1, 2, 2, () =>
                 {
-                    panelStickDriver.gameObject.SetActive(true);
-                    orderdriver += 1;
-                    Debug.Log(orderdriver);
-                });
-            });
 
-            //write your code here
-            //this stops the input to run the code above again
-            driver.BrakePressed.RemoveAllListeners();
+                    panelGoalDriver2.gameObject.SetActive(true);
+                    FadePanelAfterSeconds(panelGoalDriver2, 2, 2, () =>
+                    {
+                        panelStickDriver.gameObject.SetActive(true);
+                        orderdriver += 1;
+                        Debug.Log(orderdriver);
+                    });
+                });
+
+                //this stops the input to run the code above again
+
+            }
+            else if (orderdriver >= 7)
+            {
+                driverReady = true;
+                driver.BrakePressed.RemoveAllListeners();
+            }
+
+
+
         });
 
 
@@ -68,7 +79,10 @@ public class TutorialSequencer : MonoBehaviour
             if (orderdriver >= 6)
             {
 
-                FadePanelAfterSeconds(panelGasDriver, 1, 1);
+                FadePanelAfterSeconds(panelGasDriver, 1, 1, () =>
+                {
+                    panelEndDriver.gameObject.SetActive(true);
+                }); ;
                 driver.GasPressed.RemoveAllListeners();
                 orderdriver += 1;
                 Debug.Log(orderdriver);
@@ -86,7 +100,7 @@ public class TutorialSequencer : MonoBehaviour
 
                 driver.ItemGrab.RemoveAllListeners();
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
         });
 
@@ -101,7 +115,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 driver.ItemInteract.RemoveAllListeners();
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
         });
 
@@ -113,7 +127,7 @@ public class TutorialSequencer : MonoBehaviour
             //example
             if (v != Vector2.zero && orderdriver >= 2)
             {
-                Debug.Log("updating");
+
 
                 FadePanelAfterSeconds(panelStickDriver, 1, 1, () =>
                 {
@@ -121,7 +135,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 driver.UpdateRightJoystick.RemoveListener(onJoystickRightDriver);
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
 
         }
@@ -140,7 +154,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftDriver);
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
         }
 
@@ -148,20 +162,29 @@ public class TutorialSequencer : MonoBehaviour
 
         passenger.BrakePressed.AddListener(() =>
         {
-            Debug.Log(" before pp" + orderpassenger);
+
 
 
             //write your code here
-            FadePanelAfterSeconds(panelGoalPassenger, 1, 1, () =>
+            if (orderpassenger == 1)
             {
-                panelStickPassenger.gameObject.SetActive(true);
-            });
-            //write your code here
+                FadePanelAfterSeconds(panelGoalPassenger, 1, 1, () =>
+                {
+                    panelStickPassenger.gameObject.SetActive(true);
+                });
 
-            //this stops the input to run the code above again
-            passenger.BrakePressed.RemoveAllListeners();
-            orderpassenger++;
-            Debug.Log("+pp" + orderpassenger);
+                //write your code here
+
+                //this stops the input to run the code above again
+
+                orderpassenger++;
+            }
+            else if (orderpassenger >= 4)
+            {
+                passengerReady = true;
+                passenger.BrakePressed.RemoveAllListeners();
+            }
+
 
         });
 
@@ -180,7 +203,7 @@ public class TutorialSequencer : MonoBehaviour
 
                 passenger.UpdateRightJoystick.RemoveListener(onJoystickRightPassenger);
                 orderpassenger++;
-                Debug.Log("+pp" + orderpassenger);
+
             }
         }
 
@@ -200,7 +223,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 passenger.ItemGrab.RemoveAllListeners();
                 orderpassenger++;
-                Debug.Log("+pp" + orderpassenger);
+
             }
         });
 
@@ -211,11 +234,14 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGrabPassenger2, 1, 1, () =>
                 {
                     panelGrabPassenger3.gameObject.SetActive(true);
-                    FadePanelAfterSeconds(panelGrabPassenger3, 1, 1);
+                    FadePanelAfterSeconds(panelGrabPassenger3, 2, 2, () =>
+                    {
+                        panelEndPassenger.gameObject.SetActive(true);
+                    }); ;
                 });
                 passenger.ItemInteract.RemoveAllListeners();
                 orderpassenger++;
-                Debug.Log("+pp" + orderpassenger);
+
             }
         });
 
@@ -250,20 +276,16 @@ public class TutorialSequencer : MonoBehaviour
     {
         yield return new WaitForSeconds(bufferTime);
         float currTime = fadeTime;
-        Color startClrPanel = panel.color;
-        TextMeshProUGUI text = panel.GetComponentInChildren<TextMeshProUGUI>();
-        Color startClrTxt = text.color;
+        CanvasGroup group = panel.GetComponent<CanvasGroup>();
 
         while (currTime > 0)
         {
-            panel.color = new Color(startClrPanel.r, startClrPanel.g, startClrPanel.b, currTime / fadeTime);
-            text.color = new Color(startClrTxt.r, startClrTxt.g, startClrTxt.b, currTime / fadeTime);
+            group.alpha = currTime / fadeTime;
 
             currTime -= Time.deltaTime;
             yield return null;
         }
-        panel.color = new Color(startClrPanel.r, startClrPanel.g, startClrPanel.b, 0);
-        panel.color = new Color(startClrTxt.r, startClrTxt.g, startClrTxt.b, 0);
+        group.alpha = 0;
         panel.gameObject.SetActive(false);
 
         onComplete?.Invoke();
@@ -273,5 +295,15 @@ public class TutorialSequencer : MonoBehaviour
     void Start()
     {
         StartCoroutine(GetPlayerCar(Interface));
+    }
+
+    private void FixedUpdate()
+    {
+
+
+        if (driverReady && passengerReady)
+        {
+            gameManager.FinishLevel();
+        }
     }
 }
