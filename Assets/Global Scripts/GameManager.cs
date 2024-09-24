@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
     [field: SerializeField] public GameObject PlayerCar { get; private set; }
-    
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -34,9 +34,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         if (_grid != null)
+        {
             OnMapGenerated();
+            PlayerCar.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
+        }
 
-        PlayerCar.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
+
+
         StartCoroutine(Utils.DoFadeOut(_fadeScreen, _fadeScreenTime, 0));
 
     }
@@ -86,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void FinishLevel()
     {
+        _fadeScreen.gameObject.SetActive(true);
         StartCoroutine(Utils.DoFadeIn(_fadeScreen, _fadeScreenTime, 0, () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1)));
 
     }
