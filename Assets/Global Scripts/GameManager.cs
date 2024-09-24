@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
+    [SerializeField] Image _gameOverPanel;
     [SerializeField] Image _gameOverPanel;
     [SerializeField] CanvasGroup _fadeScreen;
     [SerializeField] float _fadeScreenTime = .8f;
@@ -60,10 +62,13 @@ public class GameManager : MonoBehaviour
         PlayerCar = carInst;
 
     }
-
-    public void GameOver()
+    /// <summary>
+    /// Spawns the game over panel
+    /// </summary>
+    /// <param name="driverState">is true if driver won, and false if driver lost</param>
+    /// <param name="passengerState">is true if passenger won, and false if passenger lost</param>
+    public void GameOver(bool driverState, bool passengerState)
     {
-        _gameOverPanel.gameObject.SetActive(true);
         foreach (var input in _playerInputs)
         {
             input.DeactivateInput();
@@ -72,7 +77,10 @@ public class GameManager : MonoBehaviour
         {
             camController.enabled = false;
         }
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
+
+        _gameOverPanel.gameObject.SetActive(true);
+
     }
 
     public void FinishLevel()

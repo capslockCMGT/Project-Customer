@@ -65,7 +65,7 @@ public class SteeringWheel : MonoBehaviour
         grab.onPlayerInteract.AddListener((PlayerController addedController) =>
         {
             if (!_canHonk) return;
-            Debug.Log("HONLK!!1!");
+
             SoundManager.PlayRandomSound(_honkSounds);
             if (++_honks > _honksBeforeCooldownStart)
                 StartCoroutine(HonkTimer());
@@ -74,7 +74,7 @@ public class SteeringWheel : MonoBehaviour
         if (Renderer != null) 
             carHandler.SteeringAngleChanged += (float input) => 
             {
-                _currAngle += input * _steeringSens;
+                _currAngle += input * _steeringSens * Time.deltaTime;
                 _currAngle = Mathf.Clamp(_currAngle, -_steeringAngle, _steeringAngle);
                 //goes back to 0 in increments
                 if (_canReposition && input == 0 && _currAngle != 0)
@@ -90,7 +90,7 @@ public class SteeringWheel : MonoBehaviour
     void CenterWheel()
     {
         var prevAngle = _currAngle;
-        _currAngle -= _steeringSens * Mathf.Sign(_currAngle);
+        _currAngle -= _steeringSens * Mathf.Sign(_currAngle) * Time.deltaTime;
         if (prevAngle * _currAngle < 0)
             _currAngle = 0;
     }
