@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
-    [SerializeField] Image _driverGameOverPanel;
-    [SerializeField] Image _passengerGameOverPanel;
     [SerializeField] CanvasGroup _fadeScreen;
     [SerializeField] float _fadeScreenTime = .8f;
+    [SerializeField] GameObject _passengerGameOver;
+    [SerializeField] GameObject _driverGameOver;
+    [SerializeField] GameObject _passengerWin;
+    [SerializeField] GameObject _driverWin;
 
     readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
@@ -77,11 +79,16 @@ public class GameManager : MonoBehaviour
         {
             camController.enabled = false;
         }
-        //Cursor.lockState = CursorLockMode.None;
 
-        _driverGameOverPanel.gameObject.SetActive(true);
-        _passengerGameOverPanel.gameObject.SetActive(true);
+        if(driverState)
+            _driverWin.SetActive(true);
+        else
+            _driverGameOver.SetActive(true);
 
+        if(passengerState)
+            _passengerWin.SetActive(true);
+        else
+            _passengerGameOver.SetActive(true);
     }
 
     public void FinishLevel()
