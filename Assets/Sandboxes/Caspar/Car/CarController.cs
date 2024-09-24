@@ -24,6 +24,7 @@ public class CarController : MonoBehaviour
     [SerializeField][Range(0f, 1f)] float FrontWheelBrakeStrengthMultiplier = .5f;
     [SerializeField] float MaxTurnAngle = 30;
     [SerializeField] float CenterOfMassOffset = .2f;
+
     public Vector3 CarVelocity => _carRB.velocity;
 
     Rigidbody _carRB;
@@ -68,11 +69,12 @@ public class CarController : MonoBehaviour
         //invert driving direction and inputs if were going in reverse
         float reversing = 1;
         float maxVel = MaximumSpeed;
-        if(_inReverse)
+        if (_inReverse)
         {
             reversing = -1;
             maxVel = MaxSpeedBackwards;
         }
+
 
         //if the car is already near maximum speed, power down the engine
         float currentSpeed = Vector3.Dot(_carRB.velocity,transform.forward) / maxVel;

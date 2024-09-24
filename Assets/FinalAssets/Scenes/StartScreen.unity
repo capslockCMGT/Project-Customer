@@ -155,6 +155,8 @@ MonoBehaviour:
   _carPrefab: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
   _gameOverPanel: {fileID: 0}
+  _fadeScreen: {fileID: 0}
+  _fadeScreenTime: 0.8
   <PlayerCar>k__BackingField: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
 --- !u!4 &325936699
@@ -894,6 +896,41 @@ MonoBehaviour:
   _masterVolume: 0.769
   _soundClips:
     _serializedList:
+    - Key:
+        Name: EngineIdle
+        PopUpIndexOfChosenName: 12
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 4d65b2ddf91f94345b2dae33120c147f, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 2
+        PopUpIndexOfChosenName: 14
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 29a70804a78f34c49867ddf997ad0e69, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 1
+        PopUpIndexOfChosenName: 13
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 9a411e6c6aff449479aa84a9dbd8593d, type: 3}
+        Loop: 0
+    - Key:
+        Name: PhoneCall
+        PopUpIndexOfChosenName: 11
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 502f60b39eaad7549bd39cedb496c364, type: 3}
+        Loop: 0
+    - Key:
+        Name: PhoneTalk
+        PopUpIndexOfChosenName: 10
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 7204d18cf76cffe479ccd40ec157725d, type: 3}
+        Loop: 0
     - Key:
         Name: Collision Pedestrian 3
         PopUpIndexOfChosenName: 8
