@@ -2359,6 +2359,7 @@ MonoBehaviour:
     type: 3}
   _gameOverPanel: {fileID: 1822082288}
   _fadeScreen: {fileID: 1120180619}
+  _fadeScreenTime: 3.12
   <PlayerCar>k__BackingField: {fileID: 0}
 --- !u!4 &356019372
 Transform:
