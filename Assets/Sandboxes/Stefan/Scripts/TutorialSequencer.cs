@@ -47,8 +47,10 @@ public class TutorialSequencer : MonoBehaviour
         //SKIP TUTORIAL
         driver.OptionPress.AddListener(() =>
         {
-
+            driverReady = true;
             driver.OptionPress.RemoveAllListeners();
+            Debug.Log("options" + driverReady);
+
 
         });
 
@@ -65,7 +67,7 @@ public class TutorialSequencer : MonoBehaviour
                     {
                         panelStickDriver.gameObject.SetActive(true);
                         orderdriver += 1;
-                        Debug.Log(orderdriver);
+
                     });
                 });
 
@@ -76,6 +78,7 @@ public class TutorialSequencer : MonoBehaviour
             {
                 driverReady = true;
                 driver.BrakePressed.RemoveAllListeners();
+                Debug.Log(driverReady);
             }
 
 
@@ -95,7 +98,7 @@ public class TutorialSequencer : MonoBehaviour
                 }); ;
                 driver.GasPressed.RemoveAllListeners();
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
         });
 
@@ -172,8 +175,9 @@ public class TutorialSequencer : MonoBehaviour
 
         passenger.OptionPress.AddListener(() =>
         {
-
+            passengerReady = true;
             passenger.OptionPress.RemoveAllListeners();
+            Debug.Log(passengerReady);
 
         });
 
@@ -200,6 +204,7 @@ public class TutorialSequencer : MonoBehaviour
             {
                 passengerReady = true;
                 passenger.BrakePressed.RemoveAllListeners();
+                Debug.Log(passengerReady);
             }
 
 
@@ -320,7 +325,6 @@ public class TutorialSequencer : MonoBehaviour
     IEnumerator WaitForReady()
     {
         yield return new WaitUntil(() => driverReady && passengerReady);
-
-        StartCoroutine(Utils.DoFadeIn(panelGasDriver.gameObject, 1, 0, () => GameManager.Instance.FinishLevel()));
+        GameManager.Instance.FinishLevel();
     }
 }

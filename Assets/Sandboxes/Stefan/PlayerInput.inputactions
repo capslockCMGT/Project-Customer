@@ -430,7 +430,7 @@
                 {
                     "name": "",
                     "id": "f8e2fd6f-951d-42cc-800e-18eccff048d7",
-                    "path": "<Gamepad>/{Back}",
+                    "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
