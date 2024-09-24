@@ -44,6 +44,13 @@ public class TutorialSequencer : MonoBehaviour
         StartCoroutine(WaitForReady());
 
         // DRIVER INPUTS 
+        //SKIP TUTORIAL
+        driver.OptionPress.AddListener(() =>
+        {
+
+            driver.OptionPress.RemoveAllListeners();
+
+        });
 
         driver.BrakePressed.AddListener(() =>
         {
@@ -162,6 +169,13 @@ public class TutorialSequencer : MonoBehaviour
         }
 
         // PASSENGER INPUTS
+
+        passenger.OptionPress.AddListener(() =>
+        {
+
+            passenger.OptionPress.RemoveAllListeners();
+
+        });
 
         passenger.BrakePressed.AddListener(() =>
         {
