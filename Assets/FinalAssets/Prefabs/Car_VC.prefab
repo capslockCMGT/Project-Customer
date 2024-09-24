@@ -1231,6 +1231,9 @@ MonoBehaviour:
   ItemGrab:
     m_PersistentCalls:
       m_Calls: []
+  OptionPress:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1043878151290241886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,6 +1347,8 @@ MonoBehaviour:
   _sound:
     Name: Honk
     PopUpIndexOfChosenName: 0
+  _car: {fileID: 4321014292650692184}
+  _speedThreshHold: 0.01
 --- !u!114 &7962352702799397996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3506,6 +3511,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ItemGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OptionPress:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1355784804607396852

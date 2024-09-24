@@ -3,18 +3,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
     [SerializeField] Image _gameOverPanel;
+    [SerializeField] CanvasGroup _fadeScreen;
+    [SerializeField] float _fadeScreenTime = .8f;
 
-    List<PlayerInput> _playerInputs = new List<PlayerInput>(2);
+    readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
     [field: SerializeField] public GameObject PlayerCar { get; private set; }
-
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
             OnMapGenerated();
 
         PlayerCar.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
+        StartCoroutine(Utils.DoFadeOut(_fadeScreen, _fadeScreenTime, 0));
+
     }
 
     void OnDisable()
@@ -74,10 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void FinishLevel()
     {
-        //show UI
-        //make darkening transition etc
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(Utils.DoFadeIn(_fadeScreen, _fadeScreenTime, 0, () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1)));
 
     }
 
