@@ -8,6 +8,7 @@ public class GearShift : MonoBehaviour
 {
     [SerializeField] Transform Renderer;
     [SerializeField] CarControlsHandler carHandler;
+    [SerializeField] float PassengerSetCooldown = 10f;
 
     private void Start()
     {
@@ -23,6 +24,15 @@ public class GearShift : MonoBehaviour
         if (Renderer == null)
             Debug.LogWarning($"gearshift {transform.name} doesnt have a renderer set. can you add it pls");
 
-        grab.onPlayerInteract.AddListener(carHandler.ToggleCarReverse);
+        grab.onPlayerInteract.AddListener((PlayerController controller) => {
+            if (controller.SetGearshiftCooldown > 0)
+                return;
+
+            //waahhhh hardcoding
+            if(controller.Player == 1)
+                controller.SetGearshiftCooldown = PassengerSetCooldown;
+
+            carHandler.ToggleCarReverse(controller);
+            });
     }
 }
