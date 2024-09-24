@@ -41,6 +41,13 @@ public class TutorialSequencer : MonoBehaviour
         PlayerController passenger = players.FirstOrDefault(p => p.Player == 1);
 
         // DRIVER INPUTS 
+        //SKIP TUTORIAL
+        driver.OptionPress.AddListener(() =>
+        {
+
+            driver.OptionPress.RemoveAllListeners();
+
+        });
 
         driver.BrakePressed.AddListener(() =>
         {
@@ -152,6 +159,13 @@ public class TutorialSequencer : MonoBehaviour
         }
 
         // PASSENGER INPUTS
+
+        passenger.OptionPress.AddListener(() =>
+        {
+
+            passenger.OptionPress.RemoveAllListeners();
+
+        });
 
         passenger.BrakePressed.AddListener(() =>
         {
