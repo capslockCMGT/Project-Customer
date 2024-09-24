@@ -11,6 +11,7 @@ public class CarCollisionEffects : MonoBehaviour
         for (int i = 0; i < collision.contactCount; i++)
         {
             var col = collision.GetContact(i);
+            if (col.impulse == Vector3.zero) continue;
             var obj = Instantiate(Effect, col.point, Quaternion.LookRotation(col.impulse));
             
             var parts = obj.GetComponent<ParticleSystem>();
