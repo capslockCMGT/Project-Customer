@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public UnityEvent ItemGrab;
     public UnityEvent OptionPress;
 
+    public float SetGearshiftCooldown = 0;
+
     Vector2 _rightJoystickValue;
     ItemGrabber _grabber;
 
@@ -99,6 +101,12 @@ public class PlayerController : MonoBehaviour
     {
         UpdateRightJoystick?.Invoke(_rightJoystickValue);
 
+    }
+
+    private void Update()
+    {
+        //listen i dont care that this is gross hardcoding. i just want to get this over with
+        SetGearshiftCooldown -= Time.deltaTime;
     }
 
     public void OnItemControl(CallbackContext context)
