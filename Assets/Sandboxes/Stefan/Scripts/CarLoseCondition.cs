@@ -18,7 +18,7 @@ public class CarLoseCondition : MonoBehaviour
         if(_safetyCreditsManager.SafetyCredits < 0)
         {
             _done = true;
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(false, false);
         }
         if (_done || NotLoseCondition())
         {
@@ -31,7 +31,7 @@ public class CarLoseCondition : MonoBehaviour
         _done = _penaltyAccumulation >= _penaltyThreshhold;
 
         if(_done)
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(false, false);
 
     }
 
