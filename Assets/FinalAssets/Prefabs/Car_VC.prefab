@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture1: {fileID: 2800000, guid: 81f613c116395a34a9ae34e169fda976, type: 3}
   Glow: {fileID: 2100000, guid: d7e1545256faaed4c9297c9f45e829b3, type: 2}
-  _reverseColor: {r: 5.9921575, g: 5.9921575, b: 5.9921575, a: 0}
+  _reverseColor: {r: 2.9960787, g: 2.9960787, b: 2.9960787, a: 0}
   _reverseColorOff: {r: 0, g: 0, b: 0, a: 0}
   _grabbable: {fileID: 1133269429651397710}
 --- !u!1 &611079792148784705
@@ -643,13 +643,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaximumSpeed: 30
+  MaximumSpeed: 20
   MaxSpeedBackwards: 20
   EngineStrength: 300
-  BrakeStrength: 5000
+  BrakeStrength: 6000
   FrontWheelBrakeStrengthMultiplier: 0.5
-  MaxTurnAngle: 30
-  CenterOfMassOffset: 0.2
+  MaxTurnAngle: 15
+  CenterOfMassOffset: 0.5
 --- !u!114 &2847147933222837468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1916,8 +1916,8 @@ MonoBehaviour:
   Renderer: {fileID: 6904660203198777245}
   carHandler: {fileID: 2847147933222837468}
   _carController: {fileID: 4321014292650692184}
-  _steeringSens: 1.21
-  _steeringAngle: 49
+  _steeringSens: 30
+  _steeringAngle: 10
   _honksBeforeCooldownStart: 1
   _honkCooldown: 1
   _honkSounds:
@@ -2882,7 +2882,7 @@ Transform:
   m_GameObject: {fileID: 6278304516592279655}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70695174, w: 0.7072619}
-  m_LocalPosition: {x: 0.96700037, y: 0.030000001, z: -0.79}
+  m_LocalPosition: {x: 0.96700037, y: 0.030000001, z: -0.81}
   m_LocalScale: {x: 0.68, y: 0.68, z: 0.68}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3747,7 +3747,7 @@ Transform:
   m_GameObject: {fileID: 8944787549962894266}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70695174, w: 0.7072619}
-  m_LocalPosition: {x: -0.975, y: 0.030000001, z: -0.79}
+  m_LocalPosition: {x: -0.975, y: 0.030000001, z: -0.80999994}
   m_LocalScale: {x: 0.68, y: 0.68, z: 0.68}
   m_ConstrainProportionsScale: 1
   m_Children:
