@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Renderer: {fileID: 3845893286572383455}
+  handMoveSpeed: 250
 --- !u!1 &8413006783281673495
 GameObject:
   m_ObjectHideFlags: 0
