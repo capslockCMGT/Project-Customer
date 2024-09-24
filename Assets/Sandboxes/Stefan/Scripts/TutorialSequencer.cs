@@ -214,6 +214,7 @@ public class TutorialSequencer : MonoBehaviour
                 passenger.ItemInteract.RemoveAllListeners();
                 orderpassenger++;
                 Debug.Log("+pp" + orderpassenger);
+
             }
         });
 
@@ -241,28 +242,8 @@ public class TutorialSequencer : MonoBehaviour
     /// <param name="bufferTime">how much time passes after calling the function before it starts to fade the panel</param>
     void FadePanelAfterSeconds(Image panel, float fadeTime, float bufferTime, Action onComplete = null)
     {
-        StartCoroutine(DoFade(panel, fadeTime, bufferTime, onComplete));
+        StartCoroutine(Utils.DoFadeOut(panel.gameObject, fadeTime, bufferTime, onComplete));
     }
-
-    IEnumerator DoFade(Image panel, float fadeTime, float bufferTime, Action onComplete = null)
-    {
-        yield return new WaitForSeconds(bufferTime);
-        float currTime = fadeTime;
-        CanvasGroup group = panel.GetComponent<CanvasGroup>();
-
-        while (currTime > 0)
-        {
-            group.alpha = currTime/fadeTime;
-
-            currTime -= Time.deltaTime;
-            yield return null;
-        }
-        group.alpha = 0;
-        panel.gameObject.SetActive(false);
-
-        onComplete?.Invoke();
-    }
-
 
     void Start()
     {
