@@ -1095,9 +1095,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SafetyCredits>k__BackingField: 100
-  _sound:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+  _deductionSound:
+    Name: Credit Notice
+    PopUpIndexOfChosenName: 9
   _car: {fileID: 4321014292650692184}
   _speedThreshHold: 0.01
 --- !u!114 &7962352702799397996
