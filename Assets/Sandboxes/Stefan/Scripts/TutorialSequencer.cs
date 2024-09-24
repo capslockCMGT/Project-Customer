@@ -28,8 +28,8 @@ public class TutorialSequencer : MonoBehaviour
 
     int orderdriver = 1;
     int orderpassenger = 1;
-    int passengerReady = 0;
-    int driverReady = 0;
+    bool passengerReady = false;
+    bool driverReady = false;
 
 
     void Interface(GameObject playerCar)
@@ -39,6 +39,9 @@ public class TutorialSequencer : MonoBehaviour
 
         PlayerController driver = players.FirstOrDefault(p => p.Player == 0);
         PlayerController passenger = players.FirstOrDefault(p => p.Player == 1);
+
+        //waits untill both plazers pressed ready to leave tutorial
+        StartCoroutine(WaitForReady());
 
         // DRIVER INPUTS 
         //SKIP TUTORIAL
@@ -51,24 +54,31 @@ public class TutorialSequencer : MonoBehaviour
 
         driver.BrakePressed.AddListener(() =>
         {
-            //write your code here
 
-            //just an example
-            FadePanelAfterSeconds(panelGoalDriver1, 2, 2, () =>
+            if (orderdriver == 1)
             {
-
-                panelGoalDriver2.gameObject.SetActive(true);
-                FadePanelAfterSeconds(panelGoalDriver2, 2, 2, () =>
+                FadePanelAfterSeconds(panelGoalDriver1, 2, 2, () =>
                 {
-                    panelStickDriver.gameObject.SetActive(true);
-                    orderdriver += 1;
-                    Debug.Log(orderdriver);
-                });
-            });
 
-            //write your code here
-            //this stops the input to run the code above again
-            driver.BrakePressed.RemoveAllListeners();
+                    panelGoalDriver2.gameObject.SetActive(true);
+                    FadePanelAfterSeconds(panelGoalDriver2, 2, 2, () =>
+                    {
+                        panelStickDriver.gameObject.SetActive(true);
+                        orderdriver += 1;
+                        Debug.Log(orderdriver);
+                    });
+                });
+
+                //this stops the input to run the code above again
+
+            }
+            else if (orderdriver >= 7)
+            {
+                driverReady = true;
+                driver.BrakePressed.RemoveAllListeners();
+            }
+
+
 
         });
 
@@ -173,16 +183,24 @@ public class TutorialSequencer : MonoBehaviour
 
 
             //write your code here
-            FadePanelAfterSeconds(panelGoalPassenger, 1, 1, () =>
+            if (orderpassenger == 1)
             {
-                panelStickPassenger.gameObject.SetActive(true);
-            });
+                FadePanelAfterSeconds(panelGoalPassenger, 1, 1, () =>
+                {
+                    panelStickPassenger.gameObject.SetActive(true);
+                });
 
-            //write your code here
+                //write your code here
 
-            //this stops the input to run the code above again
-            passenger.BrakePressed.RemoveAllListeners();
-            orderpassenger++;
+                //this stops the input to run the code above again
+
+                orderpassenger++;
+            }
+            else if (orderpassenger >= 4)
+            {
+                passengerReady = true;
+                passenger.BrakePressed.RemoveAllListeners();
+            }
 
 
         });
@@ -258,6 +276,8 @@ public class TutorialSequencer : MonoBehaviour
             car = GameManager.Instance.PlayerCar;
         } while (car == null);
         onGet(car);
+
+
     }
 
     /// <summary>
@@ -279,7 +299,7 @@ public class TutorialSequencer : MonoBehaviour
 
         while (currTime > 0)
         {
-            group.alpha = currTime/fadeTime;
+            group.alpha = currTime / fadeTime;
 
             currTime -= Time.deltaTime;
             yield return null;
@@ -296,20 +316,11 @@ public class TutorialSequencer : MonoBehaviour
         StartCoroutine(GetPlayerCar(Interface));
     }
 
-    private void FixedUpdate()
-    {
-        if (orderdriver >= 7)
-        {
-            driverReady += 1;
-        }
-        if (orderpassenger >= 4)
-        {
-            passengerReady += 1;
-        }
 
-        if (driverReady >= 1 && passengerReady >= 1)
-        {
-            gameManager.FinishLevel();
-        }
+    IEnumerator WaitForReady()
+    {
+        yield return new WaitUntil(() => driverReady && passengerReady);
+
+        StartCoroutine(Utils.DoFadeIn(panelGasDriver.gameObject, 1, 0, () => GameManager.Instance.FinishLevel()));
     }
 }
