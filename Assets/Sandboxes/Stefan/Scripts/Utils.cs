@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Utils 
 {
@@ -56,4 +59,52 @@ public static class Utils
         Vector2Int manhatanVector = a - b;
         return Mathf.Abs(manhatanVector.x) + Mathf.Abs(manhatanVector.y);
     }
+
+    public static IEnumerator DoFadeOut(GameObject panel, float fadeTime, float bufferTime, Action onComplete = null)
+    {
+        CanvasGroup group = panel.GetComponent<CanvasGroup>();
+
+        yield return DoFadeOut(group, fadeTime, bufferTime, onComplete);
+    }
+
+    public static IEnumerator DoFadeOut(CanvasGroup group, float fadeTime, float bufferTime,Action onComplete = null)
+    {
+        yield return new WaitForSeconds(bufferTime);
+        float currTime = fadeTime;
+        while (currTime > 0)
+        {
+            group.alpha = currTime / fadeTime;
+
+            currTime -= Time.deltaTime;
+            yield return null;
+        }
+        group.alpha = 0;
+        group.gameObject.SetActive(false);
+
+        onComplete?.Invoke();
+    }
+
+    public static IEnumerator DoFadeIn(GameObject panel, float fadeTime, float bufferTime, Action onComplete = null)
+    {
+        CanvasGroup group = panel.GetComponent<CanvasGroup>();
+
+        yield return DoFadeIn(group, fadeTime, bufferTime, onComplete);
+    }
+
+    public static IEnumerator DoFadeIn(CanvasGroup group, float fadeTime, float bufferTime, Action onComplete = null)
+    {
+        yield return new WaitForSeconds(bufferTime);
+        float currTime = fadeTime;
+        while (currTime > 0)
+        {
+            group.alpha = 1 - (currTime / fadeTime);
+
+            currTime -= Time.deltaTime;
+            yield return null;
+        }
+        group.alpha = 1;
+
+        onComplete?.Invoke();
+    }
+
 }
