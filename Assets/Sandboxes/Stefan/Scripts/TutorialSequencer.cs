@@ -21,10 +21,15 @@ public class TutorialSequencer : MonoBehaviour
     [SerializeField] Image panelGrabPassenger1;
     [SerializeField] Image panelGrabPassenger2;
     [SerializeField] Image panelGrabPassenger3;
+    [SerializeField] Image panelEndDriver;
+    [SerializeField] Image panelEndPassenger;
+    [SerializeField] GameManager gameManager;
 
 
     int orderdriver = 1;
     int orderpassenger = 1;
+    int passengerReady = 0;
+    int driverReady = 0;
 
 
     void Interface(GameObject playerCar)
@@ -57,6 +62,7 @@ public class TutorialSequencer : MonoBehaviour
             //write your code here
             //this stops the input to run the code above again
             driver.BrakePressed.RemoveAllListeners();
+
         });
 
 
@@ -66,7 +72,10 @@ public class TutorialSequencer : MonoBehaviour
             if (orderdriver >= 6)
             {
 
-                FadePanelAfterSeconds(panelGasDriver, 1, 1);
+                FadePanelAfterSeconds(panelGasDriver, 1, 1, () =>
+                {
+                    panelEndDriver.gameObject.SetActive(true);
+                }); ;
                 driver.GasPressed.RemoveAllListeners();
                 orderdriver += 1;
                 Debug.Log(orderdriver);
@@ -84,7 +93,7 @@ public class TutorialSequencer : MonoBehaviour
 
                 driver.ItemGrab.RemoveAllListeners();
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
         });
 
@@ -99,7 +108,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 driver.ItemInteract.RemoveAllListeners();
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
         });
 
@@ -111,7 +120,7 @@ public class TutorialSequencer : MonoBehaviour
             //example
             if (v != Vector2.zero && orderdriver >= 2)
             {
-                Debug.Log("updating");
+
 
                 FadePanelAfterSeconds(panelStickDriver, 1, 1, () =>
                 {
@@ -119,7 +128,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 driver.UpdateRightJoystick.RemoveListener(onJoystickRightDriver);
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
 
         }
@@ -138,7 +147,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftDriver);
                 orderdriver += 1;
-                Debug.Log(orderdriver);
+
             }
         }
 
@@ -146,7 +155,7 @@ public class TutorialSequencer : MonoBehaviour
 
         passenger.BrakePressed.AddListener(() =>
         {
-            Debug.Log(" before pp" + orderpassenger);
+
 
 
             //write your code here
@@ -154,12 +163,13 @@ public class TutorialSequencer : MonoBehaviour
             {
                 panelStickPassenger.gameObject.SetActive(true);
             });
+
             //write your code here
 
             //this stops the input to run the code above again
             passenger.BrakePressed.RemoveAllListeners();
             orderpassenger++;
-            Debug.Log("+pp" + orderpassenger);
+
 
         });
 
@@ -178,7 +188,7 @@ public class TutorialSequencer : MonoBehaviour
 
                 passenger.UpdateRightJoystick.RemoveListener(onJoystickRightPassenger);
                 orderpassenger++;
-                Debug.Log("+pp" + orderpassenger);
+
             }
         }
 
@@ -198,7 +208,7 @@ public class TutorialSequencer : MonoBehaviour
                 });
                 passenger.ItemGrab.RemoveAllListeners();
                 orderpassenger++;
-                Debug.Log("+pp" + orderpassenger);
+
             }
         });
 
@@ -209,11 +219,13 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGrabPassenger2, 1, 1, () =>
                 {
                     panelGrabPassenger3.gameObject.SetActive(true);
-                    FadePanelAfterSeconds(panelGrabPassenger3, 1, 1);
+                    FadePanelAfterSeconds(panelGrabPassenger3, 2, 2, () =>
+                    {
+                        panelEndPassenger.gameObject.SetActive(true);
+                    }); ;
                 });
                 passenger.ItemInteract.RemoveAllListeners();
                 orderpassenger++;
-                Debug.Log("+pp" + orderpassenger);
 
             }
         });
@@ -242,11 +254,48 @@ public class TutorialSequencer : MonoBehaviour
     /// <param name="bufferTime">how much time passes after calling the function before it starts to fade the panel</param>
     void FadePanelAfterSeconds(Image panel, float fadeTime, float bufferTime, Action onComplete = null)
     {
-        StartCoroutine(Utils.DoFadeOut(panel.gameObject, fadeTime, bufferTime, onComplete));
+        StartCoroutine(DoFade(panel, fadeTime, bufferTime, onComplete));
     }
+
+    IEnumerator DoFade(Image panel, float fadeTime, float bufferTime, Action onComplete = null)
+    {
+        yield return new WaitForSeconds(bufferTime);
+        float currTime = fadeTime;
+        CanvasGroup group = panel.GetComponent<CanvasGroup>();
+
+        while (currTime > 0)
+        {
+            group.alpha = currTime/fadeTime;
+
+            currTime -= Time.deltaTime;
+            yield return null;
+        }
+        group.alpha = 0;
+        panel.gameObject.SetActive(false);
+
+        onComplete?.Invoke();
+    }
+
 
     void Start()
     {
         StartCoroutine(GetPlayerCar(Interface));
+    }
+
+    private void FixedUpdate()
+    {
+        if (orderdriver >= 7)
+        {
+            driverReady += 1;
+        }
+        if (orderpassenger >= 4)
+        {
+            passengerReady += 1;
+        }
+
+        if (driverReady >= 1 && passengerReady >= 1)
+        {
+            gameManager.FinishLevel();
+        }
     }
 }
