@@ -1,5 +1,6 @@
 using AYellowpaper.SerializedCollections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -77,12 +78,12 @@ public class SoundManager : MonoBehaviour
         return _activeSources.Any(s => s.ID == id);
     }
 
-    int PlaySound(string soundName, float volumeMult = 1)
+    (int, AudioSource) PlaySound(string soundName, float volumeMult = 1)
     {
         if (!SoundClips.ContainsKey(soundName))
         {
             Debug.LogError($"There is no sound named {soundName}");
-            return -1;
+            return (-1,null);
         }
         int soundID = _currentID++;
         AudioSource source = GetSource(soundID);
@@ -92,14 +93,27 @@ public class SoundManager : MonoBehaviour
         source.loop = data.Loop;
         source.Play();
 
-        return soundID;
+        return (soundID, source);
+    }
+
+    IEnumerator WaitForSoundEnd(AudioSource source, Action onComplete)
+    {
+        yield return new WaitUntil(()=> !source.isPlaying);
+        onComplete?.Invoke();
     }
 
     public int PlaySound(SoundName soundName, float volumeMult = 1)
     {
-        return PlaySound(soundName.Name, volumeMult);
+        (int id, _) = PlaySound(soundName.Name, volumeMult);
+        return id;
     }
 
+    public int PlaySound(SoundName soundName, Action onComplete, float volumeMult = 1)
+    {
+        (int id, AudioSource audioSource) = PlaySound(soundName.Name, volumeMult);
+        StartCoroutine(WaitForSoundEnd(audioSource, onComplete));
+        return id;
+    }
 
     public void StopSound(int id)
     {

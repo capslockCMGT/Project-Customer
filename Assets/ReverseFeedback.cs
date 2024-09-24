@@ -1,35 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ReverseFeedback : MonoBehaviour
 {
     public Texture2D texture1;
     public Material Glow;
-    public float State;
+    bool _isReversed;
     [ColorUsageAttribute(true, true)]
-    public Color Color1;
+    public Color _reverseColor;
     [ColorUsageAttribute(true, true)]
-    public Color Color2;
+    public Color _reverseColorOff;
+    [SerializeField] GrabbableItem _grabbable;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-
+        _grabbable.onPlayerInteract.AddListener((c) =>
+        {
+            _isReversed = !_isReversed;
+            if (_isReversed)
+            {
+                Glow.SetColor("_Glow_Color", _reverseColor);
+            }
+            else
+            {
+                Glow.SetColor("_Glow_Color", _reverseColorOff);
+            }
+        });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (State == 1)
-        {
-            Glow.SetColor("_Glow_Color", Color1);
-        }
-        else if (State == 2)
-        {
-            Glow.SetColor("_Glow_Color", Color2);
-        }
-
-    }
 }

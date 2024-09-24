@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Glow 13
-  m_Shader: {fileID: -6465566751694194690, guid: d424c64cb2be9744aba06aadfc6ffa60,
+  m_Shader: {fileID: -6465566751694194690, guid: dda3b2d4e06b79344a8968e2a731e77f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
