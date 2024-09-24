@@ -40,6 +40,9 @@ public class TutorialSequencer : MonoBehaviour
         PlayerController driver = players.FirstOrDefault(p => p.Player == 0);
         PlayerController passenger = players.FirstOrDefault(p => p.Player == 1);
 
+        //waits untill both plazers pressed ready to leave tutorial
+        StartCoroutine(WaitForReady());
+
         // DRIVER INPUTS 
 
         driver.BrakePressed.AddListener(() =>
@@ -259,6 +262,8 @@ public class TutorialSequencer : MonoBehaviour
             car = GameManager.Instance.PlayerCar;
         } while (car == null);
         onGet(car);
+
+
     }
 
     /// <summary>
@@ -297,13 +302,11 @@ public class TutorialSequencer : MonoBehaviour
         StartCoroutine(GetPlayerCar(Interface));
     }
 
-    private void FixedUpdate()
+
+    IEnumerator WaitForReady()
     {
+        yield return new WaitUntil(() => driverReady && passengerReady);
 
-
-        if (driverReady && passengerReady)
-        {
-            gameManager.FinishLevel();
-        }
+        StartCoroutine(Utils.DoFadeIn(panelGasDriver.gameObject, 1, 0, () => GameManager.Instance.FinishLevel()));
     }
 }

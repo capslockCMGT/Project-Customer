@@ -309,9 +309,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457692778450349730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000028169922, y: -0.86602545, z: 0.5, w: -0.000000044703484}
-  m_LocalPosition: {x: -0.067, y: 0.0565, z: -0.0568}
-  m_LocalScale: {x: 0.004, y: 0.0040000007, z: 0.004}
+  m_LocalRotation: {x: 0.00000002816992, y: -0.8660254, z: 0.5, w: -0.00000004470348}
+  m_LocalPosition: {x: -0.0874, y: 0.0499, z: -0.0453}
+  m_LocalScale: {x: 0.004, y: 0.004000001, z: 0.004}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8398171770084861345}
@@ -378,11 +378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a2cc539a1414b4a97ad17821e04b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture1: {fileID: 0}
-  Glow: {fileID: 0}
-  State: 0
-  Color1: {r: 1, g: 1, b: 1, a: 0}
-  Color2: {r: 0, g: 0, b: 0, a: 0}
+  texture1: {fileID: 2800000, guid: 81f613c116395a34a9ae34e169fda976, type: 3}
+  Glow: {fileID: 2100000, guid: d7e1545256faaed4c9297c9f45e829b3, type: 2}
+  _reverseColor: {r: 5.9921575, g: 5.9921575, b: 5.9921575, a: 0}
+  _reverseColorOff: {r: 0, g: 0, b: 0, a: 0}
+  _grabbable: {fileID: 1133269429651397710}
 --- !u!1 &611079792148784705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,7 +2303,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4080344074193978752}
   m_LocalRotation: {x: 0.000000028169922, y: -0.86602545, z: 0.5, w: -0.000000044703484}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0569}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0415}
   m_LocalScale: {x: 0.006, y: 0.0040000007, z: 0.004}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2311,7 +2311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 60, y: -180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.6, y: 0.2}
-  m_AnchoredPosition: {x: -0.0058, y: 0.0633}
+  m_AnchoredPosition: {x: -0.0286, y: 0.0545}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &6054291981119224511
