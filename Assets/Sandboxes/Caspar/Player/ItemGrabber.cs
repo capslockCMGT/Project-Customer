@@ -186,13 +186,12 @@ public class ItemGrabber : MonoBehaviour
                 workingHand.itemRB.velocity = Car.velocity;
             }
 
-            Debug.Log(workingHandRenderer);
             workingHandRenderer.Grab(grabbable.Renderer, hitinfo.point);
 
             if (DisableGravity && hitinfo.rigidbody != null)
                 hitinfo.rigidbody.useGravity = false;
 
-            if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None)
+            if (hitinfo.rigidbody != null && hitinfo.rigidbody.interpolation == RigidbodyInterpolation.None && !hitinfo.rigidbody.isKinematic)
                 Debug.Log($"grabbed rigidbody '{hitinfo.rigidbody.gameObject.name}' has interpolation set to None, movement may look janky");
             grabbable.Grab(controller);
         }
