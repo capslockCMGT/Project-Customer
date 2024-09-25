@@ -916,7 +916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 35787296}
-  _carPrefab: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
+  _carPrefab: {fileID: 7491304573171201693, guid: 0ca10e2526c378d4db712fb3764c0407,
     type: 3}
   _fadeScreen: {fileID: 1230828881}
   _fadeScreenTime: 0.8

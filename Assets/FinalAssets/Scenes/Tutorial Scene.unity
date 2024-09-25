@@ -445,8 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1e9a507f0c06942b0c1201bf1e08d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcPrefab: {fileID: 5732280243949051071, guid: 0d726a57ac4176540a71d350eddee2f9,
-    type: 3}
+  _npcPrefabs: []
   _npcHolder: {fileID: 2125844193}
 --- !u!1 &47978562
 GameObject:
@@ -2358,7 +2357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 35787296}
-  _carPrefab: {fileID: 2628084228180285201, guid: b364887eec389f74580b86f83be56090,
+  _carPrefab: {fileID: 6148675369328509564, guid: 2eeafc576b2b298488abf59563c9065b,
     type: 3}
   _fadeScreen: {fileID: 1120180619}
   _fadeScreenTime: 3.12
