@@ -162,7 +162,7 @@ MonoBehaviour:
     type: 3}
   _tPrefab: {fileID: 8011886544565409896, guid: da2d33e4f3c130a4b9773d8034695f80,
     type: 3}
-  _cornerPrefab: {fileID: 8011886544565409896, guid: 3165b8cfa58e62a4788069e152d6304b,
+  _cornerPrefab: {fileID: 8011886544565409896, guid: 4320a8022fe505745812a30e9b91c12e,
     type: 3}
   _blankPrefab: {fileID: 8011886544565409896, guid: 42b0c7fc898b1eb42a5f660683013fa9,
     type: 3}
@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1e9a507f0c06942b0c1201bf1e08d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcPrefab: {fileID: 5732280243949051071, guid: 0d726a57ac4176540a71d350eddee2f9,
-    type: 3}
+  _npcPrefabs:
+  - {fileID: 5732280243949051071, guid: 0d726a57ac4176540a71d350eddee2f9, type: 3}
   _npcHolder: {fileID: 2125844193}
 --- !u!1 &52199710
 GameObject:

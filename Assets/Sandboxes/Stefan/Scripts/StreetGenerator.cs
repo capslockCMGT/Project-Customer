@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(MyGrid))]
 public class StreetGenerator : MonoBehaviour
 {
-    [SerializeField] NPC _npcPrefab;
+    [SerializeField] NPC[] _npcPrefabs;
     [SerializeField] Transform _npcHolder;
 
     MyGrid _cityGenerator;
@@ -46,8 +46,8 @@ public class StreetGenerator : MonoBehaviour
             CrossManager crossPoint = cell.WorldObj.GetComponentInChildren<CrossManager>();
             if (crossPoint == null) continue;
 
-            Instantiate(_npcPrefab, crossPoint.transform.position, Quaternion.identity, _npcHolder);
-            Instantiate(_npcPrefab, crossPoint.transform.position, Quaternion.identity, _npcHolder);
+            Instantiate(_npcPrefabs[UnityEngine.Random.Range(0, _npcPrefabs.Length)], crossPoint.transform.position, Quaternion.identity, _npcHolder);
+            Instantiate(_npcPrefabs[UnityEngine.Random.Range(0, _npcPrefabs.Length)], crossPoint.transform.position, Quaternion.identity, _npcHolder);
         }
 
         //instantiate random crosswalks
