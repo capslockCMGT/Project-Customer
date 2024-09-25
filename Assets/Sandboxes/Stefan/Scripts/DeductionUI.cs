@@ -55,6 +55,6 @@ public class DeductionUI : MonoBehaviour
 
     void UpdateTotalCount(int val)
     {
-        _totalCountMesh.text = "Count: " +  val + "$";
+        _totalCountMesh.text = "Current credits: " + val + "$";
     }
 }
