@@ -1515,6 +1515,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4537572436796302764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7510982972463387305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5238152932840764322}
+  - component: {fileID: 7200073101449474008}
+  m_Layer: 0
+  m_Name: Road Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5238152932840764322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510982972463387305}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8647630973829367811}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7200073101449474008
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510982972463387305}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.2561963, z: 1}
+  m_Center: {x: 0, y: -0.121901855, z: 0}
 --- !u!1 &7564342970589627842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,7 +1793,6 @@ GameObject:
   - component: {fileID: 1540286596480447933}
   - component: {fileID: 6914539774658325591}
   - component: {fileID: 4623541840702658635}
-  - component: {fileID: 2615526507787582997}
   m_Layer: 0
   m_Name: Cross
   m_TagString: Untagged
@@ -1762,6 +1814,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1522567738036029483}
+  - {fileID: 5238152932840764322}
   - {fileID: 1331481573984982547}
   - {fileID: 5559705054985779511}
   - {fileID: 8317110887296605534}
@@ -1873,27 +1926,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3203007, y: 0.34659353, z: 0.33109468}
   m_Center: {x: 0.35, y: 0.15, z: -0.35}
---- !u!65 &2615526507787582997
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011886544565409896}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.07838771, z: 1}
-  m_Center: {x: 0, y: -0.032602325, z: 0}
 --- !u!1 &8035729784182454280
 GameObject:
   m_ObjectHideFlags: 0
