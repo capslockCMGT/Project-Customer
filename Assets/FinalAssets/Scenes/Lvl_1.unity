@@ -237,6 +237,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _npcPrefabs:
+  - {fileID: 5732280243949051071, guid: a47b69587b3c5ac49a154e91393c4e80, type: 3}
+  - {fileID: 5732280243949051071, guid: 9d5e0186eaf87414c8ec4f9da7a599ba, type: 3}
+  - {fileID: 5732280243949051071, guid: 3f297ab08aae32a45809fa39a2e43ae3, type: 3}
+  - {fileID: 5732280243949051071, guid: 61b73d6307c3dc245a15375e1c1fbcdf, type: 3}
+  - {fileID: 5732280243949051071, guid: 8ead62fca6f5f0148a068f69ebb69d1b, type: 3}
   - {fileID: 5732280243949051071, guid: 0d726a57ac4176540a71d350eddee2f9, type: 3}
   _npcHolder: {fileID: 2125844193}
 --- !u!1 &52199710

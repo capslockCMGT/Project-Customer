@@ -237,8 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1e9a507f0c06942b0c1201bf1e08d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcPrefab: {fileID: 5732280243949051071, guid: 0d726a57ac4176540a71d350eddee2f9,
-    type: 3}
+  _npcPrefabs: []
   _npcHolder: {fileID: 2125844193}
 --- !u!1 &52199710
 GameObject:
@@ -303,10 +302,13 @@ MonoBehaviour:
   _grid: {fileID: 35787296}
   _carPrefab: {fileID: 1582638049416433318, guid: b9539473c0ad1a14aa27fb874cc6ece3,
     type: 3}
-  _driverGameOverPanel: {fileID: 0}
-  _passengerGameOverPanel: {fileID: 0}
   _fadeScreen: {fileID: 0}
   _fadeScreenTime: 0.8
+  _passengerGameOver: {fileID: 0}
+  _driverGameOver: {fileID: 0}
+  _passengerWin: {fileID: 0}
+  _driverWin: {fileID: 0}
+  _gameOverTest: 0
   <PlayerCar>k__BackingField: {fileID: 0}
 --- !u!4 &356019372
 Transform:

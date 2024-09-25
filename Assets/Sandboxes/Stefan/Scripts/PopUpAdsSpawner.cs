@@ -1,47 +1,30 @@
 using System.Collections;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class PopUpAdsSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] _ads;
     [SerializeField] Range _spawnTimeRange;
+    [SerializeField] float _activationCooldown;
     Transform[] _randomSpots;
 
-    Coroutine _coroutine;
+    float _time;
+
 
     void Start()
     {
         _randomSpots = GetComponentsInChildren<Transform>();
-        StartSpawning();    
     }
     
-    public void StartSpawning()
+    public void PutAdOnRandomSpot()
     {
-        _coroutine = StartCoroutine(Timer());
-    }
+        if (Time.time - _time < _activationCooldown) return;
 
-    public void StopSpawning()
-    {
-        StopCoroutine(_coroutine);
-    }
+        _time = Time.time;
+        Transform[] openSpots = _randomSpots.Where(s => s.childCount == 0).ToArray();
 
-    IEnumerator Timer()
-    {
-        yield return new WaitForSeconds(Random.Range(_spawnTimeRange.Min, _spawnTimeRange.Max));
-
-        PutAdOnSpot(Random.Range(0, _randomSpots.Length));
-
-        _coroutine = StartCoroutine(Timer());
-    }
-
-    void PutAdOnSpot(int index)
-    {
-        Transform spot = _randomSpots[index];
-
-        if (spot.childCount > 0) return;
-
-        Instantiate(_ads[Random.Range(0, _ads.Length)], spot);
+        Instantiate(_ads[Random.Range(0, _ads.Length)], openSpots[Random.Range(0, openSpots.Length)]);
 
     }
 }
