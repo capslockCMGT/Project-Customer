@@ -17,6 +17,7 @@ public class Phone : MonoBehaviour
 
     public event Action<PlayerController> Grabbed;
     public bool CanCall { get; set; } = true;
+    int _callSoundID = -1;
 
     void Awake()
     {
@@ -45,9 +46,13 @@ public class Phone : MonoBehaviour
 
     public void StartCall()
     {
+        if(_callSoundID != -1)
+        {
+            SoundManager.Instance.StopSound( _callSoundID );
+        }
         _idleState.SetActive(false);
         _talkState.SetActive(false);
-        SoundManager.Instance.PlaySound(_callSound);
+        _callSoundID = SoundManager.Instance.PlaySound(_callSound);
         
         _callState.SetActive(true);
     }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _passengerWin;
     [SerializeField] GameObject _driverWin;
     [SerializeField] bool _gameOverTest;
+    [SerializeField] bool _lockCursorOnStart = true;
 
     readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
         }
 
 
+        if(_lockCursorOnStart)
+            Cursor.lockState = CursorLockMode.Locked;
 
         StartCoroutine(Utils.DoFadeOut(_fadeScreen, _fadeScreenTime, 0));
 

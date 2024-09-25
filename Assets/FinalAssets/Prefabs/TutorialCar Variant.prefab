@@ -83,6 +83,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialCar Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8458823581964245096, guid: 0ca10e2526c378d4db712fb3764c0407,
+        type: 3}
+      propertyPath: _callRange.Max
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458823581964245096, guid: 0ca10e2526c378d4db712fb3764c0407,
+        type: 3}
+      propertyPath: _callRange.Min
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8589914642641892043, guid: 0ca10e2526c378d4db712fb3764c0407,
         type: 3}
       propertyPath: m_Enabled

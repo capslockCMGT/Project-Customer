@@ -161,6 +161,7 @@ MonoBehaviour:
   _passengerWin: {fileID: 0}
   _driverWin: {fileID: 0}
   _gameOverTest: 0
+  _lockCursorOnStart: 1
   <PlayerCar>k__BackingField: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
 --- !u!4 &325936699
@@ -981,7 +982,7 @@ MonoBehaviour:
         Name: IntroSound
         PopUpIndexOfChosenName: 15
       Value:
-        Volume: 0.753
+        Volume: 1
         Clip: {fileID: 8300000, guid: 9de94ee9b4b7fb54580f3f4e90187955, type: 3}
         Loop: 0
     - Key:

@@ -3624,6 +3624,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightwalks
       objectReference: {fileID: 0}
+    - target: {fileID: 2110425751847551080, guid: 3cba1611c2a388144b6311f327673d15,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662838089454795970, guid: 3cba1611c2a388144b6311f327673d15,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702562285942213618, guid: 3cba1611c2a388144b6311f327673d15,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381117720846523801, guid: 3cba1611c2a388144b6311f327673d15,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496440338140741971, guid: 3cba1611c2a388144b6311f327673d15,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7515780488414542675, guid: 3cba1611c2a388144b6311f327673d15,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3689,7 +3714,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6561068427714535829, guid: 3cba1611c2a388144b6311f327673d15, type: 3}
+    - {fileID: 2238646065661331022, guid: 3cba1611c2a388144b6311f327673d15, type: 3}
+    - {fileID: 3591736989230869016, guid: 3cba1611c2a388144b6311f327673d15, type: 3}
+    - {fileID: 8015103113276010890, guid: 3cba1611c2a388144b6311f327673d15, type: 3}
+    - {fileID: 7206670977425296947, guid: 3cba1611c2a388144b6311f327673d15, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

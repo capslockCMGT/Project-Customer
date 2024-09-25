@@ -1619,8 +1619,8 @@ MonoBehaviour:
   Renderer: {fileID: 5094216157829565239}
   carHandler: {fileID: 2498693049502525786}
   _carController: {fileID: 4026741183918657276}
-  _steeringSens: 150
-  _steeringAngle: 49
+  _steeringSens: 130
+  _steeringAngle: 100
   _honksBeforeCooldownStart: 1
   _honkCooldown: 1
   _honkSounds:
@@ -2569,7 +2569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture1: {fileID: 2800000, guid: 81f613c116395a34a9ae34e169fda976, type: 3}
   Glow: {fileID: 2100000, guid: d7e1545256faaed4c9297c9f45e829b3, type: 2}
-  _reverseColor: {r: 5.9921575, g: 5.9921575, b: 5.9921575, a: 0}
+  _reverseColor: {r: 0.86039776, g: 0.86039776, b: 0.86039776, a: 0}
   _reverseColorOff: {r: 0, g: 0, b: 0, a: 0}
   _grabbable: {fileID: 1495494695958770121}
 --- !u!1 &5511997074182639531
@@ -2758,7 +2758,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2549243761998595747}
+  - {fileID: 6875235660231228883}
   m_Father: {fileID: 7800304389657966447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6333233318009640077
@@ -3174,6 +3174,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7060238365786563363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6875235660231228883}
+  m_Layer: 9
+  m_Name: DoorPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6875235660231228883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060238365786563363}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2549243761998595747}
+  m_Father: {fileID: 6851166339986318261}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7210117871243734227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3919,7 +3951,7 @@ GameObject:
   - component: {fileID: 1495494695958770121}
   - component: {fileID: 1319404250811126322}
   - component: {fileID: 7558616005191543257}
-  - component: {fileID: 8546102573384772257}
+  - component: {fileID: 3973677680355870124}
   m_Layer: 9
   m_Name: Gearshift
   m_TagString: Interactable
@@ -4075,8 +4107,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &8546102573384772257
-SphereCollider:
+--- !u!65 &3973677680355870124
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4094,8 +4126,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4.79
-  m_Center: {x: 0, y: -0.018524528, z: -2.49}
+  m_Size: {x: 12.06, y: 3.3676033, z: 20.29}
+  m_Center: {x: 1.3, y: -0.018524528, z: 0.0035889149}
 --- !u!1 &8361230123379303612
 GameObject:
   m_ObjectHideFlags: 0
@@ -4124,11 +4156,11 @@ Transform:
   m_GameObject: {fileID: 8361230123379303612}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000014722347, y: 0.05699918, z: 0}
+  m_LocalPosition: {x: -0.000014722347, y: 0.05, z: 0}
   m_LocalScale: {x: 0.0075665815, y: 0.0009964335, z: 0.00016142009}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6851166339986318261}
+  m_Father: {fileID: 6875235660231228883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5983058302176341322
 MeshFilter:

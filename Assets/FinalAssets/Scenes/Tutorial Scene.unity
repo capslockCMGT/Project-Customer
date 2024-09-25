@@ -445,7 +445,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1e9a507f0c06942b0c1201bf1e08d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcPrefabs: []
+  _npcPrefabs:
+  - {fileID: 5732280243949051071, guid: 0d726a57ac4176540a71d350eddee2f9, type: 3}
+  - {fileID: 5732280243949051071, guid: a47b69587b3c5ac49a154e91393c4e80, type: 3}
+  - {fileID: 5732280243949051071, guid: 9d5e0186eaf87414c8ec4f9da7a599ba, type: 3}
+  - {fileID: 5732280243949051071, guid: 3f297ab08aae32a45809fa39a2e43ae3, type: 3}
+  - {fileID: 5732280243949051071, guid: 61b73d6307c3dc245a15375e1c1fbcdf, type: 3}
+  - {fileID: 5732280243949051071, guid: 8ead62fca6f5f0148a068f69ebb69d1b, type: 3}
   _npcHolder: {fileID: 2125844193}
 --- !u!1 &47978562
 GameObject:
@@ -2045,6 +2051,7 @@ MonoBehaviour:
   _passengerWin: {fileID: 0}
   _driverWin: {fileID: 0}
   _gameOverTest: 0
+  _lockCursorOnStart: 1
   <PlayerCar>k__BackingField: {fileID: 0}
 --- !u!4 &356019372
 Transform:
@@ -2746,8 +2753,8 @@ MonoBehaviour:
   panelGasDriver: {fileID: 518104319}
   panelGoalPassenger: {fileID: 1128923046}
   panelStickPassenger: {fileID: 1073800246}
-  panelGrabPassenger1: {fileID: 0}
-  panelGrabPassenger2: {fileID: 0}
+  panelGrabPassenger1: {fileID: 1669537901}
+  panelGrabPassenger2: {fileID: 1584877300}
   panelGrabPassenger3: {fileID: 1099222311}
   panelEndDriver: {fileID: 211873814}
   panelEndPassenger: {fileID: 1370225773}
@@ -11096,11 +11103,25 @@ MonoBehaviour:
   _soundClips:
     _serializedList:
     - Key:
+        Name: Car accelerate
+        PopUpIndexOfChosenName: 16
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: ec3e59bfdf654f241b28290138d77938, type: 3}
+        Loop: 0
+    - Key:
         Name: PhoneCall
         PopUpIndexOfChosenName: 11
       Value:
         Volume: 0.753
         Clip: {fileID: 8300000, guid: 502f60b39eaad7549bd39cedb496c364, type: 3}
+        Loop: 0
+    - Key:
+        Name: EngineIdle
+        PopUpIndexOfChosenName: 12
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 4d65b2ddf91f94345b2dae33120c147f, type: 3}
         Loop: 0
     - Key:
         Name: PhoneTalk
