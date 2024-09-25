@@ -265,7 +265,7 @@ MonoBehaviour:
   _carRedLight2: {fileID: 2419418123976564798}
   _carYellowLight2: {fileID: 4213372371679786951}
   _carGreenLight2: {fileID: 607835393880595350}
-  _lightSwitchTime: 0.4
+  _lightSwitchTime: 2
 --- !u!65 &6470762915976329364
 BoxCollider:
   m_ObjectHideFlags: 0

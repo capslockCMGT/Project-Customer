@@ -4156,6 +4156,13 @@ MonoBehaviour:
   _soundClips:
     _serializedList:
     - Key:
+        Name: PhoneCall
+        PopUpIndexOfChosenName: 11
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 502f60b39eaad7549bd39cedb496c364, type: 3}
+        Loop: 1
+    - Key:
         Name: EngineIdle
         PopUpIndexOfChosenName: 12
       Value:
@@ -4215,7 +4222,7 @@ MonoBehaviour:
         Name: Honk3
         PopUpIndexOfChosenName: 2
       Value:
-        Volume: 0.753
+        Volume: 0.5
         Clip: {fileID: 8300000, guid: 1f65d97cb83a1314fbe14ebb0d9582a0, type: 3}
         Loop: 0
     - Key:
