@@ -4996,6 +4996,16 @@ PrefabInstance:
       propertyPath: onPlayerInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: _callRange.Max
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: _callRange.Min
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3326446383880971365, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
       propertyPath: m_Size.x
