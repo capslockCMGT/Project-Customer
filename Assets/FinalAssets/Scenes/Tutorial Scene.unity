@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 35787296}
-  _carPrefab: {fileID: 2628084228180285201, guid: b364887eec389f74580b86f83be56090,
+  _carPrefab: {fileID: 6148675369328509564, guid: 2eeafc576b2b298488abf59563c9065b,
     type: 3}
   _fadeScreen: {fileID: 1120180619}
   _fadeScreenTime: 3.12
