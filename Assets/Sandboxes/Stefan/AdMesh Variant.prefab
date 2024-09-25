@@ -12,11 +12,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec4186ccea8482c4981b684bf1be8289, type: 2}
+      objectReference: {fileID: 2100000, guid: 8ee20bf243e34e241bd1d518912b5e94, type: 2}
     - target: {fileID: 389965249080716159, guid: 698179763c32c0748ae9400e7fbf71a2,
         type: 3}
       propertyPath: m_Name
       value: AdMesh Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745134564708320186, guid: 698179763c32c0748ae9400e7fbf71a2,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9025304845478970960, guid: 698179763c32c0748ae9400e7fbf71a2,
         type: 3}
