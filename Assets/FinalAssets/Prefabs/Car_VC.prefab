@@ -538,7 +538,6 @@ Transform:
   - {fileID: 8398171770084861345}
   - {fileID: 728902454614120251}
   - {fileID: 81317081054430049}
-  - {fileID: 7378509637936740544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2117219472132942864
@@ -665,6 +664,9 @@ MonoBehaviour:
   engineSound:
     Name: EngineIdle
     PopUpIndexOfChosenName: 12
+  accelerateSound:
+    Name: Car accelerate
+    PopUpIndexOfChosenName: 16
 --- !u!114 &6588284555081939846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3378,37 +3380,6 @@ Transform:
   - {fileID: 1928886433885412296}
   - {fileID: 2227572484847509040}
   - {fileID: 1583180038377348382}
-  m_Father: {fileID: 426732384452381009}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6924982340076946953
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7378509637936740544}
-  m_Layer: 8
-  m_Name: EngineSound
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7378509637936740544
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6924982340076946953}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.376, z: 0.962}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
   m_Father: {fileID: 426732384452381009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7060603675418040767

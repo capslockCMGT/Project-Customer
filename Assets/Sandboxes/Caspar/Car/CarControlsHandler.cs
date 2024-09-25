@@ -8,11 +8,13 @@ public class CarControlsHandler : MonoBehaviour
     public event Action<float> CarSpeedChanged;
     public event Action GearshiftReversed;
     [SerializeField] SoundName engineSound;
+    [SerializeField] SoundName accelerateSound;
 
     //int _steersReceived = 0;
     float _steerInput = 0;
     float _gasInput;
 
+    int _engineSound = -1;
 
     private void Start()
     {
@@ -38,10 +40,22 @@ public class CarControlsHandler : MonoBehaviour
 
     private void Update()
     {
-        //if(_steersReceived != 0)
         SteeringAngleChanged?.Invoke(_steerInput );
         CarSpeedChanged?.Invoke(_gasInput);
+        handleEngineSound();
+    }
 
-        //_steersReceived = 0;
+    void handleEngineSound()
+    {
+        if (_gasInput > .5f)
+        {
+            if (_engineSound != -1) return;
+            _engineSound = SoundManager.Instance.PlaySound(accelerateSound);
+        }
+        else if(_engineSound != -1)
+        {
+            SoundManager.Instance.StopSound(_engineSound);
+            _engineSound = -1;
+        }
     }
 }
