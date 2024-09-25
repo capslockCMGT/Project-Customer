@@ -835,6 +835,9 @@ MonoBehaviour:
     Min: 10
     Max: 20
   _activationCooldown: 5
+  _popUpSound:
+    Name: Honk
+    PopUpIndexOfChosenName: 0
 --- !u!1 &1967596478789812469
 GameObject:
   m_ObjectHideFlags: 0
