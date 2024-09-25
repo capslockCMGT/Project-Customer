@@ -142,6 +142,9 @@ public class ItemGrabber : MonoBehaviour
         GrabbedItem hand = leftHand ? _leftHand : _rightHand;
         if (hand == null) return;
         hand.grabbable.onPlayerInteract?.Invoke(controller);
+
+        HandRenderer h = leftHand ? LeftHandRenderer : RightHandRenderer;
+        h.Interact();
     }
     public void TryGrabReleaseItem(bool leftHand, PlayerController controller)
     {
@@ -182,7 +185,7 @@ public class ItemGrabber : MonoBehaviour
                 workingHand.itemRB.velocity = Car.velocity;
             }
 
-            workingHandRenderer.Grab(grabbable.Renderer, hitinfo.point);
+            workingHandRenderer.Grab(grabbable.Renderer, hitinfo.point, hitinfo.normal);
 
             if (DisableGravity && hitinfo.rigidbody != null)
                 hitinfo.rigidbody.useGravity = false;
