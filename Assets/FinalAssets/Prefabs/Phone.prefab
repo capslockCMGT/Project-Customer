@@ -104,11 +104,11 @@ MonoBehaviour:
     Min: 10
     Max: 20
   _callSound:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+    Name: PhoneCall
+    PopUpIndexOfChosenName: 11
   _talkSound:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+    Name: PhoneTalk
+    PopUpIndexOfChosenName: 10
 --- !u!54 &5796611540896983978
 Rigidbody:
   m_ObjectHideFlags: 0
