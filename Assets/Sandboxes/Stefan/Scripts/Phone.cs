@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Phone : MonoBehaviour
     [SerializeField] SoundName _callSound;
     [SerializeField] SoundName _talkSound;
 
+    public event Action<PlayerController> Grabbed;
     public bool CanCall { get; set; } = true;
 
     void Awake()
@@ -69,6 +71,8 @@ public class Phone : MonoBehaviour
             //accept phone call and start talking
             StartCoroutine(Talk());
         }
+
+        Grabbed?.Invoke(controller);
     }
 
     IEnumerator Talk()
@@ -85,7 +89,7 @@ public class Phone : MonoBehaviour
     {
         while(CanCall)
         {
-            yield return new WaitForSeconds(Random.Range(_callRange.Min, _callRange.Max));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(_callRange.Min, _callRange.Max));
             StartCall();
         }
 
