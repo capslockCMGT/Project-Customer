@@ -2357,8 +2357,10 @@ MonoBehaviour:
   _grid: {fileID: 35787296}
   _carPrefab: {fileID: 2628084228180285201, guid: b364887eec389f74580b86f83be56090,
     type: 3}
-  _gameOverPanel: {fileID: 1822082288}
+  _driverGameOverPanel: {fileID: 0}
+  _passengerGameOverPanel: {fileID: 0}
   _fadeScreen: {fileID: 1120180619}
+  _fadeScreenTime: 3.12
   <PlayerCar>k__BackingField: {fileID: 0}
 --- !u!4 &356019372
 Transform:
@@ -6552,7 +6554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1120180616
 RectTransform:
   m_ObjectHideFlags: 0

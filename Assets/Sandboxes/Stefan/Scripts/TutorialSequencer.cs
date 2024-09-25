@@ -95,9 +95,10 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGasDriver, 1, 1, () =>
                 {
                     panelEndDriver.gameObject.SetActive(true);
-                }); ;
+                    orderdriver++;
+                });
                 driver.GasPressed.RemoveAllListeners();
-                orderdriver += 1;
+
 
             }
         });
@@ -109,10 +110,11 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGrabDriver1, 1, 1, () =>
                 {
                     panelGrabDriver2.gameObject.SetActive(true);
+                    orderdriver++;
                 }); ;
 
                 driver.ItemGrab.RemoveAllListeners();
-                orderdriver += 1;
+
 
             }
         });
@@ -125,9 +127,10 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGrabDriver2, 1, 1, () =>
                 {
                     panelGrabDriver3.gameObject.SetActive(true);
+                    orderdriver++;
                 });
                 driver.ItemInteract.RemoveAllListeners();
-                orderdriver += 1;
+
 
             }
         });
@@ -145,9 +148,10 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelStickDriver, 1, 1, () =>
                 {
                     panelGrabDriver1.gameObject.SetActive(true);
+                    orderdriver++;
                 });
                 driver.UpdateRightJoystick.RemoveListener(onJoystickRightDriver);
-                orderdriver += 1;
+
 
             }
 
@@ -163,10 +167,10 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGrabDriver3, 1, 1, () =>
                 {
                     panelGasDriver.gameObject.SetActive(true);
-
+                    orderdriver++;
                 });
                 driver.UpdateLeftJoystick.RemoveListener(onJoystickLeftDriver);
-                orderdriver += 1;
+
 
             }
         }
@@ -192,6 +196,7 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGoalPassenger, 1, 1, () =>
                 {
                     panelStickPassenger.gameObject.SetActive(true);
+                    orderpassenger++;
                 });
 
                 //write your code here
@@ -221,6 +226,7 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelStickPassenger, 2, 2, () =>
                 {
                     panelGrabPassenger1.gameObject.SetActive(true);
+                    orderpassenger++;
                 });
 
                 passenger.UpdateRightJoystick.RemoveListener(onJoystickRightPassenger);
@@ -242,9 +248,10 @@ public class TutorialSequencer : MonoBehaviour
                 FadePanelAfterSeconds(panelGrabPassenger1, 1, 1, () =>
                 {
                     panelGrabPassenger2.gameObject.SetActive(true);
+                    orderpassenger++;
                 });
                 passenger.ItemGrab.RemoveAllListeners();
-                orderpassenger++;
+
 
             }
         });
@@ -259,10 +266,11 @@ public class TutorialSequencer : MonoBehaviour
                     FadePanelAfterSeconds(panelGrabPassenger3, 2, 2, () =>
                     {
                         panelEndPassenger.gameObject.SetActive(true);
+                        orderpassenger++;
                     }); ;
                 });
                 passenger.ItemInteract.RemoveAllListeners();
-                orderpassenger++;
+
 
             }
         });

@@ -20,7 +20,7 @@ class SourceInfo
 {
     public AudioSource AudioSource;
     public int ID;
-    
+
     public SourceInfo(AudioSource audioSource, int id)
     {
         AudioSource = audioSource;
@@ -59,7 +59,7 @@ public class SoundManager : MonoBehaviour
     readonly List<SourceInfo> _activeSources = new();
     Stack<AudioSource> _inactiveSources;
     int _currentID;
-    [SerializeField, Range(0, 1)] float _masterVolume; 
+    [SerializeField, Range(0, 1)] float _masterVolume;
     //make this for inspector interface, but habe actual dictionary be a copy of it with strings as key
     [SerializeField, SerializedDictionary("Clip Name", "Clip")] SerializedDictionary<SoundName, SoundData> _soundClips;
     Dictionary<string, SoundData> SoundClips;
@@ -83,7 +83,7 @@ public class SoundManager : MonoBehaviour
         if (!SoundClips.ContainsKey(soundName))
         {
             Debug.LogError($"There is no sound named {soundName}");
-            return (-1,null);
+            return (-1, null);
         }
         int soundID = _currentID++;
         AudioSource source = GetSource(soundID);
@@ -98,7 +98,7 @@ public class SoundManager : MonoBehaviour
 
     IEnumerator WaitForSoundEnd(AudioSource source, Action onComplete)
     {
-        yield return new WaitUntil(()=> !source.isPlaying);
+        yield return new WaitUntil(() => source.time >= source.clip.length || (source.time == 0 && !source.isPlaying));
         onComplete?.Invoke();
     }
 
@@ -118,7 +118,7 @@ public class SoundManager : MonoBehaviour
     public void StopSound(int id)
     {
         SourceInfo source = FindSourceInfoByID(id);
-        if(source != null)
+        if (source != null)
         {
             source.AudioSource.Stop();
             ReleaseSource(source);
@@ -144,7 +144,7 @@ public class SoundManager : MonoBehaviour
         _activeSources.Add(new SourceInfo(source, id));
 
         source.loop = false;
-        source.volume = _masterVolume; 
+        source.volume = _masterVolume;
         source.enabled = true;
 
         return source;

@@ -19,7 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
         var index = playerInput.playerIndex;
 
         controller = FindObjectsOfType<PlayerController>().FirstOrDefault(p => p.Player == index);
-
+        //get canvas from playercontroller and set it to work with this playerInput 
     }
 
     public void OnGasPress(CallbackContext context)

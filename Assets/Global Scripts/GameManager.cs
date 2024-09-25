@@ -9,15 +9,18 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
-    [SerializeField] Image _driverGameOverPanel;
-    [SerializeField] Image _passengerGameOverPanel;
     [SerializeField] CanvasGroup _fadeScreen;
     [SerializeField] float _fadeScreenTime = .8f;
+    [SerializeField] GameObject _passengerGameOver;
+    [SerializeField] GameObject _driverGameOver;
+    [SerializeField] GameObject _passengerWin;
+    [SerializeField] GameObject _driverWin;
+    [SerializeField] bool _gameOverTest;
 
     readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
     [field: SerializeField] public GameObject PlayerCar { get; private set; }
-    
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,12 +34,25 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if(_gameOverTest)
+        {
+            _gameOverTest = false;
+            GameOver(false,true);
+        }
+    }
+
     void Start()
     {
         if (_grid != null)
+        {
             OnMapGenerated();
+            PlayerCar.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
+        }
 
-        PlayerCar.GetComponentInChildren<NavigationDisplayRenderer>().Init(_grid);
+
+
         StartCoroutine(Utils.DoFadeOut(_fadeScreen, _fadeScreenTime, 0));
 
     }
@@ -77,15 +93,21 @@ public class GameManager : MonoBehaviour
         {
             camController.enabled = false;
         }
-        //Cursor.lockState = CursorLockMode.None;
 
-        _driverGameOverPanel.gameObject.SetActive(true);
-        _passengerGameOverPanel.gameObject.SetActive(true);
+        if(driverState)
+            _driverWin.SetActive(true);
+        else
+            _driverGameOver.SetActive(true);
 
+        if(passengerState)
+            _passengerWin.SetActive(true);
+        else
+            _passengerGameOver.SetActive(true);
     }
 
     public void FinishLevel()
     {
+        _fadeScreen.gameObject.SetActive(true);
         StartCoroutine(Utils.DoFadeIn(_fadeScreen, _fadeScreenTime, 0, () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1)));
 
     }
