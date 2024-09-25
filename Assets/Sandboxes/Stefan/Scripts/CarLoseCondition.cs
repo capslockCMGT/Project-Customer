@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CarLoseCondition : MonoBehaviour
 {
@@ -7,7 +8,6 @@ public class CarLoseCondition : MonoBehaviour
     SafetyCreditsManager _safetyCreditsManager;
     float _penaltyAccumulation;
     bool _done = false;
-
     private void Awake()
     {
         _safetyCreditsManager = GetComponentInChildren<SafetyCreditsManager>();
@@ -15,10 +15,10 @@ public class CarLoseCondition : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(_safetyCreditsManager.SafetyCredits < 0)
+        if(_safetyCreditsManager.SafetyCredits < 0 && !_done)
         {
             _done = true;
-            GameManager.Instance.GameOver(false, false);
+            OnDeductionToZero();
         }
         if (_done || NotLoseCondition())
         {
@@ -31,8 +31,18 @@ public class CarLoseCondition : MonoBehaviour
         _done = _penaltyAccumulation >= _penaltyThreshhold;
 
         if(_done)
-            GameManager.Instance.GameOver(false, false);
+            OnCarFlip();
 
+    }
+
+    void OnCarFlip()
+    {
+        GameManager.Instance.GameOver(false, false);
+    }
+
+    void OnDeductionToZero()
+    {
+        GameManager.Instance.GameOver(false, true);
     }
 
     bool NotLoseCondition()
