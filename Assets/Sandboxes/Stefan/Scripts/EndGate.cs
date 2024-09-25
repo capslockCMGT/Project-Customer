@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class EndGate : MonoBehaviour
 {
+    bool _done;
     void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<CarController>(out _))
+        if (_done) return;
+
+        if(other.CompareTag("Car"))
         {
-            GameManager.Instance.FinishLevel();
+            GameManager.Instance.GameOver(true, false);
+            _done = true;
         }
 
 

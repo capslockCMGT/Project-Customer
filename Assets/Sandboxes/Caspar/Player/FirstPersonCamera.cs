@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
 public class FirstPersonCamera: MonoBehaviour
 {
     public float LookSensitivity = 3;
+    [SerializeField] Transform _renderer;
 
     Vector2 _mousePos;
-    float _targetYRot;
-    float _currTilt;
 
     public void UpdateCameraAngle(Vector2 delta)
     {
@@ -36,5 +33,6 @@ public class FirstPersonCamera: MonoBehaviour
         Quaternion up = Quaternion.AngleAxis(_mousePos.y, Vector3.left);
 
         transform.localRotation = rot*up;
+        _renderer.localRotation = rot;
     }
 }
