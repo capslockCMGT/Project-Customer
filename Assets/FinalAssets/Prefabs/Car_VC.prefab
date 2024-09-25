@@ -874,6 +874,9 @@ GameObject:
   - component: {fileID: 7962352702799397996}
   - component: {fileID: 8404092223514185774}
   - component: {fileID: 267872072770291766}
+  - component: {fileID: 7938583403531861434}
+  - component: {fileID: 6402368115316589517}
+  - component: {fileID: 4419439182186333932}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: MainCamera
@@ -1145,7 +1148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _penaltyThreshhold: -5
   _penaltyCooldown: 3
-  _deductionAmount: 5
+  _deductionAmount: 15
   _pedestrianHitSound:
   - Name: Collision Pedestrian 1
     PopUpIndexOfChosenName: 6
@@ -1161,6 +1164,63 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2270127816248381527}
   m_Enabled: 1
+--- !u!114 &7938583403531861434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270127816248381527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &6402368115316589517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270127816248381527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a703eb87325777248acf3c7018ba65a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderer: {fileID: 0}
+  onItemGrabbed:
+    m_PersistentCalls:
+      m_Calls: []
+  onItemReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  <ChangeToDynamicWhileGrabbing>k__BackingField: 0
+--- !u!114 &4419439182186333932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270127816248381527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0b88f34d85327458c3bd5f67a4f01b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _penaltyThreshhold: 3
+  _penaltyCooldown: 3
+  _deductionAmount: 5
+  _phone: {fileID: 1730475119872457245}
 --- !u!1 &2555021252920610890
 GameObject:
   m_ObjectHideFlags: 0
@@ -4031,6 +4091,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3820739745115374866}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1730475119872457245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3820739745115374866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94bc298a6e5f244091c1c0a76bd1c49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5204623029478576299
 PrefabInstance:
   m_ObjectHideFlags: 0
