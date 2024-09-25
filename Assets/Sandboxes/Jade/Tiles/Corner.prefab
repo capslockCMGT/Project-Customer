@@ -1843,6 +1843,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3446092063367455749}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b441e9f5bd5c13b4690c7403a41a9bac,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1439274997700247306}
     - targetCorrespondingSourceObject: {fileID: -8730051827315326399, guid: b441e9f5bd5c13b4690c7403a41a9bac,
         type: 3}
       insertIndex: -1
@@ -1911,8 +1915,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 284.9653, y: 64.742645, z: 88.71326}
-  m_Center: {x: -37.178673, y: 6.0134554, z: -89.48064}
+  m_Size: {x: 361.81055, y: 37.097347, z: 125.348755}
+  m_Center: {x: -75.60118, y: -7.809194, z: -71.16294}
 --- !u!65 &3587615996545710159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1932,8 +1936,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 105.73744, y: 64.742645, z: 249.11485}
-  m_Center: {x: 76.53388, y: 6.0134554, z: 79.45443}
+  m_Size: {x: 125.262405, y: 37.58269, z: 251.35828}
+  m_Center: {x: 66.77142, y: -7.5665274, z: 80.57614}
 --- !u!65 &3446092063367455749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1953,8 +1957,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 80.26851, y: 64.742645, z: 70.91434}
-  m_Center: {x: -145.5155, y: 6.0134554, z: 145.09409}
+  m_Size: {x: 179.39923, y: 38.434235, z: 161.74007}
+  m_Center: {x: -157.31892, y: -7.1407585, z: 134.8661}
+--- !u!65 &1439274997700247306
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5211850610511752508}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 421.45383, y: 45.940422, z: 377.0822}
+  m_Center: {x: -54.737976, y: -14.599616, z: 25.778183}
 --- !u!1 &5812951938778951160 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7764593160169194091, guid: b441e9f5bd5c13b4690c7403a41a9bac,

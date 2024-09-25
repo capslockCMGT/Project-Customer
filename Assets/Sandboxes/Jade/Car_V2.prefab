@@ -656,7 +656,7 @@ MonoBehaviour:
   BrakeStrength: 5000
   FrontWheelBrakeStrengthMultiplier: 0.5
   MaxTurnAngle: 30
-  _engineToMaxPowerTime: 0.8
+  CenterOfMassOffset: 0.2
 --- !u!114 &2847147933222837468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +669,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66824c984a93654096193faa2a019f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  engineSound:
+    Name: Honk
+    PopUpIndexOfChosenName: 0
 --- !u!114 &6588284555081939846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: 0
   <PlayerCanSteer>k__BackingField: 1
+  SteeringStrength: 1
   CarIfDriver: {fileID: 2847147933222837468}
   ItemControl:
     m_PersistentCalls:
@@ -895,6 +899,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  GasPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  BrakePressed:
+    m_PersistentCalls:
+      m_Calls: []
+  ItemInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  ItemGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OptionPress:
+    m_PersistentCalls:
+      m_Calls: []
+  SetGearshiftCooldown: 0
 --- !u!114 &1043878151290241886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,9 +1025,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SafetyCredits>k__BackingField: 100
-  _sound:
-    Name: Honk
+  _deductionSound:
+    Name: 
     PopUpIndexOfChosenName: 0
+  _car: {fileID: 0}
+  _speedThreshHold: 0.01
 --- !u!114 &7962352702799397996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,9 +1060,7 @@ MonoBehaviour:
   _penaltyThreshhold: -5
   _penaltyCooldown: 3
   _deductionAmount: 5
-  _sound1:
-    Name: Honk
-    PopUpIndexOfChosenName: 0
+  _pedestrianHitSound: []
 --- !u!81 &267872072770291766
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1589,6 +1609,15 @@ MonoBehaviour:
   _idleState: {fileID: 5810029090764501910}
   _inspectorCall: 0
   _callTime: 5
+  _callRange:
+    Min: 0
+    Max: 0
+  _callSound:
+    Name: 
+    PopUpIndexOfChosenName: 0
+  _talkSound:
+    Name: 
+    PopUpIndexOfChosenName: 0
 --- !u!54 &7310553796953353912
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2012,9 +2041,7 @@ MonoBehaviour:
   _steeringAngle: 49
   _honksBeforeCooldownStart: 1
   _honkCooldown: 1
-  _soundName:
-    Name: GloveBox Close
-    PopUpIndexOfChosenName: 4
+  _honkSounds: []
   _canReposition: 1
 --- !u!114 &3259280824667309276
 MonoBehaviour:
@@ -2680,6 +2707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Renderer: {fileID: 0}
   carHandler: {fileID: 2847147933222837468}
+  PassengerSetCooldown: 10
 --- !u!54 &7163401259453029466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3044,6 +3072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: 1
   <PlayerCanSteer>k__BackingField: 1
+  SteeringStrength: 1
   CarIfDriver: {fileID: 0}
   ItemControl:
     m_PersistentCalls:
@@ -3066,6 +3095,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  GasPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  BrakePressed:
+    m_PersistentCalls:
+      m_Calls: []
+  ItemInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  ItemGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OptionPress:
+    m_PersistentCalls:
+      m_Calls: []
+  SetGearshiftCooldown: 0
 --- !u!114 &1355784804607396852
 MonoBehaviour:
   m_ObjectHideFlags: 0

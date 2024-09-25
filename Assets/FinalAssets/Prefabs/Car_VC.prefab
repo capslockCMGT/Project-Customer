@@ -1001,6 +1001,7 @@ MonoBehaviour:
   OptionPress:
     m_PersistentCalls:
       m_Calls: []
+  SetGearshiftCooldown: 0
 --- !u!114 &1043878151290241886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1916,7 +1917,7 @@ MonoBehaviour:
   Renderer: {fileID: 6904660203198777245}
   carHandler: {fileID: 2847147933222837468}
   _carController: {fileID: 4321014292650692184}
-  _steeringSens: 1.21
+  _steeringSens: 150
   _steeringAngle: 49
   _honksBeforeCooldownStart: 1
   _honkCooldown: 1
@@ -2610,6 +2611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Renderer: {fileID: 0}
   carHandler: {fileID: 2847147933222837468}
+  PassengerSetCooldown: 10
 --- !u!54 &7163401259453029466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3204,6 +3206,7 @@ MonoBehaviour:
   OptionPress:
     m_PersistentCalls:
       m_Calls: []
+  SetGearshiftCooldown: 0
 --- !u!114 &1355784804607396852
 MonoBehaviour:
   m_ObjectHideFlags: 0
