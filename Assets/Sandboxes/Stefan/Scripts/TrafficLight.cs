@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,18 @@ public class TrafficLight : MonoBehaviour
     [SerializeField] UnityEvent RedEnter;
     [SerializeField] int _creditViolation;
     [SerializeField] float _deductionCooldown = 3;
+    [SerializeField] GameObject _pedestrianRedLight;
+    [SerializeField] GameObject _pedestrianGreenLight;
+    [SerializeField] GameObject _carRedLight;
+    [SerializeField] GameObject _carYellowLight;
+    [SerializeField] GameObject _carGreenLight;
+    [SerializeField] GameObject _pedestrianRedLight2;
+    [SerializeField] GameObject _pedestrianGreenLight2;
+    [SerializeField] GameObject _carRedLight2;
+    [SerializeField] GameObject _carYellowLight2;
+    [SerializeField] GameObject _carGreenLight2;
+    [SerializeField] float _lightSwitchTime = .4f;
+    Coroutine _togglingCoroutine;
 
     float _currentRandomTime;
     bool _carCanCross;
@@ -54,7 +67,7 @@ public class TrafficLight : MonoBehaviour
 
     Transform GetTopParent(Transform child)
     {
-        if(child.parent != null)
+        if (child.parent != null)
             return GetTopParent(child.parent);
         return child;
     }
@@ -64,5 +77,50 @@ public class TrafficLight : MonoBehaviour
         _cooldownOver = false;
         yield return new WaitForSeconds(_deductionCooldown);
         _cooldownOver = true;
+    }
+
+    public void ToggleLights(bool toRed)
+    {
+        if (_togglingCoroutine != null)
+            StopCoroutine(_togglingCoroutine);
+        _togglingCoroutine = StartCoroutine(ToggleCarLights(toRed));
+    }
+
+    IEnumerator ToggleCarLights(bool toRed)
+    {
+        TurnOffAllLights();
+        _carYellowLight.SetActive(true);
+        _carYellowLight2.SetActive(true);
+
+        yield return new WaitForSeconds(_lightSwitchTime);
+        _pedestrianGreenLight.SetActive(toRed);
+        _pedestrianRedLight.SetActive(!toRed);
+
+        _carYellowLight.SetActive(false);
+        _carGreenLight.SetActive(!toRed);
+        _carRedLight.SetActive(toRed);
+
+        _pedestrianGreenLight2.SetActive(toRed);
+        _pedestrianRedLight2.SetActive(!toRed);
+
+        _carYellowLight2.SetActive(false);
+        _carGreenLight2.SetActive(!toRed);
+        _carRedLight2.SetActive(toRed);
+    }
+
+    void TurnOffAllLights()
+    {
+        _pedestrianGreenLight.SetActive(false);
+        _pedestrianRedLight.SetActive(false);
+        _pedestrianGreenLight2.SetActive(false);
+        _pedestrianRedLight2.SetActive(false);
+
+        _carGreenLight.SetActive(false);
+        _carYellowLight.SetActive(false);
+        _carRedLight.SetActive(false);
+
+        _carGreenLight2.SetActive(false);
+        _carYellowLight2.SetActive(false);
+        _carRedLight2.SetActive(false);
     }
 }

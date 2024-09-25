@@ -19,6 +19,10 @@ public class ReverseFeedback : MonoBehaviour
     {
         _grabbable.onPlayerInteract.AddListener((c) =>
         {
+            if (c.SetGearshiftCooldown > 0)
+            {
+                return;
+            }
             _isReversed = !_isReversed;
             if (_isReversed)
             {

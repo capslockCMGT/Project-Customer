@@ -16,6 +16,7 @@ public class NavigationDisplayRenderer : MonoBehaviour
     Texture2D _magicRoadTexture;
     MyGrid _map;
     List<Cell> _currentRoute = null;
+    Vector2Int _currentTile;
 
     readonly Color zero = new Color(0,0,0,0);
     public void Init(MyGrid grid)
@@ -94,13 +95,9 @@ public class NavigationDisplayRenderer : MonoBehaviour
         relPos /= _map._size;
         Vector2Int pos = new((int)(relPos.x * _map.Cells.GetLength(0)), (int)(-relPos.z * _map.Cells.GetLength(1)));
 
-        bool carIsOnRoute = false;
-        if(_currentRoute != null) 
-            foreach(var cell in _currentRoute)
-                if(cell.X == pos.x && cell.Y == pos.y)
-                    carIsOnRoute = true;
-        if (carIsOnRoute) return;
-
+        if (pos == _currentTile) return;
+        
+        _currentTile = pos;
         _currentRoute = _map.DoAstar(pos, _map.EndPos);
 
         for (int x = 0; x < _mapAsTexture.width; x++)

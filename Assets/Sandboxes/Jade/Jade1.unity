@@ -171,7 +171,7 @@ MonoBehaviour:
     type: 3}
   _tileHolder: {fileID: 52199711}
   _start: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544, type: 3}
-  _end: {fileID: 5099231861569548205, guid: 4aeed216c4c184e4dbc2e27d99f4e402, type: 3}
+  _end: {fileID: 5099231861569548205, guid: 8896f7b91c4721b4d8ed870e1aaa99c5, type: 3}
   _pathMat: {fileID: 2100000, guid: 27341f7f9d79fc045be2682c96244763, type: 2}
   _generateNewMap: 0
   MapGenerated:
@@ -303,7 +303,11 @@ MonoBehaviour:
   _grid: {fileID: 35787296}
   _carPrefab: {fileID: 1582638049416433318, guid: b9539473c0ad1a14aa27fb874cc6ece3,
     type: 3}
-  _gameOverPanel: {fileID: 792068514}
+  _driverGameOverPanel: {fileID: 0}
+  _passengerGameOverPanel: {fileID: 0}
+  _fadeScreen: {fileID: 0}
+  _fadeScreenTime: 0.8
+  <PlayerCar>k__BackingField: {fileID: 0}
 --- !u!4 &356019372
 Transform:
   m_ObjectHideFlags: 0
@@ -1071,8 +1075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c84621cb62d59c4b843a4dda0b7a451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bg: {fileID: 1124355598}
-  _textMesh: {fileID: 438158924}
+  _totalCountMesh: {fileID: 0}
+  _deductionPanelPrefab: {fileID: 0}
+  _deductionSignsHolder: {fileID: 0}
   _displayTime: 3
 --- !u!1 &1124355596
 GameObject:
