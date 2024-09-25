@@ -170,7 +170,7 @@ MonoBehaviour:
     type: 3}
   _tileHolder: {fileID: 52199711}
   _start: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544, type: 3}
-  _end: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544, type: 3}
+  _end: {fileID: 5099231861569548205, guid: 8e8256dc25be8f14989cefb69d8e7d4c, type: 3}
   _pathMat: {fileID: 2100000, guid: 27341f7f9d79fc045be2682c96244763, type: 2}
   _generateNewMap: 0
   MapGenerated:
@@ -436,10 +436,13 @@ MonoBehaviour:
   _grid: {fileID: 35787296}
   _carPrefab: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
-  _driverGameOverPanel: {fileID: 0}
-  _passengerGameOverPanel: {fileID: 0}
   _fadeScreen: {fileID: 1230828881}
   _fadeScreenTime: 0.8
+  _passengerGameOver: {fileID: 0}
+  _driverGameOver: {fileID: 0}
+  _passengerWin: {fileID: 0}
+  _driverWin: {fileID: 0}
+  _gameOverTest: 0
   <PlayerCar>k__BackingField: {fileID: 0}
 --- !u!4 &356019372
 Transform:
