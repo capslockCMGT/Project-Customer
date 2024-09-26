@@ -5,17 +5,20 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject Menu;
-    bool _paused = false;
     
-    private void Update()
+    static bool _paused = false;
+    static GameObject _menu;
+
+    private void Awake()
     {
-        if (!Input.GetKeyDown(KeyCode.P)) return;
-        TogglePause();
+        if (_menu == null)
+            _menu = Menu;
     }
     public void TogglePause()
     {
+        if (GameManager.IsGameOver) return;
         _paused = !_paused;
         Time.timeScale = _paused ? 0 : 1;
-        Menu.SetActive(_paused);
+        _menu?.SetActive(_paused);
     }
 }

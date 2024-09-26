@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
     [field: SerializeField] public GameObject PlayerCar { get; private set; }
+    public static bool IsGameOver { get; private set; } = false;
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
+            IsGameOver = false;
         }
 
     }
@@ -88,6 +90,7 @@ public class GameManager : MonoBehaviour
     /// <param name="passengerState">is true if passenger won, and false if passenger lost</param>
     public void GameOver(bool driverState, bool passengerState)
     {
+        IsGameOver = true;
         foreach (var input in _playerInputs)
         {
             input.DeactivateInput();
@@ -118,6 +121,7 @@ public class GameManager : MonoBehaviour
     public void ReloadLevel()
     {
         Debug.Log("Reload");
+        IsGameOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
