@@ -1092,8 +1092,8 @@ MonoBehaviour:
   DistanceBetweenHands: 0.3
   DisableGravity: 0
   _minHandReach: 0.5
-  _maxHandReach: 1
-  _itemReachChangeSpeed: 1
+  _maxHandReach: 1.49
+  _itemReachChangeSpeed: 1.5
 --- !u!1 &1753244641523972812
 GameObject:
   m_ObjectHideFlags: 0
@@ -4636,7 +4636,7 @@ MonoBehaviour:
   DistanceBetweenHands: 0.3
   DisableGravity: 0
   _minHandReach: 0.5
-  _maxHandReach: 1.22
+  _maxHandReach: 2.11
   _itemReachChangeSpeed: 1
 --- !u!114 &1119943430569605804
 MonoBehaviour:

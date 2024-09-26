@@ -469,6 +469,7 @@ MonoBehaviour:
   - Name: CrabRave
     PopUpIndexOfChosenName: 22
   _startMusic: 0
+  _stopMusic: 0
   _grid: {fileID: 35787296}
   _carPrefab: {fileID: 7491304573171201693, guid: 0ca10e2526c378d4db712fb3764c0407,
     type: 3}
@@ -1914,9 +1915,39 @@ PrefabInstance:
       objectReference: {fileID: 742904083986189824}
     - target: {fileID: 3834455129820560700, guid: fd48f63e04bb469469c52b7c8baa12f3,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834455129820560700, guid: fd48f63e04bb469469c52b7c8baa12f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834455129820560700, guid: fd48f63e04bb469469c52b7c8baa12f3,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 356019371}
+    - target: {fileID: 3834455129820560700, guid: fd48f63e04bb469469c52b7c8baa12f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834455129820560700, guid: fd48f63e04bb469469c52b7c8baa12f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FinishLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834455129820560700, guid: fd48f63e04bb469469c52b7c8baa12f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834455129820560700, guid: fd48f63e04bb469469c52b7c8baa12f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4327916322981123287, guid: fd48f63e04bb469469c52b7c8baa12f3,
         type: 3}
       propertyPath: m_Name
