@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1511895281511533053}
   - component: {fileID: 7835473814985512020}
   - component: {fileID: 7135658827834774553}
-  - component: {fileID: 4814233052754911181}
   - component: {fileID: 804972389379212159}
   m_Layer: 0
   m_Name: Danger
@@ -85,28 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4814233052754911181
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161286949023584874}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &804972389379212159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture1: {fileID: 2800000, guid: f00b785cf0158c74d942fa7cb05ca280, type: 3}
   texture2: {fileID: 2800000, guid: f4c2d955f40aadf4a8b60494b30f0af9, type: 3}
-  Glow: {fileID: 2100000, guid: cb4e66ffbf00d294e8732cf3b2eef3c4, type: 2}
+  Glow: {fileID: 2100000, guid: 3341b3c74264fab43aede87cbd3b5732, type: 2}
   Timer: 0
   CD: 0.5
   State: 0

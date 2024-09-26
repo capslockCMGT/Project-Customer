@@ -1070,7 +1070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe230fb8f8f69424abf0ef424cbe9506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSensitivity: 1
+  LookSensitivity: 2.11
   _renderer: {fileID: 5568618478850152799}
 --- !u!114 &4087730026274515029
 MonoBehaviour:
