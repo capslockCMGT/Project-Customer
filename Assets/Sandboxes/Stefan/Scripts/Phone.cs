@@ -9,7 +9,6 @@ public class Phone : MonoBehaviour
     [SerializeField] GameObject _callState;
     [SerializeField] GameObject _talkState;
     [SerializeField] GameObject _idleState;
-    [SerializeField] bool _inspectorCall;
     [SerializeField] float _callTime = 10;
     [SerializeField] Range _callRange;
     [SerializeField] SoundName _callSound;
@@ -35,21 +34,13 @@ public class Phone : MonoBehaviour
         _grababble.onPlayerInteract.RemoveListener(OnInteract);
     }
 
-    void FixedUpdate()
-    {
-        if (_inspectorCall)
-        {
-            _inspectorCall = false;
-            StartCall();
-        }
-    }
-
     public void StartCall()
     {
         if(_callSoundID != -1)
         {
             SoundManager.Instance.StopSound( _callSoundID );
         }
+
         _idleState.SetActive(false);
         _talkState.SetActive(false);
         _callSoundID = SoundManager.Instance.PlaySound(_callSound);
@@ -59,21 +50,22 @@ public class Phone : MonoBehaviour
 
     void OnInteract(PlayerController controller)
     {
-        if (!_callState.activeInHierarchy) return;
+        if (!_callState.activeInHierarchy || _talkState.activeInHierarchy) return;
         
         bool isDriver = controller.Player == 0;
 
-        _callState.SetActive(false);
+        RemoveAllStates();
 
         if (isDriver)
         {
             _idleState.SetActive(true);
-            //turn off phone call 
-
+            
         }
         else
         {
-            //accept phone call and start talking
+            if (_callSoundID != -1)
+                SoundManager.Instance.StopSound(_callSoundID);
+            _callSoundID = -1;
             StartCoroutine(Talk());
         }
 
@@ -82,11 +74,13 @@ public class Phone : MonoBehaviour
 
     IEnumerator Talk()
     {
+        RemoveAllStates();
         _talkState.SetActive(true);
-        SoundManager.Instance.PlaySound(_callSound);
-
+        
+        SoundManager.Instance.PlaySound(_talkSound);
+        Debug.Log("Talking");
         yield return new WaitForSeconds(_callTime);
-        _talkState.SetActive(false);
+        RemoveAllStates();
         _idleState.SetActive(true);
     }    
 
@@ -95,8 +89,17 @@ public class Phone : MonoBehaviour
         while(CanCall)
         {
             yield return new WaitForSeconds(UnityEngine.Random.Range(_callRange.Min, _callRange.Max));
+            if (_talkState.activeInHierarchy) continue;
+
             StartCall();
         }
 
+    }
+
+    void RemoveAllStates()
+    {
+        _callState.SetActive(false);
+        _idleState.SetActive(false);
+        _talkState.SetActive(false);
     }
 }

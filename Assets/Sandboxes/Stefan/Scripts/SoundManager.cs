@@ -73,6 +73,11 @@ public class SoundManager : MonoBehaviour
         return Instance.PlaySound(names[UnityEngine.Random.Range(0, names.Length)], volumeMult);
     }
 
+    public static int PlayRandomSound(SoundName[] names, Action onComplete, float volumeMult = 1)
+    {
+        return Instance.PlaySound(names[UnityEngine.Random.Range(0, names.Length)],onComplete, volumeMult);
+    }
+
     public bool ContainsSoundWithID(int id)
     {
         return _activeSources.Any(s => s.ID == id);
@@ -120,7 +125,7 @@ public class SoundManager : MonoBehaviour
         SourceInfo source = FindSourceInfoByID(id);
         if (source != null)
         {
-            source.AudioSource.Stop();
+            source?.AudioSource.Stop();
             ReleaseSource(source);
         }
     }

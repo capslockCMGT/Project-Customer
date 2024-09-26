@@ -428,12 +428,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193388992963808923}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3174873, y: -0.6318242, z: 0.3174873, w: 0.6318242}
-  m_LocalPosition: {x: -0.55219287, y: 0.6865372, z: 0.15586035}
-  m_LocalScale: {x: 0.0016143102, y: 0.00015470113, z: 0.0016143101}
+  m_LocalRotation: {x: -0, y: 4.6566134e-10, z: -4.3655748e-10, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.47855473}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3887752370668047723}
+  m_Father: {fileID: 5094216157829565239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1052738109227976741
 MeshFilter:
@@ -540,12 +540,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587c231dd7d7ed84bab8f64ba76b716d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 2549243761998595747}
+  _renderer: {fileID: 6875235660231228883}
   _openRot: {fileID: 7858752440608564519}
   _closeRot: {fileID: 6851166339986318261}
   _spawnSpots: {fileID: 2935159263220039426}
   _itemsRandomPool:
-  - {fileID: 755275588320937708, guid: ea7be52d0fa8b8b4892a608b63eb7df3, type: 3}
+  - {fileID: 990141308481438917, guid: f58e4f5165262764483d223b5061c1db, type: 3}
   _sound1:
     Name: GloveBox Open
     PopUpIndexOfChosenName: 3
@@ -1619,8 +1619,8 @@ MonoBehaviour:
   Renderer: {fileID: 5094216157829565239}
   carHandler: {fileID: 2498693049502525786}
   _carController: {fileID: 4026741183918657276}
-  _steeringSens: 130
-  _steeringAngle: 100
+  _steeringSens: 100
+  _steeringAngle: 50
   _honksBeforeCooldownStart: 1
   _honkCooldown: 1
   _honkSounds:
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a703eb87325777248acf3c7018ba65a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Renderer: {fileID: 0}
+  Renderer: {fileID: 5094216157829565239}
   onItemGrabbed:
     m_PersistentCalls:
       m_Calls: []
@@ -3360,7 +3360,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6875208201277879825}
-  - {fileID: 7776221862221761339}
   - {fileID: 5282032112776072994}
   - {fileID: 7800304389657966447}
   - {fileID: 7945214816421683753}
@@ -3477,13 +3476,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaximumSpeed: 30
-  MaxSpeedBackwards: 20
+  MaximumSpeed: 20
+  MaxSpeedBackwards: 15
   EngineStrength: 300
-  BrakeStrength: 5000
+  BrakeStrength: 6000
   FrontWheelBrakeStrengthMultiplier: 0.5
   MaxTurnAngle: 30
-  CenterOfMassOffset: 0.28
+  CenterOfMassOffset: 0.4
 --- !u!114 &2498693049502525786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3809,7 +3808,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0016143101, y: 0.00015470113, z: 0.0016143103}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7776221862221761339}
   m_Father: {fileID: 3950111093509315269}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4168416130399846777
@@ -5312,6 +5312,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Phone
       objectReference: {fileID: 0}
+    - target: {fileID: 1611006945316082000, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1933739770643185097, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
       propertyPath: onPlayerInteract.m_PersistentCalls.m_Calls.Array.size
@@ -5320,7 +5325,7 @@ PrefabInstance:
     - target: {fileID: 1933739770643185097, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
       propertyPath: onPlayerInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1933739770643185097, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
@@ -5350,12 +5355,12 @@ PrefabInstance:
     - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
       propertyPath: _callRange.Max
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3244315207232110351, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
       propertyPath: _callRange.Min
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3326446383880971365, guid: c4d235fdaed1044458e80ee0ba91dba3,
         type: 3}
@@ -5431,6 +5436,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374944416701637593, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081073934691515504, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324154965380150916, guid: c4d235fdaed1044458e80ee0ba91dba3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

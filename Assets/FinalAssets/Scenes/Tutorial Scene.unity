@@ -379,7 +379,7 @@ MonoBehaviour:
     type: 3}
   _tileHolder: {fileID: 52199711}
   _start: {fileID: 5099231861569548205, guid: 837730867c57a3d4c947144c18ee8544, type: 3}
-  _end: {fileID: 5099231861569548205, guid: 8e8256dc25be8f14989cefb69d8e7d4c, type: 3}
+  _end: {fileID: 5099231861569548205, guid: 7c24267e0abdc164084609004f7b6e30, type: 3}
   _pathMat: {fileID: 2100000, guid: 27341f7f9d79fc045be2682c96244763, type: 2}
   _generateNewMap: 0
   MapGenerated:
@@ -2041,6 +2041,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aa1ac46579d7745a27fc211090a4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bgMusic: []
+  _startMusic: 0
+  _stopMusic: 0
   _grid: {fileID: 35787296}
   _carPrefab: {fileID: 6148675369328509564, guid: 2eeafc576b2b298488abf59563c9065b,
     type: 3}

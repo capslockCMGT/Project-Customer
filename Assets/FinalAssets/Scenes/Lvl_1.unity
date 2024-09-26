@@ -439,6 +439,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aa1ac46579d7745a27fc211090a4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bgMusic:
+  - Name: DriftVelocity
+    PopUpIndexOfChosenName: 18
+  - Name: RealGone
+    PopUpIndexOfChosenName: 19
+  - Name: RickRoll
+    PopUpIndexOfChosenName: 20
+  - Name: NightOfFire
+    PopUpIndexOfChosenName: 21
+  - Name: CrabRave
+    PopUpIndexOfChosenName: 22
+  _startMusic: 0
   _grid: {fileID: 35787296}
   _carPrefab: {fileID: 7491304573171201693, guid: 0ca10e2526c378d4db712fb3764c0407,
     type: 3}
@@ -713,6 +725,214 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.7615595, y: 3.1102958, z: -0.711359}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &838962332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 838962334}
+  - component: {fileID: 838962333}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &838962333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838962332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419d24a69188fdb41860e44560d4d6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _masterVolume: 0.769
+  _soundClips:
+    _serializedList:
+    - Key:
+        Name: IntroSound
+        PopUpIndexOfChosenName: 15
+      Value:
+        Volume: 1
+        Clip: {fileID: 8300000, guid: 9de94ee9b4b7fb54580f3f4e90187955, type: 3}
+        Loop: 0
+    - Key:
+        Name: AddPop
+        PopUpIndexOfChosenName: 17
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 6ecc3c44f7727354fb1b4e5bdc40f230, type: 3}
+        Loop: 0
+    - Key:
+        Name: EngineIdle
+        PopUpIndexOfChosenName: 12
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 4d65b2ddf91f94345b2dae33120c147f, type: 3}
+        Loop: 0
+    - Key:
+        Name: Collision Pedestrian 3
+        PopUpIndexOfChosenName: 8
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 266ad72c8311c9a4db90058b31a5cd33, type: 3}
+        Loop: 0
+    - Key:
+        Name: Collision Pedestrian 2
+        PopUpIndexOfChosenName: 7
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 2b9d357cf17b7854685f5f49389badb9, type: 3}
+        Loop: 0
+    - Key:
+        Name: Collision Pedestrian 1
+        PopUpIndexOfChosenName: 6
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 832291a21149e6c4a887acd35d87f81e, type: 3}
+        Loop: 0
+    - Key:
+        Name: HeavyBrake
+        PopUpIndexOfChosenName: 5
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 7110897e01f789b4087344932ce64c39, type: 3}
+        Loop: 0
+    - Key:
+        Name: Credit Notice
+        PopUpIndexOfChosenName: 9
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: deac27bf9faec284da810ac26a7f216d, type: 3}
+        Loop: 0
+    - Key:
+        Name: GloveBox Close
+        PopUpIndexOfChosenName: 4
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 3e3c536a20d840043a454ece6501f653, type: 3}
+        Loop: 0
+    - Key:
+        Name: GloveBox Open
+        PopUpIndexOfChosenName: 3
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: da0dfffcbb41f29478375ceef29a7a4b, type: 3}
+        Loop: 0
+    - Key:
+        Name: DriftVelocity
+        PopUpIndexOfChosenName: 18
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 01da5cc20f9c3624a88d73a7174155de, type: 3}
+        Loop: 0
+    - Key:
+        Name: RealGone
+        PopUpIndexOfChosenName: 19
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 73ab812fda331774a837bc5065b48faa, type: 3}
+        Loop: 0
+    - Key:
+        Name: RickRoll
+        PopUpIndexOfChosenName: 20
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: d72686aa99c832c409f37b394281a1d6, type: 3}
+        Loop: 0
+    - Key:
+        Name: NightOfFire
+        PopUpIndexOfChosenName: 21
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 76bd27f6079a00b45afa9909c1020f63, type: 3}
+        Loop: 0
+    - Key:
+        Name: CrabRave
+        PopUpIndexOfChosenName: 22
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 97a86f7509c477342a5ae3fb48a5b89a, type: 3}
+        Loop: 1
+    - Key:
+        Name: Honk3
+        PopUpIndexOfChosenName: 2
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 1f65d97cb83a1314fbe14ebb0d9582a0, type: 3}
+        Loop: 0
+    - Key:
+        Name: Honk2
+        PopUpIndexOfChosenName: 1
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: c86fa8af64ee4e94b8c33b73d0f5f0ed, type: 3}
+        Loop: 0
+    - Key:
+        Name: PhoneCall
+        PopUpIndexOfChosenName: 11
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 502f60b39eaad7549bd39cedb496c364, type: 3}
+        Loop: 0
+    - Key:
+        Name: Car accelerate
+        PopUpIndexOfChosenName: 16
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 209a77f11453bbe47bf75a4f878daf26, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 1
+        PopUpIndexOfChosenName: 13
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 9a411e6c6aff449479aa84a9dbd8593d, type: 3}
+        Loop: 0
+    - Key:
+        Name: Sidewalk impact 2
+        PopUpIndexOfChosenName: 14
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 29a70804a78f34c49867ddf997ad0e69, type: 3}
+        Loop: 0
+    - Key:
+        Name: PhoneTalk
+        PopUpIndexOfChosenName: 10
+      Value:
+        Volume: 0.753
+        Clip: {fileID: 8300000, guid: 7204d18cf76cffe479ccd40ec157725d, type: 3}
+        Loop: 0
+    - Key:
+        Name: Honk
+        PopUpIndexOfChosenName: 0
+      Value:
+        Volume: 0.78
+        Clip: {fileID: 8300000, guid: 285c511da2f8d9241ab12b9e0583b7b9, type: 3}
+        Loop: 0
+--- !u!4 &838962334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838962332}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.08335571, y: -0, z: -0, w: 0.99651986}
+  m_LocalPosition: {x: 0, y: 2.84, z: -10.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1581,165 +1801,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &2049434309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2049434311}
-  - component: {fileID: 2049434310}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2049434310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049434309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419d24a69188fdb41860e44560d4d6cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _masterVolume: 0.769
-  _soundClips:
-    _serializedList:
-    - Key:
-        Name: PhoneCall
-        PopUpIndexOfChosenName: 11
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 502f60b39eaad7549bd39cedb496c364, type: 3}
-        Loop: 0
-    - Key:
-        Name: EngineIdle
-        PopUpIndexOfChosenName: 12
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 4d65b2ddf91f94345b2dae33120c147f, type: 3}
-        Loop: 1
-    - Key:
-        Name: Collision Pedestrian 3
-        PopUpIndexOfChosenName: 8
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 266ad72c8311c9a4db90058b31a5cd33, type: 3}
-        Loop: 0
-    - Key:
-        Name: Collision Pedestrian 2
-        PopUpIndexOfChosenName: 7
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 2b9d357cf17b7854685f5f49389badb9, type: 3}
-        Loop: 0
-    - Key:
-        Name: Collision Pedestrian 1
-        PopUpIndexOfChosenName: 6
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 832291a21149e6c4a887acd35d87f81e, type: 3}
-        Loop: 0
-    - Key:
-        Name: HeavyBrake
-        PopUpIndexOfChosenName: 5
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 7110897e01f789b4087344932ce64c39, type: 3}
-        Loop: 0
-    - Key:
-        Name: Credit Notice
-        PopUpIndexOfChosenName: 9
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: deac27bf9faec284da810ac26a7f216d, type: 3}
-        Loop: 0
-    - Key:
-        Name: GloveBox Close
-        PopUpIndexOfChosenName: 4
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 3e3c536a20d840043a454ece6501f653, type: 3}
-        Loop: 0
-    - Key:
-        Name: GloveBox Open
-        PopUpIndexOfChosenName: 3
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: da0dfffcbb41f29478375ceef29a7a4b, type: 3}
-        Loop: 0
-    - Key:
-        Name: Honk3
-        PopUpIndexOfChosenName: 2
-      Value:
-        Volume: 0.5
-        Clip: {fileID: 8300000, guid: 1f65d97cb83a1314fbe14ebb0d9582a0, type: 3}
-        Loop: 0
-    - Key:
-        Name: AddPop
-        PopUpIndexOfChosenName: 17
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: 6ecc3c44f7727354fb1b4e5bdc40f230, type: 3}
-        Loop: 0
-    - Key:
-        Name: Honk2
-        PopUpIndexOfChosenName: 1
-      Value:
-        Volume: 0.753
-        Clip: {fileID: 8300000, guid: c86fa8af64ee4e94b8c33b73d0f5f0ed, type: 3}
-        Loop: 0
-    - Key:
-        Name: Car accelerate
-        PopUpIndexOfChosenName: 16
-      Value:
-        Volume: 1
-        Clip: {fileID: 8300000, guid: 209a77f11453bbe47bf75a4f878daf26, type: 3}
-        Loop: 0
-    - Key:
-        Name: Sidewalk impact 1
-        PopUpIndexOfChosenName: 13
-      Value:
-        Volume: 0.78
-        Clip: {fileID: 8300000, guid: 9a411e6c6aff449479aa84a9dbd8593d, type: 3}
-        Loop: 0
-    - Key:
-        Name: Sidewalk impact 2
-        PopUpIndexOfChosenName: 14
-      Value:
-        Volume: 0.78
-        Clip: {fileID: 8300000, guid: 29a70804a78f34c49867ddf997ad0e69, type: 3}
-        Loop: 0
-    - Key:
-        Name: Honk
-        PopUpIndexOfChosenName: 0
-      Value:
-        Volume: 0.78
-        Clip: {fileID: 8300000, guid: 285c511da2f8d9241ab12b9e0583b7b9, type: 3}
-        Loop: 0
---- !u!4 &2049434311
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049434309}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.08335571, y: -0, z: -0, w: 0.99651986}
-  m_LocalPosition: {x: 0, y: 2.84, z: -10.87}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2125844192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,5 +2132,5 @@ SceneRoots:
   - {fileID: 1174082461}
   - {fileID: 1889564772}
   - {fileID: 1674468797}
-  - {fileID: 2049434311}
   - {fileID: 356019372}
+  - {fileID: 838962334}

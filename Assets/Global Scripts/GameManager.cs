@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] SoundName[] _bgMusic;
+    [SerializeField] bool _startMusic;
+    [SerializeField] bool _stopMusic;
+
     [SerializeField] MyGrid _grid;
     [SerializeField] GameObject _carPrefab;
     [SerializeField] CanvasGroup _fadeScreen;
@@ -21,6 +24,8 @@ public class GameManager : MonoBehaviour
     readonly List<PlayerInput> _playerInputs = new(2);
     public static GameManager Instance { get; private set; }
     [field: SerializeField] public GameObject PlayerCar { get; private set; }
+
+    int _currentMusic = -1;
 
     void Awake()
     {
@@ -42,6 +47,12 @@ public class GameManager : MonoBehaviour
             _gameOverTest = false;
             GameOver(false,true);
         }
+
+        if (_stopMusic)
+        {
+            _stopMusic = false;
+            StopMusic();
+        }
     }
 
     void Start()
@@ -58,10 +69,26 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(Utils.DoFadeOut(_fadeScreen, _fadeScreenTime, 0));
 
+        if (_startMusic && _bgMusic.Length != 0)
+            PlayRandomMusic();
+    }
+
+    public void StopMusic()
+    {
+        if (_currentMusic != -1)
+            SoundManager.Instance.StopSound(_currentMusic);
+
+        _currentMusic = -1;
+    }
+
+    void PlayRandomMusic()
+    {
+        _currentMusic = SoundManager.PlayRandomSound(_bgMusic/*, PlayRandomMusic*/);
     }
 
     void OnDisable()
     {
+        StopMusic();
         Instance = null;
     }
 

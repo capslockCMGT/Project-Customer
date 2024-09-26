@@ -18,9 +18,10 @@ public class PopUpAdsSpawner : MonoBehaviour
         _randomSpots = GetComponentsInChildren<Transform>();
     }
     
-    public void PutAdOnRandomSpot()
+    public void PutAdOnRandomSpot(PlayerController controller)
     {
-        if (Time.time - _time < _activationCooldown) return;
+        bool isPassenger = controller.Player == 0;
+        if (isPassenger || Time.time - _time < _activationCooldown) return;
 
         _time = Time.time;
         Transform[] openSpots = _randomSpots.Where(s => s.childCount == 0).ToArray();

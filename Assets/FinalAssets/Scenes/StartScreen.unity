@@ -151,6 +151,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aa1ac46579d7745a27fc211090a4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bgMusic:
+  - Name: DriftVelocity
+    PopUpIndexOfChosenName: 18
+  - Name: RealGone
+    PopUpIndexOfChosenName: 19
+  - Name: RickRoll
+    PopUpIndexOfChosenName: 20
+  - Name: NightOfFire
+    PopUpIndexOfChosenName: 21
+  - Name: CrabRave
+    PopUpIndexOfChosenName: 22
+  _startMusic: 1
+  _stopMusic: 0
   _grid: {fileID: 0}
   _carPrefab: {fileID: 1582638049416433318, guid: 788ee67ab0bb2ab4c929bd03dd2c8ab5,
     type: 3}
@@ -979,6 +992,13 @@ MonoBehaviour:
   _soundClips:
     _serializedList:
     - Key:
+        Name: ItemGrab
+        PopUpIndexOfChosenName: 23
+      Value:
+        Volume: 0.37
+        Clip: {fileID: 8300000, guid: 03a16936f0f994d46a12ea1790724313, type: 3}
+        Loop: 0
+    - Key:
         Name: IntroSound
         PopUpIndexOfChosenName: 15
       Value:
@@ -1049,6 +1069,41 @@ MonoBehaviour:
         Clip: {fileID: 8300000, guid: da0dfffcbb41f29478375ceef29a7a4b, type: 3}
         Loop: 0
     - Key:
+        Name: DriftVelocity
+        PopUpIndexOfChosenName: 18
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 01da5cc20f9c3624a88d73a7174155de, type: 3}
+        Loop: 1
+    - Key:
+        Name: RealGone
+        PopUpIndexOfChosenName: 19
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 73ab812fda331774a837bc5065b48faa, type: 3}
+        Loop: 1
+    - Key:
+        Name: RickRoll
+        PopUpIndexOfChosenName: 20
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: d72686aa99c832c409f37b394281a1d6, type: 3}
+        Loop: 1
+    - Key:
+        Name: NightOfFire
+        PopUpIndexOfChosenName: 21
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 76bd27f6079a00b45afa9909c1020f63, type: 3}
+        Loop: 1
+    - Key:
+        Name: CrabRave
+        PopUpIndexOfChosenName: 22
+      Value:
+        Volume: 0.12
+        Clip: {fileID: 8300000, guid: 97a86f7509c477342a5ae3fb48a5b89a, type: 3}
+        Loop: 1
+    - Key:
         Name: Honk3
         PopUpIndexOfChosenName: 2
       Value:
@@ -1066,7 +1121,7 @@ MonoBehaviour:
         Name: PhoneCall
         PopUpIndexOfChosenName: 11
       Value:
-        Volume: 0.753
+        Volume: 0.26
         Clip: {fileID: 8300000, guid: 502f60b39eaad7549bd39cedb496c364, type: 3}
         Loop: 0
     - Key:
