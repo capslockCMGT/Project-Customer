@@ -21,6 +21,7 @@ public class NPC : MonoBehaviour
         rb.isKinematic = false;
         rb.useGravity = true;
         rb.constraints = new();
+        rb.mass = 70; //npcs have been on a diet
 
         var col = GetComponent<Collider>();
         col.isTrigger = false;
