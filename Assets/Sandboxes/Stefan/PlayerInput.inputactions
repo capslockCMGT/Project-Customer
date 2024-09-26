@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PauseButton",
+                    "type": "Button",
+                    "id": "2da001ef-685e-4595-8b68-423ca0f43bf5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -446,6 +455,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Options",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ff5c574-abf9-46df-8e90-3cafcc88d3f7",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "PauseButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "372669b0-7e97-4510-a662-60d05708ab76",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MNK",
+                    "action": "PauseButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -27,6 +27,7 @@ public class PedestrianHitRule : RuleChecker
         if(other.CompareTag("NPC"))
         {
             _pedestrianHitList.Add(other);
+            other.GetComponent<NPC>()?.Die();
             SoundManager.PlayRandomSound(_pedestrianHitSound);
         }
 

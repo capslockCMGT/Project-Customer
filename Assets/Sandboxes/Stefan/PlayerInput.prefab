@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5772789674659275800}
   - component: {fileID: 4945125415953808283}
   - component: {fileID: 3677139174491872196}
+  - component: {fileID: 616486231491084035}
   m_Layer: 0
   m_Name: PlayerInput
   m_TagString: Untagged
@@ -219,6 +220,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 93515429-c71f-40f2-884d-a53cb53e1b5c
     m_ActionName: PlayerMovement/Options[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 616486231491084035}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2da001ef-685e-4595-8b68-423ca0f43bf5
+    m_ActionName: PlayerMovement/PauseButton[/XInputControllerWindows/start,/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -236,3 +253,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2103f814a2949cd4b96a3ae84800b8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &616486231491084035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721069099570694077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfabcdfdbcd22e4d98963a69c2c5398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Menu: {fileID: 0}

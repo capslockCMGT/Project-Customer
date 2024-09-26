@@ -15,6 +15,19 @@ public class NPC : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();    
     }
 
+    public void Die()
+    {
+        var rb = GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        rb.constraints = new();
+        rb.mass = 70; //npcs have been on a diet
+
+        var col = GetComponent<Collider>();
+        col.isTrigger = false;
+        Destroy(this);
+        Destroy(Agent);
+    }
     //private void OnDrawGizmos()
     //{
     //    Gizmos.DrawSphere(gixmo, 2);
